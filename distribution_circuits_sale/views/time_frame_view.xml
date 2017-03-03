@@ -1,0 +1,65 @@
+<odoo>
+	<data>
+		<record id="view_time_frame_list" model="ir.ui.view">
+            <field name="name">time.frame.list</field>
+            <field name="model">time.frame</field>
+            <field name="arch" type="xml">
+                <tree string="Time Frames">
+	            	<field name="name"/>
+	            	<field name="delivery_date"/>
+	            	<field name="start"/>
+	            	<field name="end"/>
+                </tree>
+            </field>
+        </record>
+        
+		<record id="view_time_frame_form" model="ir.ui.view">
+            <field name="name">time.frame.form</field>
+            <field name="model">time.frame</field>
+            <field name="arch" type="xml">
+                <form string="Time Frame">
+	                <sheet>
+	                	<group>
+		                	<field name="name"/>
+			            	<field name="delivery_date"/>
+			            	<field name="start"/>
+			            	<field name="end"/>
+		            	</group>
+		            	<notebook>
+		            		<page string="Sale orders" name="sale_orders">
+		            			<field name="sale_orders"/>
+		            		</page>
+		            	</notebook>
+	                </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_time_frame_filter" model="ir.ui.view">
+            <field name="name">time.frame.select</field>
+            <field name="model">time.frame</field>
+            <field name="arch" type="xml">
+            	<search string="Search Time Frame">
+                	<filter string="Upcoming" name="upcoming" domain="[('start','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" />
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_time_frame" model="ir.actions.act_window">
+            <field name="name">Time frame</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">time.frame</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{"search_default_upcoming":1}</field>
+            <field name="search_view_id" ref="view_time_frame_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+              	Click to add a time frame in your sale calendar.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="action_time_frame" id="menu_time_frame" name="Time frames" parent="menu_easy_my_hub_main_sale" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+	</data>
+</odoo>

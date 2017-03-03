@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_order_easymy_hub_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            	<field name="partner_id" position="before">
+            		<field name="time_frame_id"/>
+            	</field>
+            </field>
+        </record>
+        
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+            	<field name="name" position="after">
+            		<field name="time_frame_id"/>
+            	</field>
+            </field>
+        </record>
+        
+        <record id="action_easy_my_hub_sale_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{'show_sale': True}</field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                    Your next actions should flow efficiently: confirm the Quotation to a Sale Order, then create the Invoice and collect the Payment.
+                </p><p>
+                    Note that once a Quotation becomes a Sale Order, it will be moved from the Quotations list to the Sales Order list.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_easy_my_hub_sale_orders"
+            id="menu_easy_my_hub_sale_order" parent="menu_easy_my_hub_main_sale"
+            sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+	</data>
+</odoo>
