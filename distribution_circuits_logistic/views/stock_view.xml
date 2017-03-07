@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="vpicktree_gac" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+	            <field name="partner_id" position="before">
+	            	<field name="raliment_point"/>
+	            </field>
+            </field>
+        </record>
+        
+        <record id="vpicktree_easymy_hub" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list">
+                    <field name="name"/>
+                    <field name="location_dest_id" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="date" invisible="1"/>
+                    <field name="min_date"/>
+                    <field name="origin"/>
+                    <field name="group_id" invisible="1"/>
+                    <field name="backorder_id"/>
+                    <field name="state"/>
+                    <field name="priority" invisible="1"/>
+                    <field name="picking_type_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_picking_form_gac" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<field name="partner_id" position="before">
+            		<field name="raliment_point"/> 
+            	</field>
+        	</field>
+        </record>
+        
+        <record id="view_picking_easymy_hub_search" model="ir.ui.view">
+            <field name="name">stock.picking.internal.search</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+            	<filter name="picking_type" position="after">
+            		<filter name="raliment_point" string="Raliment point" domain="[('partner_id.gac','=',False)]" context="{'group_by':'raliment_point'}"/>
+            	</filter>
+            </field>
+        </record>
+        
+		<record id="action_all_delivery_ready" model="ir.actions.act_window">
+            <field name="name">To Do</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+                    'search_default_available': 1,
+                    'search_default_raliment_point': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree_easymy_hub"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+       
+        <menuitem action="action_all_delivery_ready" id="menu_delivery" name="All Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+	</data>
+</odoo>

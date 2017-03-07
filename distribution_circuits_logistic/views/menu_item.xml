@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem name="Delivery" id="menu_easy_my_hub_main_delivery" parent="distribution_circuits_base.menu_main_easy_my_hub" sequence="30" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+		<menuitem name="Reception" id="menu_easy_my_hub_main_reception" parent="distribution_circuits_base.menu_main_easy_my_hub" sequence="40" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+	</data>
+</odoo>
