@@ -10,7 +10,6 @@ class TimeFrame(models.Model):
     @api.onchange('delivery_date')
     def onchange_delivery_date(self):
         if self.delivery_date:
-            #self.name = _(datetime.strptime(self.delivery_date, "%Y-%m-%d").strftime('%A'))
             self.name = datetime.strptime(self.delivery_date, "%Y-%m-%d").strftime('%A %d %B %Y')
     
     name = fields.Char(string="Order closing date")

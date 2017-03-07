@@ -21,7 +21,7 @@
 {
     "name": "Short distribution circuits sale",
     "version": "1.0",
-    "depends": ["distribution_circuits_base","sale", "stock"],
+    "depends": ["distribution_circuits_base","sale"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
@@ -29,7 +29,6 @@
     """,
     'data': [
         'views/menu_item.xml',
-        'views/stock_view.xml',
         'views/time_frame_view.xml',
         'views/sale_view.xml',
     ],
