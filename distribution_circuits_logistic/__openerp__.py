@@ -30,6 +30,7 @@
     'data': [
         'views/menu_item.xml',
         'views/stock_view.xml',
+        'views/delivery_round_view.xml',
     ],
     'installable': True,
 }
