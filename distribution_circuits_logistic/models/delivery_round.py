@@ -9,6 +9,8 @@ class DeliveryRound(models.Model):
     time_frame_id = fields.Many2one('time.frame', string='Time frame', required=True)
     delivery_date = fields.Date(related='time_frame_id.delivery_date', store=True)
     lines = fields.One2many('delivery.round.line', 'delivery_round_id', string='Delivery line')
+    deliverer = fields.Many2one('res.user', string="Deliverer")
+    responsible = fields.Many2one('res.user', string="Responsible")
     
 class DeliveryRoundLine(models.Model):    
     _name = "delivery.round.line"
