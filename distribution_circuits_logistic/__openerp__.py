@@ -25,7 +25,7 @@
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
-    This module implements the features manage the sales of your distribution circuits.    
+    This module implements the features managing the sales of your distribution circuits.    
     """,
     'data': [
         'views/menu_item.xml',
