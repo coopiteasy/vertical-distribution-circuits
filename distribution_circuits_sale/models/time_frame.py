@@ -6,7 +6,9 @@ from openerp import api, fields, models, _
 class TimeFrame(models.Model):
     
     _name = "time.frame"
-    
+
+    _order = "delivery_date, id"
+        
     @api.onchange('delivery_date')
     def onchange_delivery_date(self):
         if self.delivery_date:
@@ -21,5 +23,24 @@ class TimeFrame(models.Model):
                               ('validated','Validated'),
                               ('open','Open'),
                               ('cancel','Cancelled'),
-                              ('closed','Closed'),], string="State")
+                              ('closed','Closed'),], default="draft",string="State")
     
+    @api.one
+    def action_validate(self):
+        self.write({'state':'validated'})
+    
+    @api.one
+    def action_cancel(self):
+        self.write({'state':'cancel'})
+    
+    @api.one
+    def action_open(self):
+        self.write({'state':'open'})
+        
+    @api.one
+    def action_close(self):
+        self.write({'state':'closed'})
+
+    @api.one
+    def action_draft(self):
+        self.write({'state':'draft'})

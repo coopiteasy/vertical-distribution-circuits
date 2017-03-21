@@ -18,6 +18,14 @@
             <field name="model">time.frame</field>
             <field name="arch" type="xml">
                 <form string="Time Frame">
+	                <header>
+	                    <button name="action_validate" type="object" states="draft" string="Validate"/>
+	                    <button name="action_open" type="object" states="validated" string="Open"/>
+	                    <button name="action_cancel"  type="object" states="draft,closed" string="Cancel"/>
+	                    <button name="action_draft" type="object"  string="Set to Draft"/>
+	                    <button name="action_close" type="object" states="open" string="Close"/>
+	                    <field name="state" widget="statusbar" statusbar_visible="draft,validated,open,cancel,closed"/>
+	                </header>
 	                <sheet>
 	                	<group>
 		                	<field name="name"/>
@@ -41,6 +49,7 @@
             <field name="arch" type="xml">
             	<search string="Search Time Frame">
                 	<filter string="Upcoming" name="upcoming" domain="[('start','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" />
+                	<filter string="Ongoing" name="ongoing" domain="[('start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),('end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" />
                 </search>
             </field>
         </record>
@@ -51,7 +60,7 @@
             <field name="res_model">time.frame</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,calendar</field>
-            <field name="context">{"search_default_upcoming":1}</field>
+            <field name="context">{"search_default_ongoing":1}</field>
             <field name="search_view_id" ref="view_time_frame_filter"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
