@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
             	<field name="partner_id" position="before">
-            		<field name="time_frame_id"/>
+            		<field name="time_frame_id" domain="[('state','=', 'open')]" />
             	</field>
             </field>
         </record>
