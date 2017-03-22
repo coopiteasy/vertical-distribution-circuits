@@ -7,7 +7,9 @@
             <field name="inherit_id" ref="stock.vpicktree"/>
             <field name="arch" type="xml">
 	            <field name="partner_id" position="before">
-	            	<field name="raliment_point"/>
+	            	<field name="time_frame_id"/>
+	            	<field name="raliment_point"/> 
+	            	<field name="delivery_address" context="{'show_address_only':True}"/>
 	            </field>
             </field>
         </record>
@@ -38,7 +40,9 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
             	<field name="partner_id" position="before">
-            		<field name="raliment_point"/> 
+            		<field name="time_frame_id"/>
+            		<field name="raliment_point"/>
+            		<field name="delivery_address" context="{'show_address_only':True}"/> 
             	</field>
         	</field>
         </record>
@@ -49,7 +53,9 @@
             <field name="inherit_id" ref="stock.view_picking_internal_search"/>
             <field name="arch" type="xml">
             	<filter name="picking_type" position="after">
-            		<filter name="raliment_point" string="Raliment point" domain="[('partner_id.gac','=',False)]" context="{'group_by':'raliment_point'}"/>
+            		<filter name="time_frame_id" string="Time Frame" context="{'group_by':'time_frame_id'}"/>
+            		<filter name="raliment_point" string="Raliment point" domain="[('partner_id.raliment_point','=',True)]" context="{'group_by':'raliment_point'}"/>
+            		<filter name="delivery_address" string="Delivery address" domain="[('partner_id.type','=','delivery')]" context="{'group_by':'delivery_address'}"/>
             	</filter>
             </field>
         </record>
