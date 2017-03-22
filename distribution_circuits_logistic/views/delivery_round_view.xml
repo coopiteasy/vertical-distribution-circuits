@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+		<record id="delivery_round_line_form" model="ir.ui.view">
+            <field name="name">delivery.round.line.form</field>
+            <field name="model">delivery.round.line</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<group>
+		            	<field name="delivery_round_id" readonly="True"/>
+		            	<field name="raliment_point_id"/>
+		            	<field name="delivery_adress_id"/>
+	            	</group>
+	            	<field name="picking_wave"/>
+	            	<field name="stock_picking">
+	            		<!-- <tree>
+	            		</tree> -->
+	            	</field>
+	            </form>
+            </field>
+        </record>
+		
 		<record id="delivery_round_tree" model="ir.ui.view">
             <field name="name">delivery.round.tree</field>
             <field name="model">delivery.round</field>
@@ -20,10 +39,12 @@
             <field name="model">delivery.round</field>
             <field name="arch" type="xml">
 	            <form>
-	            	<field name="name"/>
-	            	<field name="time_frame_id"/>
-	            	<field name="delivery_date"/>
-	            	<field name="lines">
+	            	<group>
+		            	<field name="name"/>
+		            	<field name="time_frame_id"/>
+		            	<field name="delivery_date"/>
+	            	</group>
+	            	<field name="lines" context="{'default_delivery_round_id':active_id}">
 	            		<tree>
 	            			<field name="sequence"/>
 	            			<field name="delivery_round_id"/>

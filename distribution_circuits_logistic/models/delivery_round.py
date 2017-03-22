@@ -17,7 +17,8 @@ class DeliveryRoundLine(models.Model):
     
     sequence = fields.Integer(string="Sequence")
     delivery_round_id = fields.Many2one('delivery.round', string="Delivery round", required=True)
-    raliment_point_id = fields.Many2one('res.partner', string="R'Aliment point", required=True)
+    raliment_point_id = fields.Many2one('res.partner', string="R'Aliment point")
+    delivery_adress_id = fields.Many2one('res.partner', string="Delivery adress", domain=[('type','=','delivery')])
     picking_wave = fields.One2many('stock.picking.wave', 'round_line_id', string="Picking wave")
     stock_picking = fields.One2many('stock.picking', 'round_line_id', string="Stock picking")
     
