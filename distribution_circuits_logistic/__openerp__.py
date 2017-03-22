@@ -31,6 +31,7 @@
         'views/menu_item.xml',
         'views/stock_view.xml',
         'views/delivery_round_view.xml',
+        'wizard/delivery_round_wizard.xml',
     ],
     'installable': True,
 }
