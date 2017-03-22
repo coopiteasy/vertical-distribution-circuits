@@ -21,7 +21,7 @@
 {
     "name": "Short distribution circuits logistic",
     "version": "1.0",
-    "depends": ["distribution_circuits_base","distribution_circuits_sale", "stock_picking_wave"],
+    "depends": ["distribution_circuits_base","distribution_circuits_sale", "sale_stock","stock_picking_wave"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
