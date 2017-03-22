@@ -7,7 +7,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
             	<field name="partner_id" position="before">
-            		<field name="time_frame_id" domain="[('state','=', 'open')]" />
+            		<field name="raliment_point"/>
+            		<field name="time_frame_id" domain="[('state','=', 'open')]"/>
             	</field>
             </field>
         </record>
@@ -18,6 +19,7 @@
             <field name="inherit_id" ref="sale.view_order_tree"/>
             <field name="arch" type="xml">
             	<field name="name" position="after">
+            		<field name="raliment_point"/>
             		<field name="time_frame_id"/>
             	</field>
             </field>
