@@ -6,18 +6,27 @@ class DeliveryRoundWizard(models.TransientModel):
     
     time_frame_id = fields.Many2one('time.frame', string="Time Frame", domaine=[('state','=', 'open')], required=True)
     
-    def compute_delivery_round(self):
+    @api.one
+    def run_delivery_scheduler(self):
         time_frame = self.time_frame_id
-        pickings = self.env['stock.picking'].search([('time_frame_id','=',time_frame.id)])
-        #chercher un delivery round existant pour ce time frame
-        
-        #chercher dans les lignes du delivery round le picking wave correspondant à l'adress
-        
-        #si non existant le créer avec le time_frame_id et l'adresse recherché
-        
-        #ajoutez un nouvelle ligne au deliver round avec le picking wave créé
-        
-        #y ajouter les picking non assignés existant 
-        
-        self.env['stock.picking.wave'].search([('time_frame_id','=',time_frame.id)])
+        pickings = self.env['stock.picking'].search([('time_frame_id.id','=',time_frame.id),('wave_id','=',None)])
+        if len(pickings) > 0:
+            delivery_round = self.env['delivery.round'].search([('time_frame_id.id','=',time_frame.id)])
+            if len(delivery_round) == 0:
+                delivery_round = self.env['delivery.round'].create({'time_frame_id':time_frame.id})
+            for picking in pickings:
+                wave_found = False
+                for line in delivery_round.lines:
+                    if picking.delivery_address == line.delivery_address:
+                        picking.wave_id = line.picking_wave.id
+                        wave_found = True
+                        break
+                if not wave_found:
+                    new_wave = self.env['stock.picking.wave'].create()
+                    picking.wave_id = new_wave.id
+                    new_line = line.create({'round_id':line.round_id,
+                                            'delivery_address':picking.delivery_address,
+                                            'raliment_point_id':picking.raliment_point,
+                                            'picking_wave':new_wave})
+            
         return True

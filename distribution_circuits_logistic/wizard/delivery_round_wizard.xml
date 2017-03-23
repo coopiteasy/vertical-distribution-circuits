@@ -5,14 +5,14 @@
             <field name="name">delivery.round.wizard.form</field>
             <field name="model">delivery.round.wizard</field>
             <field name="arch" type="xml">
-            <form string="Compute delivery round wizard">
+            <form string="Run delivery round scheduler">
 				<group>
-					<field name="time_frame_id"/>	
+					<field name="time_frame_id" default_focus="1"/>	
 				</group>
 				<label string="This wizard will group all the delivery by delivery address and by Time frame"/>
 				
                 <footer>
-                    <button name="compute" string="Compute" type="object" default_focus="1" class="oe_highlight"/>
+                    <button name="run_delivery_scheduler" string="Run Scheduler" type="object" class="oe_highlight"/>
                    or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
@@ -20,18 +20,18 @@
             </field>
         </record>
 
-        <record id="action_cooperative_history_wizard" model="ir.actions.act_window">
-            <field name="name">Cooperative history</field>
+        <record id="action_round_delivery_wizard" model="ir.actions.act_window">
+            <field name="name">Delivery round scheduler</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">cooperative.history.report</field>
+            <field name="res_model">delivery.round.wizard</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_cooperative_history_wizard"/>
+            <field name="view_id" ref="view_delivery_round_wizard"/>
             <field name="target">new</field>
             <field name="multi">True</field>
         </record>
 
-		<menuitem id="menu_energiris_reporting" name="Reporting" parent="menu_main_energiris" sequence="20"/>
-		<menuitem id="menu_coop_history_wizard_report" name="Cooperative history report" parent="menu_energiris_reporting" action="action_cooperative_history_wizard" sequence="10"/>
+		<!-- <menuitem id="menu_energiris_reporting" name="Reporting" parent="menu_main_energiris" sequence="20"/> -->
+		<menuitem id="menu_round_delivery_wizard" name="Run delivery scheduler" parent="menu_easy_my_hub_main_delivery" action="action_round_delivery_wizard" sequence="40" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>

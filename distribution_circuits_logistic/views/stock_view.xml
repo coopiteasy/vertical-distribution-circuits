@@ -21,6 +21,7 @@
                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list">
                     <field name="name"/>
                     <field name="location_dest_id" invisible="1"/>
+                    <field name="raliment_point" invisible="1"/>
                     <field name="partner_id"/>
                     <field name="date" invisible="1"/>
                     <field name="min_date"/>
@@ -70,7 +71,7 @@
             <field name="context">{
                     'contact_display': 'partner_address',
                     'search_default_available': 1,
-                    'search_default_raliment_point': 1,
+                    'search_default_delivery_address': 1,
             }
             </field>
             <field name="search_view_id" ref="stock.view_picking_internal_search"/>

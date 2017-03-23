@@ -6,16 +6,18 @@
             <field name="model">delivery.round.line</field>
             <field name="arch" type="xml">
 	            <form>
-	            	<group>
-		            	<field name="delivery_round_id" readonly="True"/>
-		            	<field name="raliment_point_id"/>
-		            	<field name="delivery_adress_id"/>
-	            	</group>
-	            	<field name="picking_wave"/>
-	            	<field name="stock_picking">
-	            		<!-- <tree>
-	            		</tree> -->
-	            	</field>
+	            	<sheet>
+		            	<group>
+			            	<field name="delivery_round" readonly="True"/>
+			            	<field name="raliment_point"/>
+			            	<field name="delivery_address"/>
+		            	</group>
+		            	<field name="picking_wave"/>
+		            	<field name="stock_pickings">
+		            		<!-- <tree>
+		            		</tree> -->
+		            	</field>
+	            	</sheet>
 	            </form>
             </field>
         </record>
@@ -39,20 +41,27 @@
             <field name="model">delivery.round</field>
             <field name="arch" type="xml">
 	            <form>
-	            	<group>
-		            	<field name="name"/>
-		            	<field name="time_frame_id"/>
-		            	<field name="delivery_date"/>
-	            	</group>
-	            	<field name="lines" context="{'default_delivery_round_id':active_id}">
-	            		<tree>
-	            			<field name="sequence"/>
-	            			<field name="delivery_round_id"/>
-	            			<field name="raliment_point_id"/>
-	            			<field name="picking_wave"/>
-	            			<field name="stock_picking"/>
-	            		</tree>
-	            	</field>
+	            	<header>
+	                    <button name="action_ready" type="object" states="draft" string="Validate"/>
+	                    <button name="action_done" type="object" states="ready" string="Done"/>
+	                    <field name="state" widget="statusbar" statusbar_visible="draft,ready,done"/>
+	                </header>
+	            	<sheet>
+		            	<group>
+			            	<field name="name"/>
+			            	<field name="time_frame_id"/>
+			            	<field name="delivery_date"/>
+		            	</group>
+		            	<field name="lines" context="{'default_delivery_round_id':active_id}">
+		            		<tree>
+		            			<field name="sequence"/>
+		            			<field name="delivery_round"/>
+		            			<field name="raliment_point"/>
+		            			<field name="picking_wave"/>
+		            			<field name="stock_pickings"/>
+		            		</tree>
+		            	</field>
+	            	</sheet>
 	            </form>
             </field>
         </record>
