@@ -5,7 +5,7 @@ from openerp import api, fields, models, _
 class DeliveryRound(models.Model):
     _name = "delivery.round"
     
-    name = fields.Char(string="Name", required=True, defailt="/")
+    name = fields.Char(string="Name", required=True, default="/")
     time_frame_id = fields.Many2one('time.frame', string='Time frame', required=True)
     delivery_date = fields.Date(related='time_frame_id.delivery_date', store=True)
     lines = fields.One2many('delivery.round.line', 'delivery_round', string='Delivery line')
