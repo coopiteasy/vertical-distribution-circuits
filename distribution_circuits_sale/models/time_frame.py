@@ -23,7 +23,7 @@ class TimeFrame(models.Model):
                               ('validated','Validated'),
                               ('open','Open'),
                               ('cancel','Cancelled'),
-                              ('closed','Closed'),], default="draft",string="State")
+                              ('closed','Closed')], default="draft",string="State")
     
     @api.one
     def action_validate(self):
