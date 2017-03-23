@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
     
     raliment_point = fields.Many2one(compute="_compute_raliment", comodel_name="res.partner", string="Raliment Point", domain=[('is_raliment_point','=',True)],store=True)
-    time_frame_id = fields.Many2one('time.frame', string="Time Frame", required=True)
+    time_frame_id = fields.Many2one('time.frame', string="Time Frame")
     
     @api.multi
     @api.depends('partner_id')
