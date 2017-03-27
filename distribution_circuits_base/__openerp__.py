@@ -21,7 +21,7 @@
 {
     "name": "Short distribution circuits base",
     "version": "1.0",
-    "depends": ["base"],
+    "depends": ["base","purchase"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
