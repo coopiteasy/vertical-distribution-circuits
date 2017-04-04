@@ -28,6 +28,7 @@
     This module implements the features managing the sales of your distribution circuits.    
     """,
     'data': [
+        'security/ir.model.access.csv',
         'views/menu_item.xml',
         'views/stock_view.xml',
         'views/delivery_round_view.xml',
