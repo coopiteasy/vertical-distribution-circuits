@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_delivery_round user,delivery.round,model_delivery_round,vertical-distribution-circuits.group_easy_my_hub_user,1,0,0,0
-access_delivery_round manager,delivery.round,model_delivery_round,vertical-distribution-circuits.group_easy_my_hub_manager,1,1,1,1
-access_delivery_round_line user,delivery.round.line,model_delivery_round_line,vertical-distribution-circuits.group_easy_my_hub_user,1,0,0,0
-access_delivery_round_line manager,delivery.round.line,model_delivery_round_line,vertical-distribution-circuits.group_easy_my_hub_manager,1,1,1,1
+access_delivery_round user,delivery.round,model_delivery_round,distribution_circuits_base.group_easy_my_hub_user,1,0,0,0
+access_delivery_round manager,delivery.round,model_delivery_round,distribution_circuits_base.group_easy_my_hub_manager,1,1,1,1
+access_delivery_round_line user,delivery.round.line,model_delivery_round_line,distribution_circuits_base.group_easy_my_hub_user,1,0,0,0
+access_delivery_round_line manager,delivery.round.line,model_delivery_round_line,distribution_circuits_base.group_easy_my_hub_manager,1,1,1,1
