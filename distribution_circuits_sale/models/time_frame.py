@@ -18,7 +18,7 @@ class TimeFrame(models.Model):
     start = fields.Datetime(string="Start", required=True)
     end = fields.Datetime(string="End", required=True)
     delivery_date = fields.Date(string="Delivery date", required=True)
-    sale_orders = fields.One2many('sale.order','time_frame_id', string="Sale orders")
+    sale_orders = fields.One2many('sale.order','time_frame_id', string="Sale orders", readonly=True)
     state = fields.Selection([('draft','Draft'),
                               ('validated','Validated'),
                               ('open','Open'),
