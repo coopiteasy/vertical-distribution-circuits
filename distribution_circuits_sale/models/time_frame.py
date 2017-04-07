@@ -14,16 +14,16 @@ class TimeFrame(models.Model):
         if self.delivery_date:
             self.name = datetime.strptime(self.delivery_date, "%Y-%m-%d").strftime('%A %d %B %Y')
     
-    name = fields.Char(string="Order closing date")
-    start = fields.Datetime(string="Start", required=True)
-    end = fields.Datetime(string="End", required=True)
-    delivery_date = fields.Date(string="Delivery date", required=True)
-    sale_orders = fields.One2many('sale.order','time_frame_id', string="Sale orders", readonly=True)
+    name = fields.Char(string="Order closing date", readonly=True)
     state = fields.Selection([('draft','Draft'),
                               ('validated','Validated'),
                               ('open','Open'),
                               ('cancel','Cancelled'),
                               ('closed','Closed')], default="draft",string="State")
+    start = fields.Datetime(string="Start", required=True)
+    end = fields.Datetime(string="End", required=True)
+    delivery_date = fields.Date(string="Delivery date", required=True)
+    sale_orders = fields.One2many('sale.order','time_frame_id', string="Sale orders", readonly=True)
     
     @api.one
     def action_validate(self):
