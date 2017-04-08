@@ -20,11 +20,7 @@ class StockPicking(models.Model):
                 picking.raliment_point = picking.sale_id.raliment_point
                 picking.partner_id = picking.sale_id.partner_id
                 picking.delivery_address = picking.sale_id.partner_shipping_id
-#         if self.partner_id.parent_id and self.partner_id.parent_id.raliment_point:
-#             self.delivery_address = self.partner_id.parent_id.get_delivery_address().id
-#         elif self.partner_id.get_delivery_address():
-#             self.delivery_address = self.partner_id.get_delivery_address().id
-    
+
     @api.multi
     @api.depends('move_lines')
     def _compute_time_frame(self):
@@ -43,3 +39,4 @@ class StockPackOperation(models.Model):
     _inherit = "stock.pack.operation"
     
     raliment_point = fields.Many2one(related="picking_id.raliment_point", string="Raliment Point", store=True)
+    delivery_address = fields.Many2one(related="picking_id.delivery_address", string="Delivery Address", store=True)
