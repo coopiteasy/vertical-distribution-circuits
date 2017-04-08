@@ -43,13 +43,4 @@ class DeliveryRoundWizard(models.TransientModel):
                 raise UserError(_('You have to generate the delivery round wizard before to run this process.'))
         else:
             raise UserError(_('You can only run a consolidation on a closed time frame.'))
-#         for picking in wave_id.picking_ids:            
-#             delivery_address
-#             for pack_op in picking.pack_operation_product_ids:
-#                 
-#                 vals = {
-#                     'product_id':pack_op.product_id.id,
-#                     'product_uom':pack_op.product_uom_id.id,
-#                     #'product_uom_qty':pack_op.product_qty,
-#                     #'qty_delivered':pack_op.product_qty,
-#                 }
+
