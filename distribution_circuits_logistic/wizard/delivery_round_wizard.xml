@@ -31,7 +31,6 @@
             <field name="multi">True</field>
         </record>
 
-		<!-- <menuitem id="menu_energiris_reporting" name="Reporting" parent="menu_main_energiris" sequence="20"/> -->
 		<menuitem id="menu_round_delivery_wizard" name="Run delivery scheduler" parent="menu_easy_my_hub_main_delivery" action="action_round_delivery_wizard" sequence="40" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>
