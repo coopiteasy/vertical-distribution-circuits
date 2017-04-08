@@ -1,0 +1,52 @@
+<odoo>
+	<data>
+		<record id="time_frame_consolidation_form" model="ir.ui.view">
+            <field name="name">time.frame.consolidation.form</field>
+            <field name="model">time.frame.consolidation</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+		            	<group>
+			            	<field name="time_frame_id" readonly="True"/>
+			            	<field name="delivery_round"/>
+		            	</group>
+		            	<field name="picking_consolidations">
+		            		<!-- <tree>
+		            		</tree> -->
+		            	</field>
+	            	</sheet>
+	            </form>
+            </field>
+        </record>
+
+		<record id="time_frame_consolidation_tree" model="ir.ui.view">
+            <field name="name">time.frame.consolidation.tree</field>
+            <field name="model">time.frame.consolidation</field>
+            <field name="arch" type="xml">
+	            <tree>
+	            	<field name="time_frame_id"/>
+	            	<field name="delivery_round"/>
+	            </tree>
+            </field>
+        </record>
+        
+        <record id="action_time_frame_consolidation" model="ir.actions.act_window">
+            <field name="name">Consolidation</field>
+            <field name="res_model">time.frame.consolidation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="search_view_id" ref="view_delivery_round_search"/> -->
+            <field name="view_id" ref="time_frame_consolidation_tree"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>
+       
+        <menuitem action="action_time_frame_consolidation" id="menu_time_frame_consolidation" name="Pickings Consolidation" parent="menu_easy_my_hub_main_delivery" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+	</data>
+</odoo>

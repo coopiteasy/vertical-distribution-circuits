@@ -32,7 +32,9 @@
         'views/menu_item.xml',
         'views/stock_view.xml',
         'views/delivery_round_view.xml',
+        'views/picking_consolidation_view.xml',
         'wizard/delivery_round_wizard.xml',
+        'wizard/picking_consolidation_wizard.xml'
     ],
     'installable': True,
 }
