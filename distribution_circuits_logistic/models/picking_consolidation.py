@@ -10,16 +10,16 @@ class TimeFrameConsolidation(models.Model):
     
     time_frame_id = fields.Many2one('time.frame', readonly=True, required=True)
     delivery_round = fields.Many2one('delivery.round', string="Delivery round", readonly=True)
-    picking_consolidations = fields.One2many('picking.consolidation','time_frame_consolidation_id', string="Picking consolidations")
+    picking_consolidations = fields.One2many('picking.consolidation','time_frame_consolidation_id', string="Picking consolidations", readonly=True)
     
 class PickingConsolidation(models.Model):
     
     _name = "picking.consolidation"
     
     time_frame_consolidation_id = fields.Many2one('time.frame.consolidation',string='Time frame consolidation', ondelete='cascade', readonly=True)
-    time_frame_id = fields.Many2one(related='time_frame_consolidation_id.time_frame_id')
-    delivery_address = fields.Many2one('res.partner', string="Delivery address", domain=[('type','=','delivery')])
-    consolidation_lines = fields.One2many('picking.consolidation.line','picking_consolidation_id', string='Pickings consolidation')
+    time_frame_id = fields.Many2one(related='time_frame_consolidation_id.time_frame_id', readonly=True)
+    delivery_address = fields.Many2one('res.partner', string="Delivery address", domain=[('type','=','delivery')], readonly=True)
+    consolidation_lines = fields.One2many('picking.consolidation.line','picking_consolidation_id', string='Pickings consolidation', readonly=True)
     #pack_ops = fields.One2many('stock.pack.operation')
     
 class PickingConsolidationLine(models.Model):
