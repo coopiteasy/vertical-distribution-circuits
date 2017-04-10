@@ -14,7 +14,7 @@ class TimeFrame(models.Model):
         if self.delivery_date:
             self.name = datetime.strptime(self.delivery_date, "%Y-%m-%d").strftime('%A %d %B %Y')
     
-    name = fields.Char(string="Order closing date", readonly=True)
+    name = fields.Char(string="Order closing date")
     state = fields.Selection([('draft','Draft'),
                               ('validated','Validated'),
                               ('open','Open'),
