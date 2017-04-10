@@ -69,6 +69,6 @@
             </field>
         </record>
         
-        <menuitem action="action_time_frame" id="menu_time_frame" name="Time frames" parent="menu_easy_my_hub_main_sale" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        <menuitem action="action_time_frame" id="menu_time_frame" name="Time frames" parent="menu_easy_my_hub_main_sale" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>
