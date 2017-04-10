@@ -8,14 +8,16 @@
 	            <form>
 	            	<sheet>
 		            	<group>
-			            	<field name="delivery_round" readonly="True"/>
-			            	<field name="raliment_point"/>
-			            	<field name="delivery_address"/>
-		            	</group>
-		            	<field name="picking_wave"/>
+			            	<group>
+				            	<field name="delivery_round" readonly="True"/>
+				            	<field name="raliment_point"/>
+				            	<field name="delivery_address"/>
+			            	</group>
+			            	<group>
+				            	<field name="picking_wave"/>
+			            	</group>
+		   				</group>         		
 		            	<field name="stock_pickings">
-		            		<!-- <tree>
-		            		</tree> -->
 		            	</field>
 	            	</sheet>
 	            </form>
@@ -54,9 +56,9 @@
 		            	</group>
 		            	<field name="lines" context="{'default_delivery_round_id':active_id}">
 		            		<tree>
-		            			<field name="sequence"/>
-		            			<field name="delivery_round"/>
+		            			<field name="sequence" invisible="True"/>
 		            			<field name="raliment_point"/>
+		            			<field name="delivery_address"/>
 		            			<field name="picking_wave"/>
 		            			<field name="stock_pickings"/>
 		            		</tree>
@@ -78,11 +80,11 @@
         </record>
         
         <record id="action_delivery_round_ready" model="ir.actions.act_window">
-            <field name="name">To Do</field>
+            <field name="name">Delivery round</field>
             <field name="res_model">delivery.round</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="view_mode">tree,form,calendar</field>
             <field name="search_view_id" ref="view_delivery_round_search"/>
             <field name="view_id" ref="delivery_round_tree"/>
             <field name="help" type="html">
