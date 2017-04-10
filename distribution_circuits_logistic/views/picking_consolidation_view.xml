@@ -11,8 +11,10 @@
 			            	<field name="delivery_round"/>
 		            	</group>
 		            	<field name="picking_consolidations">
-		            		<!-- <tree>
-		            		</tree> -->
+		            		<tree>
+		            			<field name="delivery_address"/>
+		            			<field name="consolidation_lines"/>
+		            		</tree>
 		            	</field>
 	            	</sheet>
 	            </form>
@@ -46,7 +48,51 @@
               </p>
             </field>
         </record>
-       
+
+		<record id="picking_consolidation_form" model="ir.ui.view">
+            <field name="name">picking.consolidation.form</field>
+            <field name="model">picking.consolidation</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+		            	<group>
+			            	<field name="time_frame_id"/>
+			            	<field name="delivery_address"/>
+		            	</group>
+		            	<field name="consolidation_lines">
+		            		<tree>
+			            		<field name="product_id"/>
+				            	<field name="product_uom_qty"/>
+				            	<field name="product_uom"/>
+				            	<field name="qty_delivered"/>
+				            </tree>
+		            	</field>
+	            	</sheet>
+	            </form>
+            </field>
+        </record>  		
+        
+		<record id="picking_consolidation_line_form" model="ir.ui.view">
+            <field name="name">picking.consolidation.line.form</field>
+            <field name="model">picking.consolidation.line</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+		            	<group>
+			            	<group>
+				            	<field name="product_id"/>
+				            	<field name="product_uom_qty"/>
+			            	</group>
+			            	<group>
+				            	<field name="product_uom"/>
+				            	<field name="qty_delivered"/>
+			            	</group>
+		            	</group>
+	            	</sheet>
+	            </form>
+            </field>
+        </record>   
+            
         <menuitem action="action_time_frame_consolidation" id="menu_time_frame_consolidation" name="Pickings Consolidation" parent="menu_easy_my_hub_main_delivery" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>
