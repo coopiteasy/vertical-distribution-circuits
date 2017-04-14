@@ -92,11 +92,11 @@
                                 <h3 class="css_editable_display">No Brands Found.</h3>
                             </div>
                         </t>
-                    </section> -->
+                    </section> 
                 </div>
             </div>
         </t>
-    </template>
+    </template>-->
 <!-- 
     <template id="website_sale.categories_recursive" name="Category list">
         <li t-att-class="'active' if c.id == int(category or 0) else ''">
