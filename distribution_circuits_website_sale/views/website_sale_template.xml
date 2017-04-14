@@ -51,8 +51,33 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
+	     <xpath expr="//t[@t-esc='int(line.product_uom_qty)']" position="after">
+	     	<t t-esc="line.product_uom.name"/> 
+	     </xpath>
+	     
 	</template>	
 	
+	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart">
+		<xpath expr="//table[@class='table table-striped table-condensed js_cart_lines']" position="before">
+			 <div name="time_frames" class="input-group">
+	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
+	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
+	            <select name="selected_time_frame" class="form-control" t-att-disabled="True">
+	                <option value=""></option>
+	                <t t-foreach="open_time_frames or []" t-as="time_frame">
+	                    <option t-att-value="time_frame[0]" t-att-selected="time_frame[0] == current_time_frame"><t t-esc="time_frame[1]"/></option>
+	                </t>
+	         	</select>
+	    	 </div>
+	     </xpath>
+	     <xpath expr="//td[@name='price']" position="before">
+	     	<td class="text-center" id="td-qty">
+                  <div>
+                  	<strong t-esc="line.product_uom.name"/>
+                  </div>
+              </td>
+	     </xpath>
+	</template>	
     <!-- Page template for displaying Brands -->
    <!--  <template id="time_frame" name="Time frame">
         <t t-call="website.layout">
