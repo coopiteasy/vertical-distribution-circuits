@@ -72,5 +72,18 @@
         <menuitem action="action_easy_my_hub_quotation"
             id="menu_easy_my_hub_quotation" parent="menu_easy_my_hub_main_sale"
             sequence="2" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+            
+		<record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+            	<field name="seller_ids" position="before">
+            		<group>
+            			<field name="supplier_id"/>
+            		</group>
+            	</field>
+            </field>
+        </record>
 	</data>
 </odoo>
