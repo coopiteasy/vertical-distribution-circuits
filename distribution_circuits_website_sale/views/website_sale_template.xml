@@ -70,6 +70,9 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
+	     <xpath expr="//th[@width='100' and @class='text-center']" position="before">
+	     	<th width="100" class="text-center">Unit of mesure</th>
+	     </xpath>
 	     <xpath expr="//td[@name='price']" position="before">
 	     	<td class="text-center" id="td-qty">
                   <div>
@@ -78,6 +81,13 @@
               </td>
 	     </xpath>
 	</template>	
+	
+	<template id="short_distri_product_quantity" inherit_id="website_sale.product_quantity" customize_show="True" name="Select Quantity">
+		<xpath expr="//h1[@t-field='product.name']" position="after">
+        	<strong><t t-esc="product.supplier_id.display_name"/></strong><br/>
+        	<strong><t t-esc="product.uom_name"/></strong>
+		</xpath>
+	</template>
     <!-- Page template for displaying Brands -->
    <!--  <template id="time_frame" name="Time frame">
         <t t-call="website.layout">

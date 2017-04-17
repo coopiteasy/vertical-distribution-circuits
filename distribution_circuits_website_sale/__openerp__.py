@@ -5,8 +5,7 @@
 {
     'name': 'Distribution Circuits in E-Commerce',
     'category': 'e-commerce',
-    'author': "Coop IT Easy,"
-            "Odoo Community Association (OCA)",
+    'author': "Coop IT Easy - Houssine BAKKALI",
     'website': 'http://www.coopiteasy',
     'version': '9.0.1.0.0',
     'license': 'AGPL-3',
@@ -14,6 +13,7 @@
         'website_sale'
     ],
     'data': [
+        "security/ir.model.access.csv",
       #  "data/website_menu.xml",
         "views/website_sale_template.xml",
     ],
