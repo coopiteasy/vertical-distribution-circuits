@@ -21,9 +21,8 @@ class Product(models.Model):
     _inherit = "product.template"
     
     uom_name = fields.Char(related="uom_id.name", string="UoM Name")
-    supplier_id = fields.Many2one(compute="get_first_supplier", comodel_name="res.partner", string="Supplier")#, readonly=True, store=True 
+    supplier_id = fields.Many2one(compute="get_first_supplier", comodel_name="res.partner", string="Supplier") 
     
-    #@api.depends('seller_ids')
     @api.multi
     def get_first_supplier(self):
         for seller in self.seller_ids:
