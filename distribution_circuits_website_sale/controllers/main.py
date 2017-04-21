@@ -18,7 +18,7 @@ class WebsiteSale(website_sale):
                  /page/<int:page>""",
                  '/shop/time_frame'],
                 type='http',
-                auth='public',
+                auth='user',
                 website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
         if time_frame:
