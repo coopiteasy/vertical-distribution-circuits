@@ -12,7 +12,6 @@
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
-	            <!-- <label class="control-label" for="selected_time_frame">Time frame</label> -->
 	            <select name="selected_time_frame" class="form-control">
 	                <option value=""></option>
 	                <t t-foreach="open_time_frames or []" t-as="time_frame">
@@ -23,7 +22,7 @@
 	     </xpath>
 	</template>
 
-	<template id="search_time_frames" inherit_id="website.website_search_box" name="Search time frame">
+<!-- 	<template id="search_time_frames" inherit_id="website.website_search_box" name="Search time frame">
 		 <xpath expr="//div[@class='input-group']" position="before">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
@@ -36,7 +35,7 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
-	</template>
+	</template> -->
 	
 	<template id="cart_popover_time_frame" inherit_id="website_sale.cart_popover" name="Cart popover time frame">
 		 <xpath expr="//t[@t-if='website_sale_order and website_sale_order.website_order_line']" position="before">
@@ -56,9 +55,9 @@
 	     </xpath>
 	     
 	</template>	
-	
-	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart">
-		<xpath expr="//table[@class='table table-striped table-condensed js_cart_lines']" position="before">
+
+	<template id="time_frame_cart" inherit_id="website_sale.cart" name="Shopping Cart">
+		<xpath expr="//h1[@class='mb32']" position="after">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
@@ -70,6 +69,9 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
+	</template>
+	
+	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
 	     <xpath expr="//th[@width='100' and @class='text-center']" position="before">
 	     	<th width="100" class="text-center">Unit of mesure</th>
 	     </xpath>
@@ -88,60 +90,6 @@
         	<strong><t t-esc="product.uom_name"/></strong>
 		</xpath>
 	</template>
-    <!-- Page template for displaying Brands -->
-   <!--  <template id="time_frame" name="Time frame">
-        <t t-call="website.layout">
-            <t t-set="additional_title">Time frame</t>
-            <div id="wrap" t-attf-class="wrapper">
-                <div class="container">
-                    <div class="row">
-                        <form action="/shop/time_frame" class="form-horizontal mt32 col-md-8" method="post" >
-                            <div class="input-group" style="margin-left:60%;">
-                                <div class='col-md-6'>
-                                    <input type="text" name="search" class="form-control" placeholder="Search..." t-att-value='search'/>
-                                </div>
-                                <div class='col-md-2'>
-                                    <button class="btn btn-primary">Search</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <br/>
-                    <section>
-                        <t t-if='brand_rec'>
-                            <t t-foreach="brand_rec" t-as="o">
-                                <div class="col-md-3" style="display: inline-block;">
-                                    <a t-att-href="keep('/shop/brands',brand = o.id)">
-                                        <div class='row' style='margin-left:15%;'>
-                                            <img itemprop="image" width="200px" height="200px" class="img" t-attf-src="/website/image/product.brand/#{o.id}/logo#{'?max_width=300&amp;max_height=300'}"/>
-                                        </div>
-                                        <div class='row' style='text-align:center;'>
-                                            <t t-esc='o.name' />
-                                        </div>
-                                    </a>
-                                </div>
-                            </t>
-                        </t>
-                        <t t-if='not brand_rec'>
-                            <div class="text-center text-muted">
-                                <h3 class="css_editable_display">No Brands Found.</h3>
-                            </div>
-                        </t>
-                    </section> 
-                </div>
-            </div>
-        </t>
-    </template>-->
-<!-- 
-    <template id="website_sale.categories_recursive" name="Category list">
-        <li t-att-class="'active' if c.id == int(category or 0) else ''">
-            <a t-att-href="keep('/shop/category/' + slug(c), category=0, brand=brand)" t-field="c.name"/>
-            <ul t-if="c.child_id" class="nav nav-pills nav-stacked nav-hierarchy">
-                <t t-foreach="c.child_id" t-as="c">
-                    <t t-call="website_sale.categories_recursive"/></t>
-            </ul>
-        </li>
-    </template> -->
 
     </data>
 </openerp>
