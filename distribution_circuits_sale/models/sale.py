@@ -13,8 +13,8 @@ class SaleOrder(models.Model):
     @api.depends('partner_id')
     def _compute_raliment(self):
         for order in self:
-            if order.partner_id.parent_id and order.partner_id.parent_id.raliment_point:
-                order.raliment_point = order.partner_id.parent_id
+            if order.partner_id.raliment_point_id and order.partner_id.raliment_point_id:
+                order.raliment_point = order.partner_id.raliment_point_id
 
 class Product(models.Model):
     

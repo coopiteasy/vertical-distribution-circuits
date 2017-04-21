@@ -6,9 +6,12 @@
             <field name="model">res.partner</field>
 			<field name="inherit_id" ref="base.view_partner_form"/>            
             <field name="arch" type="xml">
+            	<field name="type" position="before">
+            		<field name="raliment_point_id"/>
+            	</field>
             	<xpath expr="/form/sheet/notebook/page[@name='sales_purchases']/group/group[@name='sale']/field[@name='customer']" position="after">
-            		<field name="raliment_point"/>
-            		<field name="gac"/>
+            		<field name="is_raliment_point"/>
+            		<field name="is_gac"/>
             	</xpath>
             </field>
         </record>
@@ -19,11 +22,11 @@
             <field name="inherit_id" ref="base.view_res_partner_filter"/>
             <field name="arch" type="xml">
                 <filter name="customer" position="after">
-                	<filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1)]"/>
+                	<filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),('raliment_point_id', '!=', False)]"/>
                 </filter>
                 <filter name="supplier" position="after">
-                	<filter string="Gac" name="gac" domain="[('gac','=',1), ('parent_id', '=', False)]"/>
-                	<filter string="Raliment point" name="raliment_point" domain="[('raliment_point','=',1), ('parent_id', '=', False)]"/>
+                	<filter string="Gac" name="gac" domain="[('is_gac','=',1), ('customer','=',1), ('raliment_point_id', '=', False)]"/>
+                	<filter string="Raliment point" name="raliment_point" domain="[('is_raliment_point','=',1), ('parent_id', '=', False)]"/>
                 </filter>
             </field>
         </record>

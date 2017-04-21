@@ -16,6 +16,7 @@ class DeliveryRoundWizard(models.TransientModel):
             consol_obj = self.env['picking.consolidation']
             pick_consol_line_obj = self.env['picking.consolidation.line']
             time_frame_consol = time_frame_consol_obj.search([('time_frame_id','=',self.time_frame_id.id)])
+            
             if len(time_frame_consol) == 0:
                 time_frame_consol = time_frame_consol_obj.create({'time_frame_id':self.time_frame_id.id,
                                                                   'delivery_round':delivery_round.id})
@@ -27,7 +28,7 @@ class DeliveryRoundWizard(models.TransientModel):
                     product_consols = {}
                     
                     for picking in delivery_line.picking_wave.picking_ids:
-                        if picking.partner_id.parent_id and picking.partner_id.parent_id.raliment_point:
+                        if picking.partner_id.raliment_point_id and picking.partner_id.raliment_point_id:
                             for move_line in picking.move_lines:
                                 if product_consols.get(move_line.product_id):
                                     product_consols[move_line.product_id][0] += move_line.product_uom_qty
