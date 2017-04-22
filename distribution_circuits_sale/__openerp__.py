@@ -17,6 +17,7 @@
         'views/menu_item.xml',
         'views/time_frame_view.xml',
         'views/sale_view.xml',
+        'views/partner_view.xml'
     ],
     'installable': True,
 }

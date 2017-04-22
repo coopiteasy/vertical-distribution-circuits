@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="partner_easymy_hub_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+            	<field name="credit" position="after">
+            		<field name="amount_due" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+            	</field>
+            </field>
+        </record>
+	</data>
+</odoo>
