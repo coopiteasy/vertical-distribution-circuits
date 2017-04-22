@@ -32,7 +32,7 @@ class Product(models.Model):
 class Partner(models.Model):
     _inherit = "res.partner"
     
-    amount_due = fields.Monetary(string="Amount due", compute="_compute_amount_due")
+    amount_due = fields.Monetary(string="Amount due for sale orders", compute="_compute_amount_due")
     
     @api.multi
     def _compute_amount_due(self):
@@ -40,14 +40,9 @@ class Partner(models.Model):
         invoice_obj = self.env['account.invoice']
         for partner in self:
             orders = order_obj.search([('partner_id','=',partner.id),('state','in',['sent','sale','done']),('invoice_status','!=','invoiced')])
-            invoices = invoice_obj.search([('partner_id','=',partner.id),('state','=','open')])
-            invoices_child = invoice_obj.search([('partner_id','in',partner.child_ids.ids),('state','=','open')])
-            invoices |= invoices_child
             
             amount_total = 0
             for order in orders:
                 amount_total += order.amount_total
-            for invoice in invoices:
-                amount_total += invoice.residual
     
             partner.amount_due = amount_total
