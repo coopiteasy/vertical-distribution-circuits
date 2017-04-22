@@ -22,7 +22,7 @@ class SaleOrder(models.Model):
     def check_customer_credit(self):
         for order in self:
             partner = order.partner_id
-            if partner.credit - partner.amount_due - order.amount_total >= order.amount_total:
+            if -(partner.credit - (partner.amount_due - order.amount_total)) >= order.amount_total:
                 return True
             else:
                 return False
