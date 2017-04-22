@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
             	<field name="credit" position="after">
             		<field name="amount_due" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+            		<field name="debit_limit" groups="distribution_circuits_base.group_easy_my_hub_manager"/>
             	</field>
             </field>
         </record>
