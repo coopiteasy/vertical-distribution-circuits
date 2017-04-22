@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Coop IT Easy (http://www.coopiteasy.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
 
 from openerp import http
 from openerp.http import request
@@ -8,6 +9,7 @@ from openerp import SUPERUSER_ID
 from openerp.addons.website_sale.controllers.main import QueryURL
 from openerp.addons.website_sale.controllers.main import website_sale
 
+_logger = logging.getLogger(__name__)
 
 class WebsiteSale(website_sale):
 
@@ -41,9 +43,9 @@ class WebsiteSale(website_sale):
             request.session['selected_time_frame'] = None
         return {0:""}
     
-    def check_customer_credit(self, partner):
-        #partner.debit_limit
-        if partner.credit - partner.amount_due <= order.amount_total:
+    def check_customer_credit(self, order):
+        partner = order.partner_id
+        if partner.credit - partner.amount_due >= order.amount_total:
             return True
         else:
             return False
@@ -56,12 +58,12 @@ class WebsiteSale(website_sale):
             tx = request.env['payment.transaction'].sudo().browse(transaction_id)
 
         if sale_order_id is None:
-            order = request.website.sale_get_order(context=context)
+            order = request.website.sale_get_order()
         else:
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')
         
-        enough_credit = self.check_customer_credit(tx, order.partner_id)
+        enough_credit = self.check_customer_credit(order)
         if enough_credit:
             tx.write({'state':'done'})
             return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)

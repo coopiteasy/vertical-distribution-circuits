@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
+import logging
 from openerp import api, fields, models, _
+
+_logger = logging.getLogger(__name__)
 
 class SaleOrder(models.Model):
     
