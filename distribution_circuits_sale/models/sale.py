@@ -17,7 +17,16 @@ class SaleOrder(models.Model):
         for order in self:
             if order.partner_id.raliment_point_id and order.partner_id.raliment_point_id:
                 order.raliment_point = order.partner_id.raliment_point_id
-
+    
+    @api.multi
+    def check_customer_credit(self):
+        for order in self:
+            partner = order.partner_id
+            if partner.credit - partner.amount_due - order.amount_total >= order.amount_total:
+                return True
+            else:
+                return False
+            
 class Product(models.Model):
     
     _inherit = "product.template"

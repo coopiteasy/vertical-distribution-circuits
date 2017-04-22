@@ -43,12 +43,12 @@ class WebsiteSale(website_sale):
             request.session['selected_time_frame'] = None
         return {0:""}
     
-    def check_customer_credit(self, order):
-        partner = order.partner_id
-        if partner.credit - partner.amount_due >= order.amount_total:
-            return True
-        else:
-            return False
+#     def check_customer_credit(self, order):
+#         partner = order.partner_id
+#         if partner.credit - partner.amount_due - order.amount_total >= order.amount_total:
+#             return True
+#         else:
+#             return False
     
     @http.route('/shop/payment/validate', type='http', auth="public", website=True)
     def payment_validate(self, transaction_id=None, sale_order_id=None, **post):
@@ -63,7 +63,7 @@ class WebsiteSale(website_sale):
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')
         
-        enough_credit = self.check_customer_credit(order)
+        enough_credit = order.check_customer_credit()
         if enough_credit:
             tx.write({'state':'done'})
             return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)

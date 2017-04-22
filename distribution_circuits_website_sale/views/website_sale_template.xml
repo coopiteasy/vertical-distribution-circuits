@@ -69,6 +69,12 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
+	     <xpath expr="//a[@href='/shop/checkout']" position="replace">
+	     	<t t-if="website_sale_order and website_sale_order.check_customer_credit()">
+	     		<a t-if="not optional_products and website_sale_order and website_sale_order.website_order_line" class="btn btn-primary pull-right mb32" href="/shop/checkout"><span class="hidden-xs">Process Checkout</span><span class="visible-xs-inline">Checkout</span> <span class="fa fa-long-arrow-right"/></a>
+	     	</t>
+	     	<span t-if="website_sale_order and not website_sale_order.check_customer_credit()"> Your account doesn't allow you to pay this order </span>
+	     </xpath>
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
