@@ -1,0 +1,81 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* payment_prepaid
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 13:50+0000\n"
+"PO-Revision-Date: 2017-04-24 13:50+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_prepaid
+#: code:addons/payment_prepaid/models/payment_acquirer.py:69
+#, python-format
+msgid "; multiple order found"
+msgstr "; multiple order found"
+
+#. module: payment_prepaid
+#: code:addons/payment_prepaid/models/payment_acquirer.py:67
+#, python-format
+msgid "; no order found"
+msgstr "; no order found"
+
+#. module: payment_prepaid
+#: model:payment.acquirer,cancel_msg:payment_prepaid.payment_acquirer_prepaid
+msgid "<span><i>Cancel,</i> Your payment has been cancelled.</span>"
+msgstr "<span><i>Annuler,</i> votre paiement a été annulé.</span>"
+
+#. module: payment_prepaid
+#: model:payment.acquirer,done_msg:payment_prepaid.payment_acquirer_prepaid
+msgid "<span><i>Done,</i> Your online payment has been successfully processed. Thank you for your order.</span>"
+msgstr "<span><i>Terminé,</i> votre paiement en ligne a été enregistré. Merci de votre commande.</span>"
+
+#. module: payment_prepaid
+#: model:payment.acquirer,error_msg:payment_prepaid.payment_acquirer_prepaid
+msgid "<span><i>Error,</i> Please be aware that an error occurred during the transaction. The order has been confirmed but won't be paid. Don't hesitate to contact us if you have any questions on the status of your order.</span>"
+msgstr "<span><i>Erreur,</i> une erreur est survenue pendant la transaction. La commande a été confirmée mais ne sera pas payée. N'hésitez pas à nous contacter si vous avez une question sur le statut de votre commande.</span>"
+
+#. module: payment_prepaid
+#: model:payment.acquirer,pending_msg:payment_prepaid.payment_acquirer_prepaid
+msgid "<span><i>Pending,</i> Your online payment has been successfully processed. But your order is not validated yet.</span>"
+msgstr "<span><i>En cours,</i> votre paiement en ligne a été enregistré. Mais votre commande n'est pas encore validée.</span>"
+
+#. module: payment_prepaid
+#: model:ir.model,name:payment_prepaid.model_payment_acquirer
+msgid "Payment Acquirer"
+msgstr "Intermédiaire de paiement"
+
+#. module: payment_prepaid
+#: model:ir.model,name:payment_prepaid.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transaction"
+
+#. module: payment_prepaid
+#: code:addons/payment_prepaid/models/payment_acquirer.py:20
+#, python-format
+msgid "Prepaid"
+msgstr "Prepaid"
+
+#. module: payment_prepaid
+#: model:payment.acquirer,pre_msg:payment_prepaid.payment_acquirer_prepaid
+msgid "Prepaid information will be provided after choosing the payment mode."
+msgstr "Prepaid information will be provided after choosing the payment mode."
+
+#. module: payment_prepaid
+#: model:payment.acquirer,name:payment_prepaid.payment_acquirer_prepaid
+msgid "Prepaid payment"
+msgstr "Prepaid payment"
+
+#. module: payment_prepaid
+#: code:addons/payment_prepaid/models/payment_acquirer.py:65
+#, python-format
+msgid "received data for reference %s"
+msgstr "received data for reference %s"
+

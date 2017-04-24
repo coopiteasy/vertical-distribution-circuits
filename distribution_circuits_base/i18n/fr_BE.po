@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* distribution_circuits_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 13:45+0000\n"
+"PO-Revision-Date: 2017-04-24 13:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_raliment_customer
+msgid "Click to add a customer in your address book."
+msgstr "Click to add a customer in your address book."
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_gac
+msgid "Click to add a gac in your address book."
+msgstr "Click to add a gac in your address book."
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_raliment
+msgid "Click to add a raliment point in your address book."
+msgstr "Click to add a raliment point in your address book."
+
+#. module: distribution_circuits_base
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_easy_my_hub_main_contact
+msgid "Contact"
+msgstr "Contact"
+
+#. module: distribution_circuits_base
+#: model:res.groups,name:distribution_circuits_base.group_easy_delivery_point_manager
+msgid "Delivery point manager"
+msgstr "Delivery point manager"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_main_easy_my_hub
+msgid "Easy-My Hub"
+msgstr "Easy-My Hub"
+
+#. module: distribution_circuits_base
+#: model:ir.module.category,name:distribution_circuits_base.module_category_distribution_circuits
+msgid "EasyMy Hub"
+msgstr "EasyMy Hub"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_raliment_point
+msgid "Est un Point de Raliment"
+msgstr "Est un Point de Raliment"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_partner_gac
+msgid "GAC"
+msgstr "GAC"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,name:distribution_circuits_base.action_partner_gac
+msgid "GACs"
+msgstr "GACs"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
+msgid "Gac"
+msgstr "Gac"
+
+#. module: distribution_circuits_base
+#: model:ir.module.category,description:distribution_circuits_base.module_category_distribution_circuits
+msgid "Helps you manage your distribution circuits hub."
+msgstr "Helps you manage your distribution circuits hub."
+
+#. module: distribution_circuits_base
+#: model:res.groups,name:distribution_circuits_base.group_easy_my_hub_manager
+msgid "Hub Manager"
+msgstr "Hub Manager"
+
+#. module: distribution_circuits_base
+#: model:res.groups,name:distribution_circuits_base.group_easy_my_hub_super_manager
+msgid "Hub Super Manager"
+msgstr "Hub Super Manager"
+
+#. module: distribution_circuits_base
+#: model:res.groups,name:distribution_circuits_base.group_easy_my_hub_user
+msgid "Hub User"
+msgstr "Hub User"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_gac
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_raliment
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_raliment_customer
+msgid "Odoo helps you easily track all activities related to\n"
+"                a customer; discussions, history of business opportunities,\n"
+"                documents, etc."
+msgstr "Odoo vous aide à suivre toutes les activités liées à un fournisseur :\n"
+"discussions, historique des opportunités d'affaires, \n"
+"documents, etc."
+
+#. module: distribution_circuits_base
+#: model:ir.model,name:distribution_circuits_base.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_raliment_point_id
+msgid "Point de Raliment"
+msgstr "Point de Raliment"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_raliment_customer
+#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
+msgid "Raliment customers"
+msgstr "Raliment customers"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_partner_raliment
+#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
+msgid "Raliment point"
+msgstr "Raliment point"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_gac
+msgid "est un GAC"
+msgstr "est un GAC"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,name:distribution_circuits_base.action_raliment_customer
+msgid "raliment customers"
+msgstr "raliment customers"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,name:distribution_circuits_base.action_partner_raliment
+msgid "raliment points"
+msgstr "raliment points"
+

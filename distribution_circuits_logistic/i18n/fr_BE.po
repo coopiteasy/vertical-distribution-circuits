@@ -1,0 +1,467 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* distribution_circuits_logistic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 13:46+0000\n"
+"PO-Revision-Date: 2017-04-24 13:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_delivery
+msgid "All Deliveries"
+msgstr "All Deliveries"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_wizard
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_consolidation_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_all_delivery_ready
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_delivery_round_ready
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_time_frame_consolidation
+msgid "Click here to create a new transfer."
+msgstr "Cliquez ici pour créer un nouveau transfert."
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_consolidation_wizard
+msgid "Compute consolidation"
+msgstr "Compute consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,name:distribution_circuits_logistic.action_time_frame_consolidation
+msgid "Consolidation"
+msgstr "Consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_create_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_create_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_qty_delivered
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_deliverer
+msgid "Deliverer"
+msgstr "Deliverer"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_easy_my_hub_main_delivery
+msgid "Delivery"
+msgstr "Delivery"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_pack_operation_delivery_address
+msgid "Delivery Address"
+msgstr "Adresse de livraison"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_delivery_address
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_delivery_address
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_delivery_address
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_easymy_hub_search
+msgid "Delivery address"
+msgstr "Delivery address"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_delivery_date
+msgid "Delivery date"
+msgstr "Delivery date"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_lines
+msgid "Delivery line"
+msgstr "Delivery line"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,name:distribution_circuits_logistic.action_delivery_round_ready
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_delivery_round
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_delivery_round
+msgid "Delivery round"
+msgstr "Delivery round"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_wave_round_line
+msgid "Delivery round line"
+msgstr "Delivery round line"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,name:distribution_circuits_logistic.action_round_delivery_wizard
+msgid "Delivery round scheduler"
+msgstr "Delivery round scheduler"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_delivery_round
+msgid "Delivery rounds"
+msgstr "Delivery rounds"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_search
+msgid "Delivery rounds for today"
+msgstr "Delivery rounds for today"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_search
+msgid "Delivery rounds to come"
+msgstr "Delivery rounds to come"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_display_name
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: distribution_circuits_logistic
+#: selection:delivery.round,state:0
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.delivery_round_form
+msgid "Done"
+msgstr "Terminé"
+
+#. module: distribution_circuits_logistic
+#: selection:delivery.round,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_id
+msgid "ID"
+msgstr "ID"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_search
+msgid "Incoming"
+msgstr "Incoming"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard___last_update
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_write_uid
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_write_date
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,help:distribution_circuits_logistic.field_delivery_round_line_stock_pickings
+msgid "List of picking associated to this wave"
+msgstr "Liste de prélèvements associés à cette vague"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_stock_pack_operation
+msgid "Packing Operation"
+msgstr "Colisage"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_stock_picking_wave
+msgid "Picking Wave"
+msgstr "Vague de prélèvement"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_picking_consolidation_id
+msgid "Picking consolidation"
+msgstr "Picking consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_picking_consolidations
+msgid "Picking consolidations"
+msgstr "Picking consolidations"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.vpicktree_easymy_hub
+msgid "Picking list"
+msgstr "Bon de transfert"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_picking_wave
+msgid "Picking wave"
+msgstr "Picking wave"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_time_frame_consolidation
+msgid "Pickings Consolidation"
+msgstr "Pickings Consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,name:distribution_circuits_logistic.action_picking_consolidation_wizard
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_consolidation_lines
+msgid "Pickings consolidation"
+msgstr "Pickings consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_product_uom_qty
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_raliment_point
+msgid "R'Aliment point"
+msgstr "R'Aliment point"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_pack_operation_raliment_point
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_raliment_point
+msgid "Raliment Point"
+msgstr "Raliment Point"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_easymy_hub_search
+msgid "Raliment point"
+msgstr "Raliment point"
+
+#. module: distribution_circuits_logistic
+#: selection:delivery.round,state:0
+msgid "Ready"
+msgstr "Ready"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_easy_my_hub_main_reception
+msgid "Reception"
+msgstr "Reception"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_wizard
+msgid "Run Scheduler"
+msgstr "Run Scheduler"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_wizard
+msgid "Run delivery round scheduler"
+msgstr "Run delivery round scheduler"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_round_delivery_wizard
+msgid "Run delivery scheduler"
+msgstr "Run delivery scheduler"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.menu,name:distribution_circuits_logistic.menu_action_picking_consolidation_wizard
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_consolidation_wizard
+msgid "Run pickings consolidation"
+msgstr "Run pickings consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_state
+msgid "State"
+msgstr "État"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_line_stock_pickings
+msgid "Stock pickings"
+msgstr "Stock pickings"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_wizard
+msgid "This wizard will group all the delivery by delivery address and by Time frame"
+msgstr "This wizard will group all the delivery by delivery address and by Time frame"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_consolidation_wizard
+msgid "This wizard will group all the pickings line by product, delivery address and Time frame"
+msgstr "This wizard will group all the pickings line by product, delivery address and Time frame"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_wizard_time_frame_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_wizard_time_frame_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_time_frame_id
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_easymy_hub_search
+msgid "Time Frame"
+msgstr "Time Frame"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_delivery_round_time_frame_id
+msgid "Time frame"
+msgstr "Time frame"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_time_frame_consolidation_id
+msgid "Time frame consolidation"
+msgstr "Time frame consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_time_frame_id
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_time_frame_consolidation_time_frame_id
+msgid "Time frame id"
+msgstr "Time frame id"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,name:distribution_circuits_logistic.action_all_delivery_ready
+msgid "To Do"
+msgstr "A Faire"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_search
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_picking_consolidation_line_product_uom
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.delivery_round_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_wave_website_message_ids
+#: model:ir.model.fields,field_description:distribution_circuits_logistic.field_stock_picking_website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model.fields,help:distribution_circuits_logistic.field_stock_picking_wave_website_message_ids
+#: model:ir.model.fields,help:distribution_circuits_logistic.field_stock_picking_website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: distribution_circuits_logistic
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_all_delivery_ready
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_delivery_round_ready
+#: model:ir.actions.act_window,help:distribution_circuits_logistic.action_time_frame_consolidation
+msgid "You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker."
+msgstr "You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker."
+
+#. module: distribution_circuits_logistic
+#: code:addons/distribution_circuits_logistic/wizard/picking_consolidation_wizard.py:50
+#, python-format
+msgid "You can only run a consolidation on a closed time frame."
+msgstr "You can only run a consolidation on a closed time frame."
+
+#. module: distribution_circuits_logistic
+#: code:addons/distribution_circuits_logistic/wizard/picking_consolidation_wizard.py:48
+#, python-format
+msgid "You have to generate the delivery round wizard before to run this process."
+msgstr "You have to generate the delivery round wizard before to run this process."
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_delivery_round
+msgid "delivery.round"
+msgstr "delivery.round"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_delivery_round_line
+msgid "delivery.round.line"
+msgstr "delivery.round.line"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_delivery_round_wizard
+msgid "delivery.round.wizard"
+msgstr "delivery.round.wizard"
+
+#. module: distribution_circuits_logistic
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_delivery_round_wizard
+#: model:ir.ui.view,arch_db:distribution_circuits_logistic.view_picking_consolidation_wizard
+msgid "or"
+msgstr "ou"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_picking_consolidation
+msgid "picking.consolidation"
+msgstr "picking.consolidation"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_picking_consolidation_line
+msgid "picking.consolidation.line"
+msgstr "picking.consolidation.line"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_picking_consolidation_wizard
+msgid "picking.consolidation.wizard"
+msgstr "picking.consolidation.wizard"
+
+#. module: distribution_circuits_logistic
+#: model:ir.model,name:distribution_circuits_logistic.model_time_frame_consolidation
+msgid "time.frame.consolidation"
+msgstr "time.frame.consolidation"
+
