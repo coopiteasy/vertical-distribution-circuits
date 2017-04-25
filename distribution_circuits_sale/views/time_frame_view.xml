@@ -48,8 +48,8 @@
             <field name="model">time.frame</field>
             <field name="arch" type="xml">
             	<search string="Search Time Frame">
-                	<filter string="Upcoming" name="upcoming" domain="[('start','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" />
-                	<filter string="Ongoing" name="ongoing" domain="[('start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),('end','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" />
+                	<filter string="Upcoming" name="upcoming" domain="[('start','&gt;', context_today().strftime('%%Y-%%m-%%d 23:59:59'))]" />
+                	<filter string="Ongoing" name="ongoing" domain="[('start','&lt;=', context_today().strftime('%%Y-%%m-%%d 23:59:59')),('end','&gt;=',context_today().strftime('%%Y-%%m-%%d 00:00:00'))]" />
                 </search>
             </field>
         </record>
