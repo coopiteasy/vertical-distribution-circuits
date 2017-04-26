@@ -36,9 +36,10 @@ class Product(models.Model):
     
     @api.multi
     def get_first_supplier(self):
-        for seller in self.seller_ids:
-            self.supplier_id = seller.name
-            break
+        for product in self:
+            for seller in product.seller_ids:
+                product.supplier_id = seller.name
+                break
 
 class Partner(models.Model):
     _inherit = "res.partner"
