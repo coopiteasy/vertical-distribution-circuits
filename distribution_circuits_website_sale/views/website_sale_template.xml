@@ -97,5 +97,12 @@
 		</xpath>
 	</template>
 
+	
+	<template id="products_item_extra info" inherit_id="website_sale.products_item" name="Products item extra info">
+		<xpath expr="//a[@t-field='product.name']/../.." position="after">
+			<h5><strong>(<t t-esc="product.uom_name"/>)</strong></h5>
+			<h5><strong><t t-esc="product.supplier_id.display_name"/></strong></h5>
+		</xpath>
+	</template>	
     </data>
 </openerp>
