@@ -15,6 +15,7 @@
 			            	</group>
 			            	<group>
 				            	<field name="picking_wave"/>
+				            	<field name="delivered"/>
 			            	</group>
 		   				</group>         		
 		            	<field name="stock_pickings">
@@ -60,12 +61,13 @@
 			            	</group>
 		            	</group>
 		            	<field name="lines" context="{'default_delivery_round_id':active_id}">
-		            		<tree>
-		            			<field name="sequence" invisible="True"/>
-		            			<field name="raliment_point"/>
-		            			<field name="delivery_address"/>
-		            			<field name="picking_wave"/>
-		            			<field name="stock_pickings"/>
+		            		<tree editable="bottom">
+		            			<field name="sequence" widget="handle"/>
+		            			<field name="raliment_point" readonly="True"/>
+		            			<field name="delivery_address" readonly="True"/>
+		            			<field name="picking_wave" readonly="True"/>
+		            			<field name="order_quantity" readonly="True"/>
+		            			<field name="delivered" editable="True"/>
 		            		</tree>
 		            	</field>
 	            	</sheet>

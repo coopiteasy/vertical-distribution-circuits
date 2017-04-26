@@ -32,4 +32,11 @@ class DeliveryRoundLine(models.Model):
     delivery_address = fields.Many2one('res.partner', string="Delivery address", domain=[('type','=','delivery')])
     picking_wave = fields.Many2one('stock.picking.wave', string="Picking wave")
     stock_pickings = fields.One2many(related='picking_wave.picking_ids', string="Stock pickings")
+    delivered = fields.Boolean(string="Delivered")
+    order_quantity = fields.Integer(string="Order quantity",compute="_compute_order_quantity",store=True)
     
+    @api.depends('stock_pickings')
+    @api.multi
+    def _compute_order_quantity(self):
+        for line in self:
+            line.order_quantity = len(line.stock_pickings)
