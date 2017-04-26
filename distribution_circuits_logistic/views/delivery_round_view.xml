@@ -50,9 +50,14 @@
 	                </header>
 	            	<sheet>
 		            	<group>
-			            	<field name="name"/>
-			            	<field name="time_frame_id"/>
-			            	<field name="delivery_date"/>
+			            	<group>
+				            	<field name="name"/>
+				            	<field name="time_frame_id"/>
+			            	</group>
+			            	<group>
+				            	<field name="delivery_date"/>
+			            		<field name="responsible"/>
+			            	</group>
 		            	</group>
 		            	<field name="lines" context="{'default_delivery_round_id':active_id}">
 		            		<tree>
