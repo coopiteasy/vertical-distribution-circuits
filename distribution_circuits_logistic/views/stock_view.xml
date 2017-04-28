@@ -71,9 +71,9 @@
             <field name="context">{
                     'contact_display': 'partner_address',
                     'search_default_available': 1,
-                    'search_default_delivery_address': 1,
             }
             </field>
+            <!-- 'search_default_delivery_address': 1, -->
             <field name="search_view_id" ref="stock.view_picking_internal_search"/>
             <field name="view_id" ref="vpicktree_easymy_hub"/>
             <field name="help" type="html">
@@ -86,5 +86,30 @@
         </record>
        
         <menuitem action="action_all_delivery_ready" id="menu_delivery" name="All Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+ 
+ 		<record id="action_all_raliment_delivery_ready" model="ir.actions.act_window">
+            <field name="name">Raliment Point To Do</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+                    'search_default_available': 1,
+            }
+            </field>
+            <!--  'search_default_delivery_address': 1, -->
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree_easymy_hub"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create a new transfer.
+              </p><p>
+                You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+              </p>
+            </field>
+        </record>       
+        <menuitem action="action_all_raliment_delivery_ready" id="menu_raliment_delivery" name="Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_raliment_point_manager"/>
 	</data>
 </odoo>
