@@ -21,7 +21,7 @@
                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-danger="state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list">
                     <field name="name"/>
                     <field name="location_dest_id" invisible="1"/>
-                    <field name="raliment_point" invisible="1"/>
+                    <field name="raliment_point"/>
                     <field name="partner_id"/>
                     <field name="date" invisible="1"/>
                     <field name="min_date"/>
@@ -54,9 +54,10 @@
             <field name="inherit_id" ref="stock.view_picking_internal_search"/>
             <field name="arch" type="xml">
             	<filter name="picking_type" position="after">
+            		<filter name="individual_customer" string="Individual customer" domain="[('raliment_point','=',None)]"/>
             		<filter name="time_frame_id" string="Time Frame" context="{'group_by':'time_frame_id'}"/>
-            		<filter name="raliment_point" string="Raliment point" domain="[('partner_id.raliment_point','=',True)]" context="{'group_by':'raliment_point'}"/>
-            		<filter name="delivery_address" string="Delivery address" domain="[('partner_id.type','=','delivery')]" context="{'group_by':'delivery_address'}"/>
+            		<filter name="raliment_point" string="Raliment point" context="{'group_by':'raliment_point'}"/>
+            		<filter name="delivery_address" string="Delivery address" context="{'group_by':'delivery_address'}"/>
             	</filter>
             </field>
         </record>
