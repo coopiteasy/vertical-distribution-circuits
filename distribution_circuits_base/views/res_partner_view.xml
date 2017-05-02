@@ -37,7 +37,7 @@
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="context">{"search_default_gac":1,"default_gac":1}</field>
+            <field name="context">{"search_default_gac":1,"default_is_gac":1}</field>
             <field name="search_view_id" ref="base.view_res_partner_filter"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
@@ -58,7 +58,7 @@
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="context">{"search_default_raliment_point":1,"default_raliment_point":1}</field>
+            <field name="context">{"search_default_raliment_point":1,"default_is_raliment_point":1}</field>
             <field name="search_view_id" ref="base.view_res_partner_filter"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
