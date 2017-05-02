@@ -13,7 +13,6 @@
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
 	            <select name="selected_time_frame" class="form-control">
-	                <option value=""></option>
 	                <t t-foreach="open_time_frames or []" t-as="time_frame">
 	                    <option t-att-value="time_frame[0]" t-att-selected="time_frame[0] == current_time_frame"><t t-esc="time_frame[1]"/></option>
 	                </t>

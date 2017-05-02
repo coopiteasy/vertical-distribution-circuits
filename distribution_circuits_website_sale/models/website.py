@@ -11,8 +11,10 @@ class WebSite(models.Model):
     current_time_frame = fields.Many2one('time.frame', string='Selected time frame')
     
     def get_current_time_frame(self):
-        #current_time_frame = request.session.get('selected_time_frame')
-        #return self.env['time.frame'].browse(int(current_time_frame)).id
+        if request.session.get('selected_time_frame') is None:
+            time_frame_ids = self.env['time.frame'].sudo().search([('state','=','open')]).ids
+            if len(time_frame_ids) > 0:
+                request.session['selected_time_frame'] = time_frame_ids[0]
         return request.session.get('selected_time_frame')
     
     @api.multi 
