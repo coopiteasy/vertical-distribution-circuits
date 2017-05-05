@@ -3,11 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
+import datetime
 from openerp import http
 from openerp.http import request
 from openerp import SUPERUSER_ID
 from openerp.addons.website_sale.controllers.main import QueryURL
 from openerp.addons.website_sale.controllers.main import website_sale
+from openerp.addons.website_portal_sale.controllers.main import website_account
 
 _logger = logging.getLogger(__name__)
 
@@ -71,3 +73,15 @@ class WebsiteSale(website_sale):
             error = 'The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference)
             _logger.info(error)
             return request.redirect('/shop')
+        
+
+class WebsiteAccount(website_account):
+    @http.route()
+    def account(self, **kw):
+        """ Add sales documents to main account page """
+        response = super(WebsiteAccount, self).account()
+
+        response.qcontext.update({
+            'user_partner': request.env.user.partner_id,
+        })
+        return response

@@ -72,7 +72,30 @@
         <menuitem action="action_easy_my_hub_quotation"
             id="menu_easy_my_hub_quotation" parent="menu_easy_my_hub_main_sale"
             sequence="2" groups="distribution_circuits_base.group_easy_my_hub_user"/>
-            
+        
+        <record id="action_easy_my_hub_product_template" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="product.product_template_kanban_view"/>
+            <field name="context">{'search_default_filter_to_sell':1,'default_invoice_policy':'delivery'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new product.
+                </p><p>
+                    You must define a product for everything you sell, whether it's a physical product, a consumable or a service you offer to  customers.               
+                </p><p>
+                    The product form contains information to simplify the sale process: price, notes in the quotation, accounting data, procurement methods, etc.
+                </p>
+            </field>
+        </record>
+        
+        <menuitem action="action_easy_my_hub_product_template" id="menu_easy_my_hub_product_template_action"
+            parent="menu_easy_my_hub_main_sale"
+            sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        
 		<record id="product_template_form_view" model="ir.ui.view">
             <field name="name">product.template.common.form</field>
             <field name="model">product.template</field>
