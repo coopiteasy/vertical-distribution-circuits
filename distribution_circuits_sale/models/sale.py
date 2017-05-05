@@ -27,12 +27,14 @@ class SaleOrder(models.Model):
             else:
                 return False
             
-class Product(models.Model):
-    
+class ProductTemplate(models.Model):
     _inherit = "product.template"
     
     uom_name = fields.Char(related="uom_id.name", string="UoM Name")
     supplier_id = fields.Many2one(compute="get_first_supplier", comodel_name="res.partner", string="Supplier") 
+    
+    invoice_policy = fields.Selection(default='delivery')
+    type = fields.Selection(default='product')
     
     @api.multi
     def get_first_supplier(self):

@@ -6,7 +6,7 @@
     'website': 'http://www.coopiteasy.be',
     'version': '9.0.1.0.0',
     'license': 'AGPL-3',
-    "depends": ["distribution_circuits_base","sale"],
+    "depends": ["sale","product","distribution_circuits_base"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
