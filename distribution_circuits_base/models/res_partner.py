@@ -6,7 +6,7 @@ from openerp import api, fields, models, _
 class ResPartner(models.Model):
     _inherit = "res.partner"
     
-    is_gac = fields.Boolean(string="est un GAC")
+    is_gac = fields.Boolean(string="Est un GAC")
     is_raliment_point = fields.Boolean(string="Est un Point de Raliment")
     is_delivery_point = fields.Boolean(string="Est un Point de livraison")
     raliment_point_id = fields.Many2one('res.partner', string="Point de Raliment", domain=[('is_raliment_point','=',True)])
