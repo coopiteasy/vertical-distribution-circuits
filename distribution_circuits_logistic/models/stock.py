@@ -10,7 +10,7 @@ class StockPicking(models.Model):
     time_frame_id = fields.Many2one(compute="_compute_time_frame", comodel_name="time.frame", string="Time Frame", store=True)
     raliment_point = fields.Many2one(compute="_compute_partners", comodel_name="res.partner", string="Raliment Point", domain=[('is_raliment_point','=',True)],store=True)
     delivery_address = fields.Many2one(compute="_compute_partners", comodel_name="res.partner", string="Delivery address", store=True)
-    partner_id = fields.Many2one(compute="_compute_partners", comodel_name="res.partner", string='Partner', states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
+    partner_id = fields.Many2one(compute="_compute_partners", comodel_name="res.partner", string='Partner', readonly=True)
     
     @api.multi
     @api.depends('move_lines')
