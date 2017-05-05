@@ -10,12 +10,13 @@
     'version': '9.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
-        'website_sale'
+        'website_portal_sale','website_sale'
     ],
     'data': [
         "security/ir.model.access.csv",
       #  "data/website_menu.xml",
         "views/website_sale_template.xml",
+        "views/website_portal_sale_template.xml",
     ],
     'installable': True,
 }

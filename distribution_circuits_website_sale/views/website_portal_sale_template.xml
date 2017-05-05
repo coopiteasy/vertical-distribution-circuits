@@ -1,0 +1,33 @@
+<odoo>
+	<template id="account" name="Account" inherit_id="website_portal.account">
+        <xpath expr="//div[contains(@class,'o_my_documents')]" position="inside">
+            <t t-call="distribution_circuits_website_sale.credit_account" />
+        </xpath>
+    </template>
+    
+	<template id="credit_account" name="Credit account">
+        <h3 class="page-header">Your Financial Account</h3>
+        <t t-if="not quotations">
+            <p>There are currently no quotes for your account.</p>
+        </t>
+        <t t-if="quotations">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                      <th>Amount of your financial account</th>
+                      <th>Amount due not yet invoiced</th>
+                      <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                		<td><span t-field="user_partner.customer_credit"/></td>
+                		<td><span t-field="user_partner.amount_due"/></td>
+                		<td></td>
+                	</tr>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+</odoo>

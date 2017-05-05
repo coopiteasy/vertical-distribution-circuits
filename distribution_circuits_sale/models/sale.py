@@ -33,7 +33,10 @@ class ProductTemplate(models.Model):
     uom_name = fields.Char(related="uom_id.name", string="UoM Name")
     supplier_id = fields.Many2one(compute="get_first_supplier", comodel_name="res.partner", string="Supplier") 
     
-    invoice_policy = fields.Selection(default='delivery')
+    invoice_policy = fields.Selection([('order', 'Ordered quantities'),
+                                    ('delivery', 'Delivered quantities'),
+                                    ('cost', 'Invoice based on time and material')],
+                                    string='Invoicing Policy', default='delivery')
     type = fields.Selection(default='product')
     
     @api.multi
@@ -47,7 +50,13 @@ class Partner(models.Model):
     _inherit = "res.partner"
     
     amount_due = fields.Monetary(string="Amount due for sale orders", compute="_compute_amount_due")
+    customer_credit = fields.Monetary(string="Customer credit", compute="_compute_customer_credit")
     
+    @api.multi
+    def _compute_customer_credit(self):
+        for partner in self:
+            partner.customer_credit = -(partner.credit) - partner.amount_due
+            
     @api.multi
     def _compute_amount_due(self):
         order_obj = self.env['sale.order']
