@@ -93,6 +93,6 @@
             </field>
         </record>   
             
-        <menuitem action="action_time_frame_consolidation" id="menu_time_frame_consolidation" name="Pickings Consolidation" parent="menu_easy_my_hub_main_delivery" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        <menuitem action="action_time_frame_consolidation" id="menu_time_frame_consolidation" name="Pickings Consolidation" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>

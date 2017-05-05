@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+		<record id="action_delivery_point" model="ir.actions.act_window">
+            <field name="name">Delivery points</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"search_default_type_person":1,"delivery_point":1}</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a customer in your address book.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                a customer; discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_delivery_point" id="menu_delivery_point" name="Delivery points" parent="menu_easy_my_hub_main_delivery" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/> 
+		
 		<record id="vpicktree_gac" model="ir.ui.view">
             <field name="name">stock.picking.tree</field>
             <field name="model">stock.picking</field>
@@ -123,7 +144,7 @@
             </field>
         </record>
        
-        <menuitem action="action_all_delivery_ready" id="menu_delivery" name="All Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        <menuitem action="action_all_delivery_ready" id="menu_delivery" name="All Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user"/>
  
  		<record id="action_all_raliment_delivery_ready" model="ir.actions.act_window">
             <field name="name">Raliment Point To Do</field>
@@ -147,6 +168,6 @@
               </p>
             </field>
         </record>       
-        <menuitem action="action_all_raliment_delivery_ready" id="menu_raliment_delivery" name="Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="3" groups="distribution_circuits_base.group_easy_my_hub_raliment_point_manager"/>
+        <menuitem action="action_all_raliment_delivery_ready" id="menu_raliment_delivery" name="Deliveries" parent="menu_easy_my_hub_main_delivery" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_raliment_point_manager"/>
 	</data>
 </odoo>

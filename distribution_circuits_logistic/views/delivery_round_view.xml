@@ -103,6 +103,6 @@
             </field>
         </record>
        
-        <menuitem action="action_delivery_round_ready" id="menu_delivery_round" name="Delivery rounds" parent="menu_easy_my_hub_main_delivery" sequence="1" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        <menuitem action="action_delivery_round_ready" id="menu_delivery_round" name="Delivery rounds" parent="menu_easy_my_hub_main_delivery" sequence="4" groups="distribution_circuits_base.group_easy_my_hub_user"/>
 	</data>
 </odoo>
