@@ -7,11 +7,12 @@
 			<field name="inherit_id" ref="base.view_partner_form"/>            
             <field name="arch" type="xml">
             	<field name="type" position="before">
-            		<field name="raliment_point_id"/>
+            		<field name="raliment_point_id" attrs="{'invisible':[('is_raliment_point','=',True)]}"/>
             	</field>
             	<xpath expr="/form/sheet/notebook/page[@name='sales_purchases']/group/group[@name='sale']/field[@name='customer']" position="after">
             		<field name="is_raliment_point"/>
             		<field name="is_gac"/>
+            		<field name="raliment_point_manager" attrs="{'invisible':[('is_raliment_point','=',False)]}"/>
             	</xpath>
             </field>
         </record>

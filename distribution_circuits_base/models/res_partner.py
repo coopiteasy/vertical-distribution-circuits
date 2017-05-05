@@ -9,6 +9,7 @@ class ResPartner(models.Model):
     is_gac = fields.Boolean(string="est un GAC")
     is_raliment_point = fields.Boolean(string="Est un Point de Raliment") 
     raliment_point_id = fields.Many2one('res.partner', string="Point de Raliment", domain=[('is_raliment_point','=',True)])
+    raliment_point_manager = fields.Many2one('res.users', string="Raliment point responsible", domain=[('share','=',False)])
     
     def get_delivery_address(self):
         if len(self.child_ids) > 0:
