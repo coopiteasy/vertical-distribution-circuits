@@ -45,13 +45,6 @@ class WebsiteSale(website_sale):
             request.session['selected_time_frame'] = None
         return {0:""}
     
-#     def check_customer_credit(self, order):
-#         partner = order.partner_id
-#         if partner.credit - partner.amount_due - order.amount_total >= order.amount_total:
-#             return True
-#         else:
-#             return False
-    
     @http.route('/shop/payment/validate', type='http', auth="public", website=True)
     def payment_validate(self, transaction_id=None, sale_order_id=None, **post):
         if transaction_id is None:
