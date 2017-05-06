@@ -67,7 +67,22 @@ class WebsiteSale(website_sale):
             _logger.info(error)
             return request.redirect('/shop')
         
-
+    def checkout_values(self, data=None):
+        values = super(WebsiteSale, self).checkout_values(data=None)
+        order = request.website.sale_get_order()
+        partner = order.partner_id
+        checkout = values.get('checkout')
+        if partner.is_company:
+            checkout['show_company'] = True
+            checkout['company_name'] = partner.name
+        elif partner.parent_id:
+            checkout['show_company'] = True
+            checkout['company_name'] = partner.parent_id.name
+        else:
+            checkout['show_company'] = False
+        values['checkout'] = checkout
+        return values
+    
 class WebsiteAccount(website_account):
     @http.route()
     def account(self, **kw):
