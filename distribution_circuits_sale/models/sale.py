@@ -22,7 +22,14 @@ class SaleOrder(models.Model):
     def check_customer_credit(self):
         for order in self:
             partner = order.partner_id
-            if -(partner.credit - (partner.amount_due - order.amount_total)) >= order.amount_total:
+            order_total_amount = 0.0
+            # This method is used two times : at the validation of the cart and
+            # at the payment process. The state of the order is different at these
+            # two stages so we need to handle both case. At cart validation we don't
+            # have to deduce the order total amount from the amount due.
+            if order.state != 'draft':
+                order_total_amount = order.amount_total
+            if -(partner.credit - (partner.amount_due - order_total_amount)) >= order.amount_total:
                 return True
             else:
                 return False
