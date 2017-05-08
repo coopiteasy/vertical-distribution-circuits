@@ -192,7 +192,7 @@
 	                  <div t-if="not only_services" class="form-group col-lg-12">
 	                      <label>Shipping</label>
 	                      <select name="shipping_id" class="form-control">
-	                          <option value="0">Ship to the same address</option>
+	                          <!-- <option value="0">Ship to the same address</option> -->
 	                          <t t-foreach="shippings" t-as="shipping">
 	                              <option t-att-value="shipping.id" t-att-selected="shipping.id == shipping_id"
 	                                t-att-data-shipping_name="shipping.name"
@@ -201,10 +201,12 @@
 	                                t-att-data-shipping_city="shipping.city"
 	                                t-att-data-shipping_zip="shipping.zip"
 	                                t-att-data-shipping_state_id="shipping.state_id and shipping.state_id.id"
-	                                t-att-data-shipping_country_id="shipping.country_id and shipping.country_id.id"
-	                                ><t t-esc="', '.join('\n'.join(shipping.name_get()[0][1].split(',')).split('\n')[1:])"/></option>
+	                                t-att-data-shipping_country_id="shipping.country_id and shipping.country_id.id">
+	                                <!-- <t t-esc="', '.join('\n'.join(shipping.name_get()[0][1].split(',')).split('\n')[1:])"/> -->
+	                                	<t t-esc="shipping.name_get()[0][1]"/>
+	                                </option>
 	                          </t>
-	                          <option value="-1" t-att-selected="error and len(error) > 0 and shipping_id == -1">-- Create a new address --</option>
+	                          <!-- <option value="-1" t-att-selected="error and len(error) > 0 and shipping_id == -1">## Create a new address ##</option> -->
 	                      </select>
 	                  </div>
 	              </div>

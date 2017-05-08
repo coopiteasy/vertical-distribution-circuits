@@ -16,4 +16,6 @@ class ResPartner(models.Model):
     def get_delivery_address(self):
         if len(self.child_ids) > 0:
             return self.env['res.partner'].search([('id','in',self.child_ids.ids),('type','=',"delivery")], limit=1)
-            
+        
+    def get_delivery_points(self):
+        return self.env['res.partner'].search([('is_delivery_point','=',True)])   

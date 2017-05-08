@@ -66,12 +66,11 @@ class WebsiteSale(website_sale):
             error = 'The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference)
             _logger.info(error)
             return request.redirect('/shop')
-        
-    def checkout_values(self, data=None):
-        values = super(WebsiteSale, self).checkout_values(data=None)
-        order = request.website.sale_get_order()
-        partner = order.partner_id
-        checkout = values.get('checkout')
+    
+    def get_delivery_points(self):
+        return request.env['res.partner'].sudo().get_delivery_points()
+    
+    def set_show_company(self, checkout, partner):
         if partner.is_company:
             checkout['show_company'] = True
             checkout['company_name'] = partner.name
@@ -80,7 +79,25 @@ class WebsiteSale(website_sale):
             checkout['company_name'] = partner.parent_id.name
         else:
             checkout['show_company'] = False
+        
+        return checkout
+    
+    def get_shipping_id(self, partner):
+        if partner.raliment_point_id:
+            return partner.raliment_point_id.id
+        else:
+            return partner.delvery_point_id.id
+        
+    def checkout_values(self, data=None):
+        values = super(WebsiteSale, self).checkout_values(data=None)
+        order = request.website.sale_get_order()
+        partner = order.partner_id
+        
+        checkout = self.set_show_company(values.get('checkout'), partner)
+        
+        checkout['shipping_id'] = self.get_shipping_id(partner)
         values['checkout'] = checkout
+        values['shippings'] = self.get_delivery_points()
         return values
     
 class WebsiteAccount(website_account):
