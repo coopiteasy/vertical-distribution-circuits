@@ -19,3 +19,6 @@ class ResPartner(models.Model):
         
     def get_delivery_points(self):
         return self.env['res.partner'].search([('is_delivery_point','=',True)])   
+    
+    def get_raliment_points(self):
+        return self.env['res.partner'].search([('is_raliment_point','=',True)])   
