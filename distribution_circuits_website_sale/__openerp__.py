@@ -17,6 +17,8 @@
       #  "data/website_menu.xml",
         "views/website_sale_template.xml",
         "views/website_portal_sale_template.xml",
+        "views/auth_signup_template.xml",
+        "views/res_users_view.xml",
     ],
     'installable': True,
 }
