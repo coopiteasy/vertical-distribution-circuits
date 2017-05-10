@@ -30,7 +30,7 @@
 	            <div class="form-group field-name">
 	                <label for="country_id" class="control-label">Your Country</label>
 					<select name="country_id" id="country_id" class="form-control" style="width:54%;" required="required" 
-						t-att-readonly="'readonly' if only_passwords else None" >
+						t-att-disabled="'disabled' if only_passwords else None" >
                          <option value="">Country...</option>
                          <t t-foreach="countries or []" t-as="country">
                              <option t-att-value="country.id" t-att-selected="country.id == int(country_id)"><t t-esc="country.name"/></option>
@@ -41,7 +41,7 @@
 	            <div class="form-group field-name">
 	                <label for="raliment_point_id" class="control-label">Your Raliment Point</label>
 					<select name="raliment_point_id" id="raliment_point_id" class="form-control"
-						t-att-readonly="'readonly' if only_passwords else None" >
+						t-att-disabled="'disabled' if only_passwords else None" >
                          <option value="">== Choose a Raliment Point ==</option>
                          <t t-foreach="raliment_points or []" t-as="raliment_point">
                              <option t-att-value="raliment_point.id" t-att-selected="raliment_point.id == int(raliment_point_id)"><t t-esc="raliment_point.name"/></option>
@@ -52,7 +52,7 @@
 	            <div class="form-group field-name">
 	                <label for="delivery_point_id" class="control-label">Your Delivery Point</label>
 					<select name="delivery_point_id" id="delivery_point_id" class="form-control"
-						t-att-readonly="'readonly' if only_passwords else None" >
+						t-att-disabled="'disabled' if only_passwords else None" >
                          <option value="">== Choose a Delivery Point ==</option>
                          <t t-foreach="delivery_points or []" t-as="delivery_point">
                              <option t-att-value="delivery_point.id" t-att-selected="delivery_point.id == int(delivery_point_id)"><t t-esc="delivery_point.name"/></option>
