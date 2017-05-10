@@ -8,6 +8,7 @@ from openerp import http
 from openerp.http import request
 from openerp import SUPERUSER_ID
 from openerp.addons.website_sale.controllers.main import QueryURL
+from openerp.tools.translate import _
 from openerp.addons.website_sale.controllers.main import website_sale
 from openerp.addons.website_portal_sale.controllers.main import website_account
 
@@ -134,15 +135,18 @@ class AuthSignupHome(AuthSignupHome):
         values['zip'] = values['zip_code']
         qcontext['customer'] = True
         qcontext['need_validation'] = True
-        qcontext['active'] = False
-        #self._signup_with_values(qcontext.get('token'), values)
-        request.env['res.users'].sudo().signup(values, qcontext.get('token'))
+        self._signup_with_values(qcontext.get('token'), values)
         request.cr.commit()
     
     @http.route('/web/signup', type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-
+        
+        if not qcontext.get('raliment_point_id',False) and not qcontext.get('delivery_point_id',False):
+            qcontext['error'] = _("You must at least choose a Raliment or a Delivery point")
+        if qcontext.get('raliment_point_id',False) and qcontext.get('delivery_point_id',False):
+            qcontext['error'] = _("You can not choose a Raliment and a Delivery point")
+        
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
             raise werkzeug.exceptions.NotFound()
 
