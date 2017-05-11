@@ -29,7 +29,8 @@ class SaleOrder(models.Model):
             # have to deduce the order total amount from the amount due.
             if order.state != 'draft':
                 order_total_amount = order.amount_total
-            if -(partner.credit - (partner.amount_due - order_total_amount)) >= order.amount_total:
+            #if -(partner.credit - (partner.amount_due - order_total_amount)) >= order.amount_total:
+            if partner.customer_credit >= order.amount_total:
                 return True
             else:
                 return False
