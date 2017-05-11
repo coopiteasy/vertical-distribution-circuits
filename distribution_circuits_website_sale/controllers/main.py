@@ -61,7 +61,8 @@ class WebsiteSale(website_sale):
         
         enough_credit = order.check_customer_credit()
         if enough_credit:
-            tx.write({'state':'done'})
+            if tx:
+                tx.write({'state':'done'})
             return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)
         else:
             error = 'The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference)
