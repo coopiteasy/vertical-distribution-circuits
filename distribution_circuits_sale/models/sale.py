@@ -69,7 +69,7 @@ class Partner(models.Model):
         order_obj = self.env['sale.order']
         invoice_obj = self.env['account.invoice']
         for partner in self:
-            orders = order_obj.search([('partner_id','=',partner.id),('state','in',['sent','sale','done']),('invoice_status','!=','invoiced')])
+            orders = order_obj.search([('partner_id','=',partner.id),('state','in',['sent','sale']),('invoice_status','!=','invoiced')])
             
             amount_total = 0
             for order in orders:
