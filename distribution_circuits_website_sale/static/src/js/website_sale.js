@@ -13,7 +13,6 @@ odoo.define('distribution_circuits_website_sale.website_sale', function (require
   		})
   		.then(function (data) {
 			$.each(data, function(i, obj) {
-				//alert(obj);
 			}); 
         });
 	});
