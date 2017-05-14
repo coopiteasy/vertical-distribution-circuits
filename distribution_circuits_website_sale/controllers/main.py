@@ -26,11 +26,15 @@ class WebsiteSale(website_sale):
                 auth='user',
                 website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
-        if time_frame:
-            context = dict(request.env.context)
-            context.setdefault('time_frame_id', int(time_frame))
-            request.env.context = context
-        return super(WebsiteSale, self).shop(page=page, category=category,
+#         if time_frame:
+#             context = dict(request.env.context)
+#             context.setdefault('time_frame_id', int(time_frame))
+#             request.env.context = context
+        time_frames = request.env['time.frame'].sudo().search([('state','=','open')])
+        if len(time_frames) == 0:
+            return request.website.render("distribution_circuits_website_sale.shop_closed", post)
+        else:
+            return super(WebsiteSale, self).shop(page=page, category=category,
                                              time_frame=time_frame, search=search,
                                              **post)
 
