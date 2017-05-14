@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
 <data>
 	<template id="assets_frontend" inherit_id="website.assets_frontend" name="Distribution circtuits Shop">
 	  <xpath expr="." position="inside">
@@ -54,6 +54,7 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
+	     
 	     <xpath expr="//a[@href='/shop/checkout']" position="replace">
 	     	<t t-if="website_sale_order and website_sale_order.check_customer_credit()">
 	     		<a t-if="not optional_products and website_sale_order and website_sale_order.website_order_line" class="btn btn-primary pull-right mb32" href="/shop/checkout"><span class="hidden-xs">Process Checkout</span><span class="visible-xs-inline">Checkout</span> <span class="fa fa-long-arrow-right"/></a>
@@ -91,6 +92,21 @@
 			<h5><strong><t t-esc="product.supplier_id.display_name"/></strong></h5>
 		</xpath>
 	</template>	
+
+	<template id="easy_my_hub_payment" inherit_id="website_sale.payment" name="EasyMyHub Payment">
+ 		<xpath expr="//a[@class='btn btn-primary a-submit']" position="replace">	
+			<t t-if="website_sale_order and website_sale_order.check_customer_credit()">
+				<a style="width:127px;" class="btn btn-primary a-submit">
+		          <span t-if="order.amount_total > 0">Pay Now <span class="fa fa-long-arrow-right"></span></span>
+		          <span t-if="order.amount_total == 0">Confirm Order <span class="fa fa-long-arrow-right"></span></span>
+		        </a>
+	        </t>
+	        <span t-if="website_sale_order and not website_sale_order.check_customer_credit()"> Your account doesn't allow you to pay this order </span>
+	    </xpath> 
+	    <xpath expr="//form[@action='/shop/payment/validate']" position="before">
+	    	<span> Your account doesn't allow you to pay this order </span>
+	    </xpath>
+	</template>
 	
 	<!-- redifining the original checkout template as the standard one doesn't lead to 
 	     a smooth flow. Check if this override made the other module incompatible.
@@ -256,4 +272,4 @@
 	  </t>
 	</template>
 </data>
-</openerp>
+</odoo>
