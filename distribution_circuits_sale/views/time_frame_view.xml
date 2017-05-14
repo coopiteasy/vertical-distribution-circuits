@@ -9,6 +9,7 @@
 	            	<field name="delivery_date"/>
 	            	<field name="start"/>
 	            	<field name="end"/>
+	            	<field name="state"/>
                 </tree>
             </field>
         </record>
