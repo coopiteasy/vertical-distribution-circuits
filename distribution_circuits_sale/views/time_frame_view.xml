@@ -36,7 +36,17 @@
 		            	</group>
 		            	<notebook>
 		            		<page string="Sale orders" name="sale_orders">
-		            			<field name="sale_orders"/>
+		            			<field name="sale_orders">
+		            				<tree>
+		            					<field name="name" string="Order Number"/>
+		            					<field name="raliment_point"/>
+					                    <field name="date_order"/>
+					                    <field name="partner_id"/>
+                    					<field name="amount_total" sum="Total Tax Included" widget="monetary"/>
+                    					<field name="state"/>
+                    					<field name="invoice_status"/>
+		            				</tree>
+		            			</field>
 		            		</page>
 		            	</notebook>
 	                </sheet>
