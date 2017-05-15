@@ -38,14 +38,24 @@ class SaleOrder(models.Model):
 class ProductTemplate(models.Model):
     _inherit = "product.template"
     
+    @api.model
+    def _get_buy_route(self):
+        buy_route = self.env.ref('purchase.route_warehouse0_buy')
+        mto_route = self.env.ref('stock.route_warehouse0_mto')
+        routes_list = []
+        
+        if buy_route:
+            routes_list.append(buy_route.ids[0])
+        if mto_route:
+            routes_list.append(mto_route.ids[0])
+        return routes_list
+    
     uom_name = fields.Char(related="uom_id.name", string="UoM Name")
     supplier_id = fields.Many2one(compute="get_first_supplier", comodel_name="res.partner", string="Supplier") 
     
-    invoice_policy = fields.Selection([('order', 'Ordered quantities'),
-                                    ('delivery', 'Delivered quantities'),
-                                    ('cost', 'Invoice based on time and material')],
-                                    string='Invoicing Policy', default='delivery')
+    invoice_policy = fields.Selection(default='delivery')
     type = fields.Selection(default='product')
+    route_ids = fields.Many2many(default=lambda self: self._get_buy_route())
     
     @api.multi
     def get_first_supplier(self):
