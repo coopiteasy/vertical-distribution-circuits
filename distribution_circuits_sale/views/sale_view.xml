@@ -25,6 +25,22 @@
             </field>
         </record>
         
+        <record id="view_easy_my_hub_sales_order_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+	            <field name="partner_id" position="after">
+	            	<field name="raliment_point"/>
+	            	<field name="time_frame_id"/>
+	            </field>
+            	<filter name="customer" position="after">
+               		<filter name="raliment_point" string="Raliment point" context="{'group_by':'raliment_point'}"/>
+               		<filter name="time_frame_id" string="Time frame" context="{'group_by':'time_frame_id'}"/>
+               	</filter>
+           </field>
+        </record>
+        
         <record id="action_easy_my_hub_sale_orders" model="ir.actions.act_window">
             <field name="name">Sales Orders</field>
             <field name="type">ir.actions.act_window</field>
@@ -108,5 +124,43 @@
             	</field>
             </field>
         </record>
+        
+        <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+	        <field name="name">Products</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">product.template</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">kanban,tree,form</field>
+	        <field name="context">{"search_default_filter_to_purchase":1,'default_invoice_policy':'delivery'}</field>
+	        <field name="search_view_id" eval="False"/> <!-- Force empty -->
+	        <field name="view_id" eval="False"/> <!-- Force empty -->
+	        <field name="help" type="html">
+	          <p class="oe_view_nocontent_create">
+	            Click to define a new product.
+	          </p><p>
+	            You must define a product for everything you purchase, whether
+	            it's a physical product, a consumable or services you buy to
+	            subcontractants.
+	          </p><p>
+	            The product form contains detailed information to improve the
+	            purchase process: prices, procurement logistics, accounting data,
+	            available vendors, etc.
+	          </p>
+        </field>
+    	
+    	</record>
+            <record id="product.product_template_action_product" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_type">form</field>
+            <field name="context">{"search_default_products": 1, 'default_type': 'product','default_invoice_policy':'delivery'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new product.
+                </p>
+            </field>
+        </record>    
 	</data>
 </odoo>
