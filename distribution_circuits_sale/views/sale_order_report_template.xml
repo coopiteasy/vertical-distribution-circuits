@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_saleorder_easymyhub" inherit_id="sale.report_saleorder_document">
+			<xpath expr="//div[@t-if='doc.date_order']" position="after">
+	            <div t-if="doc.time_frame_id" class="col-xs-3">
+	                <strong>Delivery Date:</strong>
+	                <p t-field="doc.time_frame_id.delivery_date"/>
+            	</div>
+            </xpath>
+		</template>
+		
+	</data>
+</odoo>
