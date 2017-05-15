@@ -243,7 +243,7 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['error'] = _("You must at least choose a Raliment or a Delivery point")
         if qcontext.get('raliment_point_id',False) and qcontext.get('delivery_point_id',False):
             qcontext['error'] = _("You can not choose a Raliment and a Delivery point")
-        if not tools.single_email_re.match(qcontext.get("login", "")):
+        if qcontext.get("login", False) and not tools.single_email_re.match(qcontext.get("login", "")):
             qcontext["error"] = _("That does not seem to be an email address.")
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
             raise werkzeug.exceptions.NotFound()
