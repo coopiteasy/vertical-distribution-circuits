@@ -9,6 +9,7 @@ from openerp.http import request
 from openerp import SUPERUSER_ID
 from openerp.addons.website_sale.controllers.main import QueryURL
 from openerp.tools.translate import _
+from openerp import tools
 from openerp.addons.website_sale.controllers.main import website_sale
 from openerp.addons.website_portal_sale.controllers.main import website_account
 
@@ -129,10 +130,94 @@ class WebsiteAccount(website_account):
             'user_partner': request.env.user.partner_id,
         })
         return response
-    
+
+    @http.route(['/my/account'], type='http', auth='user', website=True)
+    def details(self, redirect=None, **post):
+        partner = request.env['res.users'].browse(request.uid).partner_id
+        values = {
+            'error': {},
+            'error_message': []
+        }
+
+        if post:
+            error, error_message = self.details_form_validate(post)
+            values.update({'error': error, 'error_message': error_message})
+            values.update(post)
+            if not error:
+                post.update({'zip': post.pop('zipcode', '')})
+                if partner.type == "contact":
+                    address_fields = {
+                        'city': post.pop('city'),
+                        'street': post.pop('street'),
+                        'zip': post.pop('zip'),
+                        'country_id': post.pop('country_id'),
+                        'state_id': post.pop('state_id')
+                    }
+                    partner.commercial_partner_id.sudo().write(address_fields)
+                partner.sudo().write(post)
+                if redirect:
+                    return request.redirect(redirect)
+                return request.redirect('/my/home')
+
+        countries = request.env['res.country'].sudo().search([])
+        states = request.env['res.country.state'].sudo().search([])
+
+        values.update({
+            'partner': partner,
+            'countries': countries,
+            'states': states,
+            'has_check_vat': hasattr(request.env['res.partner'], 'check_vat'),
+            'redirect': redirect,
+        })
+
+        return request.website.render("website_portal.details", values)
+
+    def details_form_validate(self, data):
+        error = dict()
+        error_message = []
+
+        mandatory_billing_fields = ["name", "phone", "email", "city", "country_id"]
+        optional_billing_fields = ["zipcode", "company_name", "state_id", "vat", "street"]
+
+        # Validation
+        for field_name in mandatory_billing_fields:
+            if not data.get(field_name):
+                error[field_name] = 'missing'
+
+        # email validation
+        if data.get('email') and not tools.single_email_re.match(data.get('email')):
+            error["email"] = 'error'
+            error_message.append(_('Invalid Email! Please enter a valid email address.'))
+
+        # vat validation
+        if data.get("vat") and hasattr(request.env["res.partner"], "check_vat"):
+            if request.website.company_id.vat_check_vies:
+                # force full VIES online check
+                check_func = request.env["res.partner"].vies_vat_check
+            else:
+                # quick and partial off-line checksum validation
+                check_func = request.env["res.partner"].simple_vat_check
+            vat_country, vat_number = request.env["res.partner"]._split_vat(data.get("vat"))
+            if not check_func(vat_country, vat_number):  # simple_vat_check
+                error["vat"] = 'error'
+        # error message for empty required fields
+        if [err for err in error.values() if err == 'missing']:
+            error_message.append(_('Some required fields are empty.'))
+
+        unknown = [k for k in data.iterkeys() if k not in mandatory_billing_fields + optional_billing_fields]
+        if unknown:
+            error['common'] = 'Unknown field'
+            error_message.append("Unknown field '%s'" % ','.join(unknown))
+
+        return error, error_message
+
 from openerp.addons.auth_signup.res_users import SignupError
 from openerp.addons.auth_signup.controllers.main import AuthSignupHome
-
+try:
+    from validate_email import validate_email
+except ImportError:
+    _logger.debug("Cannot import `validate_email`.")
+    
 class AuthSignupHome(AuthSignupHome):    
     
     def do_signup(self, qcontext):
@@ -158,7 +243,8 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['error'] = _("You must at least choose a Raliment or a Delivery point")
         if qcontext.get('raliment_point_id',False) and qcontext.get('delivery_point_id',False):
             qcontext['error'] = _("You can not choose a Raliment and a Delivery point")
-        
+        if not tools.single_email_re.match(qcontext.get("login", "")):
+            qcontext["error"] = _("That does not seem to be an email address.")
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
             raise werkzeug.exceptions.NotFound()
 

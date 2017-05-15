@@ -9,6 +9,12 @@
     'website': 'http://www.coopiteasy.be',
     'version': '9.0.1.0.0',
     'license': 'AGPL-3',
+#     'external_dependencies': {
+#         "python": [
+#             "lxml",
+#             "validate_email",
+#         ],
+#     },
     'depends': ['distribution_circuits_sale','website_sale',
                 'website_portal_sale','auth_signup'
     ],
