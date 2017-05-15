@@ -112,7 +112,14 @@ class WebsiteSale(website_sale):
         values['shippings'] = self.get_delivery_points()
         return values
 
+#     @http.route(['/shop/cart/check_customer_credit'], type='json', auth="public", methods=['POST'], website=True)
+#     def check_customer_credit(self):
+#         order = request.website.sale_get_order()
+#         res = order.check_customer_credit()
+#         return{order.id:str(res)}
+        
 class WebsiteAccount(website_account):
+    
     @http.route()
     def account(self, **kw):
         """ Add sales documents to main account page """
