@@ -213,12 +213,17 @@ class WebsiteAccount(website_account):
 
 from openerp.addons.auth_signup.res_users import SignupError
 from openerp.addons.auth_signup.controllers.main import AuthSignupHome
-try:
-    from validate_email import validate_email
-except ImportError:
-    _logger.debug("Cannot import `validate_email`.")
+from openerp.addons.base_iban import base_iban
+from openerp.exceptions import ValidationError
     
 class AuthSignupHome(AuthSignupHome):    
+    def _signup_with_values(self, token, values):
+        db, login, password = request.env['res.users'].sudo().signup(values, token)
+        request.cr.commit()     # as authenticate will use its own cursor we need to commit the current transaction
+        uid = request.session.authenticate(db, login, password)
+        if not uid:
+            raise SignupError(_('Authentication Failed.'))
+        return uid
     
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
@@ -232,7 +237,10 @@ class AuthSignupHome(AuthSignupHome):
         values['zip'] = values['zip_code']
         qcontext['customer'] = True
         qcontext['need_validation'] = True
-        self._signup_with_values(qcontext.get('token'), values)
+        uid = self._signup_with_values(qcontext.get('token'), values)
+        iban = qcontext.get('iban')
+        user = request.env['res.users'].sudo().search([('id','=',uid)])
+        request.env['res.partner.bank'].sudo().create({'partner_id':user.partner_id.id,'acc_number':iban})
         request.cr.commit()
     
     @http.route('/web/signup', type='http', auth='public', website=True)
@@ -245,6 +253,11 @@ class AuthSignupHome(AuthSignupHome):
             qcontext['error'] = _("You can not choose a Raliment and a Delivery point")
         if qcontext.get("login", False) and not tools.single_email_re.match(qcontext.get("login", "")):
             qcontext["error"] = _("That does not seem to be an email address.")
+        if qcontext.get("iban",False):
+            try:
+                base_iban.validate_iban(qcontext.get("iban"))
+            except ValidationError:
+                qcontext["error"] = _("Please give a correct IBAN number.")
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
             raise werkzeug.exceptions.NotFound()
 
