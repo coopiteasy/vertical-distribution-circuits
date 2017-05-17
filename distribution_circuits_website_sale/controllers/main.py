@@ -45,6 +45,10 @@ class WebsiteSale(website_sale):
         env  = request.env
         if time_frame_id :
             time_frame = env['time.frame'].sudo().browse(int(time_frame_id))
+            if request.website.sale_get_order():
+                order = request.website.sale_get_order()
+                #env['sale.order'].sudo().write(order.id,{'time_frame_id':int(time_frame_id)}) 
+                order.sudo().write({'time_frame_id':int(time_frame_id)})
             request.session['selected_time_frame'] = time_frame.id
             return {time_frame.id: time_frame.name}
         else:
@@ -113,12 +117,7 @@ class WebsiteSale(website_sale):
         values['shippings'] = self.get_delivery_points()
         return values
 
-#     @http.route(['/shop/cart/check_customer_credit'], type='json', auth="public", methods=['POST'], website=True)
-#     def check_customer_credit(self):
-#         order = request.website.sale_get_order()
-#         res = order.check_customer_credit()
-#         return{order.id:str(res)}
-        
+
 class WebsiteAccount(website_account):
     
     @http.route()
