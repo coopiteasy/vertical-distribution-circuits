@@ -68,8 +68,11 @@ class WebsiteSale(website_sale):
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')
         
-        enough_credit = order.check_customer_credit()
-        if enough_credit:
+        #sometime without knowing yet why we loose the order so we add this last attempt to get the current sale order
+        if order is None:
+            order = request.website.sale_get_order()
+            
+        if order or order.check_customer_credit():
             if tx:
                 tx.write({'state':'done'})
             return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)
