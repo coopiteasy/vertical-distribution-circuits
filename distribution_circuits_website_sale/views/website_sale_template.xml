@@ -26,8 +26,12 @@
 		 <xpath expr="//t[@t-if='website_sale_order and website_sale_order.website_order_line']" position="before">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
-	         	<!-- <t t-set="current_time_frame" t-value="website.get_current_time_frame()"/> -->
-	            <t t-set="current_time_frame" t-value="website.sale_get_order().time_frame_id.id"/>
+	            <t t-if="website.sale_get_order()">
+	            	<t t-set="current_time_frame" t-value="website.sale_get_order().time_frame_id.id"/>
+	            </t>
+	            <t t-if="not website.sale_get_order()">
+	            	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
+	            </t>
 	            <select name="selected_time_frame_popover" class="form-control" t-att-disabled="True">
 	                <option value=""></option>
 	                <t t-foreach="open_time_frames or []" t-as="time_frame">
@@ -46,8 +50,12 @@
 		<xpath expr="//h1[@class='mb32']" position="after">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
-	         	<!-- <t t-set="current_time_frame" t-value="website.get_current_time_frame()"/> -->
-	         	<t t-set="current_time_frame" t-value="website.sale_get_order().time_frame_id.id"/>
+	         	<t t-if="website.sale_get_order()">
+	            	<t t-set="current_time_frame" t-value="website.sale_get_order().time_frame_id.id"/>
+	            </t>
+	            <t t-if="not website.sale_get_order()">
+	            	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
+	            </t>
 	            <select name="selected_time_frame_cart" class="form-control" t-att-disabled="True">
 	                <option value=""></option>
 	                <t t-foreach="open_time_frames or []" t-as="time_frame">
