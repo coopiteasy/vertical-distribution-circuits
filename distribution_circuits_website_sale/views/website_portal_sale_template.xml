@@ -122,4 +122,10 @@
             </div>
         </t>
     </template>
+    
+    <template id="website_payment.pay_meth_link" inherit_id="website_portal.account"/>
+        
+    <template id="portal_invoices_easymyhub" inherit_id="website_portal_sale.invoices">
+    	<xpath expr="//a[@t-attf-href='/website_payment/pay?reference=#{invoice.number}&amp;amount=#{invoice.residual}&amp;currency_id=#{invoice.currency_id.id}&amp;country_id=#{invoice.partner_id.country_id.id}']" position="replace"/>
+    </template>
 </odoo>
