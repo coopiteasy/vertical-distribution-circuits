@@ -10,7 +10,7 @@ class TimeFrameConsolidation(models.Model):
     
     time_frame_id = fields.Many2one('time.frame', readonly=True, required=True)
     delivery_round = fields.Many2one('delivery.round', string="Delivery round", readonly=True)
-    picking_consolidations = fields.One2many('picking.consolidation','time_frame_consolidation_id', string="Picking consolidations", readonly=True)
+    picking_consolidations = fields.One2many('picking.consolidation','time_frame_consolidation_id', string="Picking consolidations")
     
 class PickingConsolidation(models.Model):
     

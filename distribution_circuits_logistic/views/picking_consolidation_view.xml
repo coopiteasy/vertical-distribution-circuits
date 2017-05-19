@@ -11,7 +11,7 @@
 			            	<field name="delivery_round"/>
 		            	</group>
 		            	<field name="picking_consolidations">
-		            		<tree>
+		            		<tree delete="false" create="false">
 		            			<field name="delivery_address"/>
 		            			<field name="consolidation_lines"/>
 		            		</tree>
@@ -60,7 +60,7 @@
 			            	<field name="delivery_address"/>
 		            	</group>
 		            	<field name="consolidation_lines">
-		            		<tree>
+		            		<tree editable="bottom" delete="false" create="false">
 			            		<field name="product_id"/>
 				            	<field name="product_uom_qty"/>
 				            	<field name="product_uom"/>
