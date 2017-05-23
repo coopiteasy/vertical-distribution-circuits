@@ -47,8 +47,7 @@ class WebsiteSale(website_sale):
             time_frame = env['time.frame'].sudo().browse(int(time_frame_id))
             if request.website.sale_get_order():
                 order = request.website.sale_get_order()
-                #env['sale.order'].sudo().write(order.id,{'time_frame_id':int(time_frame_id)}) 
-                order.sudo().write({'time_frame_id':int(time_frame_id)})
+                order.sudo().write({'time_frame_id':time_frame.id})
             request.session['selected_time_frame'] = time_frame.id
             return {time_frame.id: time_frame.name}
         else:

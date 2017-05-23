@@ -32,7 +32,6 @@ odoo.define('distribution_circuits_website_sale.website_sale', function (require
     	if ($input.data('update_change')) {
     		return;
     	}
-    	//alert('jajaj');
     	var value = parseInt($input.val() || 0, 10);
     	var $dom = $(this).closest('tr');
     	var default_price = parseFloat($dom.find('.text-danger > span.oe_currency_value').text());
@@ -84,18 +83,10 @@ odoo.define('distribution_circuits_website_sale.website_sale', function (require
     					}
     					$input.val(data.quantity);
     				}
-/*    				ajax.jsonRpc("/shop/cart/check_customer_credit", 'call', {
-    	    			})
-    	    			.then(function (data) {
-    	    				alert('voilaaa');
-    	    				alert(data[1]);
-    	    			});*/
+
     				window.location.href = '/shop/cart';
     			});
     	}, 500);
     });
     
-/*    $(".oe_website_sale").on('change', ".oe_cart .js_cart_lines", function (ev) {
-    	alert('ahahahah');
-    });*/
 });
