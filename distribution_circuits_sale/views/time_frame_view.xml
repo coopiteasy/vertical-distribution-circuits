@@ -29,10 +29,10 @@
 	                </header>
 	                <sheet>
 	                	<group>
-		                	<field name="name"/>
 			            	<field name="delivery_date"/>
 			            	<field name="start"/>
 			            	<field name="end"/>
+		                	<field name="name"/>
 		            	</group>
 		            	<notebook>
 		            		<page string="Sale orders" name="sale_orders">
