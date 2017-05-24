@@ -231,7 +231,7 @@
 	
 	                  <div t-if="not only_services and not website.sale_get_order().partner_id.raliment_point_id" class="form-group col-lg-12">
 	                      <label>Shipping</label>
-	                      <select name="shipping_id" class="form-control">
+	                      <select name="shipping_id" class="form-control" t-att-disabled="website.sale_get_order().partner_id.raliment_point_id">
 	                          <option value="-2">Choose a delivery point</option>
 	                          <t t-foreach="shippings" t-as="shipping">
 	                              <option t-att-value="shipping.id" t-att-selected="shipping.id == shipping_id or shipping.id == checkout.get('shipping_id')"
