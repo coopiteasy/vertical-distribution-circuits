@@ -17,7 +17,7 @@ class WebSite(models.Model):
 #                 request.session['selected_time_frame'] = time_frame_ids[0]
 #         return request.session.get('selected_time_frame')
     
-    #TODO optimize the code once the fix has been validated
+    #TODO refactor the code once the fix has been validated
     def get_current_time_frame(self):
         time_frame_ids = self.env['time.frame'].sudo().search([('state','=','open')]).ids
         if request.session.get('selected_time_frame'):
