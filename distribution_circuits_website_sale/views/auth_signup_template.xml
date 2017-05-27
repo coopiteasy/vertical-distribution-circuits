@@ -42,7 +42,11 @@
                          </t>
                      </select>	            
 	            </div>
-	            
+                <div class="form-group field-name">
+                Choisissez :<br/>
+				- Soit de devenir membre d'un point de r'aliment, qui prépare les commandes (prix réduits),<br/>
+				- Soit de faire préparer vos commandes par HesbiCoop, qui les livre dans un point de livraison<br/>
+                </div>
 	            <div class="form-group field-name">
 	                <label for="raliment_point_id" class="control-label">Your Raliment Point</label>
 					<select name="raliment_point_id" id="raliment_point_id" class="form-control"
