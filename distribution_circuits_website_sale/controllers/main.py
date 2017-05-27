@@ -20,12 +20,9 @@ class WebsiteSale(website_sale):
     @http.route(['/shop',
                  '/shop/page/<int:page>',
                  '/shop/category/<model("product.public.category"):category>',
-                 """/shop/category/<model("product.public.category"):category>
-                 /page/<int:page>""",
-                 '/shop/time_frame'],
-                type='http',
-                auth='user',
-                website=True)
+                 '/shop/category/<model("product.public.category"):category>/page/<int:page>',
+                 '/shop/time_frame'
+    ],type='http',auth='user',website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
 #         if time_frame:
 #             context = dict(request.env.context)
