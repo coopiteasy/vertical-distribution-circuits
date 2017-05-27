@@ -41,7 +41,10 @@
 	    	 </div>
 	     </xpath>
 	     <xpath expr="//t[@t-esc='int(line.product_uom_qty)']" position="after">
-	     	<t t-esc="line.product_uom.name"/> 
+	     	<span>
+	     		* (<t t-esc="int(line.product_id.weight)"/>
+	     		<t t-esc="line.product_uom.name"/>)
+	     	</span> 
 	     </xpath>
 	     
 	</template>	
@@ -82,6 +85,7 @@
 	     <xpath expr="//td[@name='price']" position="before">
 	     	<td class="text-center" id="td-qty">
                   <div>
+                  	<strong t-esc="int(line.product_id.weight)"/>
                   	<strong t-esc="line.product_uom.name"/>
                   </div>
               </td>
@@ -91,14 +95,22 @@
 	<template id="short_distri_product_quantity" inherit_id="website_sale.product_quantity" customize_show="True" name="Select Quantity">
 		<xpath expr="//h1[@t-field='product.name']" position="after">
         	<strong><t t-esc="product.supplier_id.display_name"/></strong><br/>
-        	<strong><t t-esc="product.uom_name"/></strong>
+        	<strong>
+        		<t t-esc="int(product.weight)"/>
+        		<t t-esc="product.uom_name"/>
+        	</strong>
 		</xpath>
 	</template>
 
 	
 	<template id="products_item_extra info" inherit_id="website_sale.products_item" name="Products item extra info">
 		<xpath expr="//a[@t-field='product.name']/../.." position="after">
-			<h5><strong>(<t t-esc="product.uom_name"/>)</strong></h5>
+			<h5>
+				<strong>
+					(<t t-esc="int(product.weight)"/>
+					<t t-esc="product.uom_name"/>)
+					</strong>
+			</h5>
 			<h5><strong><t t-esc="product.supplier_id.display_name"/></strong></h5>
 		</xpath>
 	</template>	
