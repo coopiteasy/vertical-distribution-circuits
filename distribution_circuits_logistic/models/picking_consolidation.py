@@ -20,6 +20,7 @@ class PickingConsolidation(models.Model):
     time_frame_id = fields.Many2one(related='time_frame_consolidation_id.time_frame_id', readonly=True)
     delivery_address = fields.Many2one('res.partner', string="Delivery address", domain=[('type','=','delivery')], readonly=True)
     consolidation_lines = fields.One2many('picking.consolidation.line','picking_consolidation_id', string='Pickings consolidation')
+    user_id = fields.Many2one('res.users', string='Responsible', default=lambda self: self.env.user)
     
 class PickingConsolidationLine(models.Model):
     

@@ -9,6 +9,7 @@
 		            	<group>
 			            	<field name="time_frame_id" readonly="True"/>
 			            	<field name="delivery_round"/>
+			            	<field name="user_id"/>
 		            	</group>
 		            	<field name="picking_consolidations">
 		            		<tree delete="false" create="false">
@@ -28,6 +29,7 @@
 	            <tree>
 	            	<field name="time_frame_id"/>
 	            	<field name="delivery_round"/>
+	            	<field name="user_id"/>
 	            </tree>
             </field>
         </record>
