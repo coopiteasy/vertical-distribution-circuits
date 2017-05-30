@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="theme_picking_consolidation_document">
+    <t t-call="theme_light.invoice_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />
+        <div class="page">
+        	<head>
+				<link href="/easy_my_coop/static/src/css/coop_report.css" rel="stylesheet"/>
+				
+				<style type="text/css">
+				/* Montserrat */
+				  @font-face {
+				  font-family: 'Montserrat-Regular';
+				  font-style: normal;
+				  src: local('Montserrat Regular'), url('/theme_light/static/font/Montserrat-Regular.ttf') format('truetype');
+				}
+				/* Roboto Regular */
+				  @font-face {
+				  font-family: 'Roboto-Regular';
+				  font-style: normal;
+				  src: local('Roboto Regular'), url('/theme_light/static/font/Roboto-Regular.ttf') format('truetype');
+				}
+				/* Roboto Bold */
+				  @font-face {
+				  font-family: 'Roboto-Bold';
+				  font-style: normal;
+				  src: local('Roboto Bold'), url('/theme_light/static/font/Roboto-Bold.ttf') format('truetype');
+				}
+				/* BEBASNEUE Bold */
+				  @font-face {
+				  font-family: 'Bebasneue-Bold';
+				  font-style: normal;
+				  src: local('Bebasneue-Bold'), url('/theme_light/static/font/BEBASNEUE_BOLD.ttf') format('truetype');
+				}
+				</style>
+			</head>
+        	<t t-call="theme_light.invoice_header"/>
+        	
+			<div style="position:absolute; top:90px">
+	            <div class="row mt32 mb32 easymy-coop-info-title">
+	                <div class="col-xs-2" t-if="o.time_frame_id">
+	                    <strong>Time frame:</strong>
+	                    <p t-field="o.time_frame_id.name"/>
+	                </div>
+	                <div class="col-xs-2" t-if="o.time_frame_id">
+	                    <strong>Delivery Date:</strong>
+	                    <p t-field="o.time_frame_id.delivery_date"/>
+	                </div>
+	            </div>
+				
+				<t t-foreach="o.picking_consolidations" t-as="pc">
+					<div class="row mt32 mb32 easymy-coop-info-title" style="position:relative;top:30px;">
+		                <div class="col-xs-2" t-if="o.time_frame_id">
+		                    <strong>Delivery address:</strong>
+		                    <address t-field="pc.delivery_address"
+                        	t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+		                </div>
+		            </div>
+		            <table class="table border-easymy-coop" style="position:relative;top:20px;width:90%;align:center;">
+		                <thead class="easymy-coop-info-title">
+		                    <tr>
+		                        <th>Product</th>
+		                        <th class="text-right">Quantity</th>
+		                        <th class="text-right">UoM</th>
+		                        <th class="text-right">Delivered</th>
+		                    </tr>
+		                </thead>
+		                <tbody class="invoice_tbody easymy-coop-normal">
+		                    <tr t-foreach="pc.consolidation_lines" t-as="pcl">
+		                        <td><span t-field="pcl.product_id.name"/></td>
+		                        <td class="text-right">
+		                        	<span t-if="pcl.product_uom_qty%1>0"><span t-esc='"%0.2f" % pcl.product_uom_qty'/></span>        
+	        						<span t-if="pcl.product_uom_qty%1==0"><span t-esc='"%0.0f" % pcl.product_uom_qty'/></span>
+		                            <span t-field="pcl.product_uom"/>
+		                        </td>
+		                        <td class="text-right">
+		                            <span t-field="pcl.qty_delivered"/>
+		                        </td>
+		                    </tr>
+		                </tbody>
+		            </table>
+				</t>
+	            
+	        </div>
+        </div>
+    </t>
+    </template>
+
+	<template id="theme_picking_consolidation">
+	    <t t-call="theme_light.html_container">
+	        <t t-set="data_report_margin_top" t-value="10"/>
+	        <t t-set="data_report_header_spacing" t-value="5"/>
+	        <t t-set="data_report_dpi" t-value="110"/>
+	        
+	        <t t-foreach="docs" t-as="o">
+	            <t t-call="distribution_circuits_logistic.theme_picking_consolidation_document" t-lang="o.user_id.lang"/>
+	        </t>    	    	
+	    </t>
+	</template>
+	
+</data>
+</openerp>

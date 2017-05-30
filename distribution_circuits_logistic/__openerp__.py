@@ -21,7 +21,12 @@
 {
     "name": "Short distribution circuits logistic",
     "version": "1.0",
-    "depends": ["distribution_circuits_base","distribution_circuits_sale", "sale_stock","stock_picking_wave"],
+    "depends": [
+        "distribution_circuits_base",
+        "distribution_circuits_sale",
+        "sale_stock",
+        "stock_picking_wave",
+        "theme_light"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
@@ -34,7 +39,9 @@
         'views/delivery_round_view.xml',
         'views/picking_consolidation_view.xml',
         'wizard/delivery_round_wizard.xml',
-        'wizard/picking_consolidation_wizard.xml'
+        'wizard/picking_consolidation_wizard.xml',
+        'report/picking_consolidation_report.xml',
+        'report/logistic_report.xml',
     ],
     'installable': True,
 }
