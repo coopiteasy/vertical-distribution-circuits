@@ -29,6 +29,14 @@ class PickingConsolidationLine(models.Model):
     
     picking_consolidation_id = fields.Many2one('picking.consolidation', string='Picking consolidation')
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=True)
+    supplier = fields.Char(compute='_get_supplier_name', store=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
     qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    
+    @api.multi
+    @api.depends('product_id')
+    def _get_supplier_name(self):
+        for line in self:
+            line.supplier = line.product_id.product_tmpl_id.supplier_id.display_name
+        

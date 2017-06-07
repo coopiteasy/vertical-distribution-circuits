@@ -64,6 +64,7 @@
 		            	<field name="consolidation_lines">
 		            		<tree editable="bottom" delete="false" create="false">
 			            		<field name="product_id"/>
+			            		<field name="supplier"/>
 				            	<field name="product_uom_qty"/>
 				            	<field name="product_uom"/>
 				            	<field name="qty_delivered"/>

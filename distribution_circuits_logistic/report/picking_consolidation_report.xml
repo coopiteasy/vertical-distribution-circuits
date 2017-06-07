@@ -62,6 +62,7 @@
 		                <thead class="easymy-coop-info-title">
 		                    <tr>
 		                        <th>Product</th>
+		                        <th>Supplier</th>
 		                        <th class="text-right">Quantity</th>
 		                        <th class="text-right">UoM</th>
 		                        <th class="text-right">Delivered</th>
@@ -70,6 +71,7 @@
 		                <tbody class="invoice_tbody easymy-coop-normal">
 		                    <tr t-foreach="pc.consolidation_lines" t-as="pcl">
 		                        <td><span t-field="pcl.product_id.name"/></td>
+		                        <td><span t-field="pcl.supplier"/></td>
 		                        <td class="text-right">
 		                        	<span t-if="pcl.product_uom_qty%1>0"><span t-esc='"%0.2f" % pcl.product_uom_qty'/></span>        
 	        						<span t-if="pcl.product_uom_qty%1==0"><span t-esc='"%0.0f" % pcl.product_uom_qty'/></span>
@@ -81,6 +83,7 @@
 		                    </tr>
 		                </tbody>
 		            </table>
+                    <p style="page-break-before:always;">   </p>
 				</t>
 	            
 	        </div>
