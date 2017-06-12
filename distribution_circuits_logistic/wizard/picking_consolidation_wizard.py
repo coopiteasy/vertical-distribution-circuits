@@ -15,6 +15,8 @@ class DeliveryRoundWizard(models.TransientModel):
             time_frame_consol_obj = self.env['time.frame.consolidation']
             consol_obj = self.env['picking.consolidation']
             pick_consol_line_obj = self.env['picking.consolidation.line']
+            sup_consol_obj = self.env['picking.supplier.consolidation']
+            supplier_consol_line_obj = self.env['supplier.consolidation.line']
             time_frame_consol = time_frame_consol_obj.search([('time_frame_id','=',self.time_frame_id.id)])
             
             if len(time_frame_consol) == 0:
@@ -22,19 +24,32 @@ class DeliveryRoundWizard(models.TransientModel):
                                                                   'delivery_round':delivery_round.id})
             if len(time_frame_consol.picking_consolidations) > 0:
                 time_frame_consol.picking_consolidations.unlink()
-            
+            if len(time_frame_consol.picking_supplier_consolidation) > 0:
+                time_frame_consol.picking_supplier_consolidation.unlink()
             if len(delivery_round) > 0:
+                supplier_consols = {}
                 for delivery_line in delivery_round.lines:
                     product_consols = {}
-                    
                     for picking in delivery_line.picking_wave.picking_ids:
-                        if picking.partner_id.raliment_point_id and picking.partner_id.raliment_point_id:
+                        if picking.partner_id.raliment_point_id:
+                            raliment_point = picking.partner_id.raliment_point_id
                             for move_line in picking.move_lines:
                                 if product_consols.get(move_line.product_id):
                                     product_consols[move_line.product_id][0] += move_line.product_uom_qty
                                 else:
                                     product_consols[move_line.product_id] = [move_line.product_uom_qty, move_line.product_uom]
-                    
+                                
+                                supplier = move_line.product_id.product_tmpl_id.supplier_id
+                                if not supplier_consols.get(supplier):
+                                    supplier_consols[supplier] = {}
+                                if not supplier_consols.get(supplier).get(raliment_point):
+                                    supplier_consols[supplier][raliment_point] = {}
+                                if (supplier_consols.get(supplier) and 
+                                    supplier_consols.get(supplier).get(raliment_point) and
+                                    supplier_consols.get(supplier).get(raliment_point).get(move_line.product_id)):
+                                    supplier_consols[supplier][raliment_point][move_line.product_id][0] += move_line.product_uom_qty
+                                else:
+                                     supplier_consols[supplier][raliment_point][move_line.product_id] = [move_line.product_uom_qty, move_line.product_uom]
                     if len(product_consols) > 0:
                         picking_consol = consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
                                                             'delivery_address':delivery_line.picking_wave.round_line.delivery_address.id})
@@ -43,7 +58,17 @@ class DeliveryRoundWizard(models.TransientModel):
                                                      'product_id':product_id.id,
                                                      'product_uom_qty':product_consol[0],
                                                      'product_uom':product_consol[1].id})
-                    
+                
+                for supplier, raliment_point_consols in supplier_consols.items():
+                        supplier_consol = sup_consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
+                                                            'supplier':supplier.id})
+                        for rali_point, prod_consols in raliment_point_consols.items():
+                            for product, prod_quant in prod_consols.items():
+                                supplier_consol_line_obj.create({'supplier_consolidation_id':supplier_consol.id,
+                                                     'raliment_point_id':rali_point.id,
+                                                     'product_id':product.id,
+                                                     'product_uom_qty':prod_quant[0],
+                                                     'product_uom':prod_quant[1].id})
             else:
                 raise UserError(_('You have to generate the delivery round wizard before to run this process.'))
         else:

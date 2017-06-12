@@ -41,6 +41,7 @@
         'wizard/delivery_round_wizard.xml',
         'wizard/picking_consolidation_wizard.xml',
         'report/picking_consolidation_report.xml',
+        'report/supplier_picking_consolidation_report.xml',
         'report/logistic_report.xml',
     ],
     'installable': True,
