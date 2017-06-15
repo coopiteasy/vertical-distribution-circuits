@@ -65,16 +65,19 @@ class WebsiteSale(website_sale):
             assert order.id == request.session.get('sale_last_order_id')
         
         #sometime without knowing yet why we loose the order so we add this last attempt to get the current sale order
-        if order is None:
+        if not order:
             order = request.website.sale_get_order()
-            
-        if order or order.check_customer_credit():
+            #if it still not defined we redirect to the shop
+            if not order:
+                _logger.error('The order is not defined')
+                return request.redirect('/shop')    
+        
+        if order.check_customer_credit():
             if tx:
                 tx.write({'state':'done'})
             return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)
         else:
-            error = 'The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference)
-            _logger.info(error)
+            _logger.error('The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference))
             return request.redirect('/shop')
     
     def get_delivery_points(self):
