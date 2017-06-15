@@ -70,6 +70,8 @@ class WebsiteSale(website_sale):
             #if it still not defined we redirect to the shop
             if not order:
                 _logger.error('The order is not defined')
+                if tx:
+                    _logger.error('The transaction was reference %s' % (tx.reference))
                 return request.redirect('/shop')    
         
         if order.check_customer_credit():
