@@ -54,7 +54,7 @@ class PickingSupplierConsolidation(models.Model):
 class PickingConsolidationLine(models.Model):
     
     _name = "supplier.consolidation.line"
-    _order = "raliment_point_id,product_id"
+    _order = "product_id,raliment_point_id"
     
     supplier_consolidation_id = fields.Many2one('picking.supplier.consolidation', string='Picking supplier consolidation')
     raliment_point_id = fields.Many2one('res.partner', string="Raliment point", readonly=True)
