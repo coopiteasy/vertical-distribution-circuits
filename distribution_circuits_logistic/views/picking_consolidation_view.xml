@@ -28,6 +28,14 @@
 				            		</tree>
 				            	</field>
 			            	</page>
+			            	<page string="Customer consolidation">
+				            	<field name="picking_customer_consolidation">
+				            		<tree delete="false" create="false">
+				            			<field name="delivery_address"/>
+				            			<field name="customer_consolidation_lines"/>
+				            		</tree>
+				            	</field>
+			            	</page>
 		            	</notebook>
 	            	</sheet>
 	            </form>
@@ -126,7 +134,6 @@
 			            		<field name="product_id"/>
 				            	<field name="product_uom_qty"/>
 				            	<field name="product_uom"/>
-				            	<!-- <field name="qty_delivered"/> -->
 				            </tree>
 		            	</field>
 	            	</sheet>
@@ -153,6 +160,52 @@
 	            	</sheet>
 	            </form>
             </field>
-        </record>   
+        </record>
+        
+        <record id="customer_picking_consolidation_form" model="ir.ui.view">
+            <field name="name">picking.customer.consolidation.form</field>
+            <field name="model">picking.customer.consolidation</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+		            	<group>
+			            	<field name="time_frame_id"/>
+			            	<field name="delivery_address"/>
+		            	</group>
+		            	<field name="customer_consolidation_lines">
+		            		<tree editable="bottom" delete="false" create="false">
+			            		<field name="supplier_id"/>
+			            		<field name="customer_id"/>
+			            		<field name="product_id"/>
+				            	<field name="product_uom_qty"/>
+				            	<field name="product_uom"/>
+				            </tree>
+		            	</field>
+	            	</sheet>
+	            </form>
+            </field>
+        </record>  		
+        
+		<record id="customer_consolidation_line_form" model="ir.ui.view">
+            <field name="name">customer.consolidation.line.form</field>
+            <field name="model">customer.consolidation.line</field>
+            <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+		            	<group>
+			            	<group>
+				            	<field name="supplier_id"/>
+				            	<field name="customer_id"/>
+				            	<field name="product_id"/>
+			            	</group>
+			            	<group>
+				            	<field name="product_uom_qty"/>
+				            	<field name="product_uom"/>
+			            	</group>
+		            	</group>
+	            	</sheet>
+	            </form>
+            </field>
+        </record>    
 	</data>
 </odoo>

@@ -17,5 +17,13 @@
             name="distribution_circuits_logistic.theme_supplier_picking_consolidation"
             file="distribution_circuits_logistic.supplier_picking_consolidation_report.xml"
         />
+        <report 
+            id="action_customer_picking_consolidation"
+            model="time.frame.consolidation"
+            string="Customer Picking Consolidation"
+            report_type="qweb-pdf"
+            name="distribution_circuits_logistic.theme_customer_picking_consolidation"
+            file="distribution_circuits_logistic.customer_picking_consolidation_report.xml"
+        />
 	</data>
 </odoo>
