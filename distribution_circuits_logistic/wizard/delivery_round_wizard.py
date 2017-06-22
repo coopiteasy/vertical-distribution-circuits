@@ -5,7 +5,7 @@ class DeliveryRoundWizard(models.TransientModel):
     
     _name="delivery.round.wizard"
     
-    time_frame_id = fields.Many2one('time.frame', string="Time Frame", domaine=[('state','=', 'open')], required=True)
+    time_frame_id = fields.Many2one('time.frame', string="Time Frame", domain=[('state','=', 'closed')], required=True)
     
     @api.one
     def run_delivery_scheduler(self):
