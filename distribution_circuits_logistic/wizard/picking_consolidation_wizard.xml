@@ -6,7 +6,7 @@
             <field name="arch" type="xml">
             <form string="Run pickings consolidation">
 				<group>
-					<field name="time_frame_id" default_focus="1"/>	
+					<field name="time_frame_id" default_focus="1" options="{'no_create': True}"/>	
 				</group>
 				<label string="This wizard will group all the pickings line by product, delivery address and Time frame"/>
 				
@@ -15,7 +15,7 @@
                    or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
-            </form>
+            </form> 
             </field>
         </record>
 

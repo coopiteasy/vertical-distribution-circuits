@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
             <form string="Run delivery round scheduler">
 				<group>
-					<field name="time_frame_id" default_focus="1"/>	
+					<field name="time_frame_id" default_focus="1" options="{'no_create': True}"/>	
 				</group>
 				<label string="This wizard will group all the delivery by delivery address and by Time frame"/>
 				
