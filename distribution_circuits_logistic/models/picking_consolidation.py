@@ -62,7 +62,8 @@ class SupplierConsolidationLine(models.Model):
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
-
+    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    
 class PickingCustomerConsolidation(models.Model):    
     
     _name = "picking.customer.consolidation"
@@ -84,3 +85,5 @@ class CustomerConsolidationLine(models.Model):
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
+    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    
