@@ -35,7 +35,7 @@ class PickingConsolidationLine(models.Model):
     supplier = fields.Char(compute='_get_supplier_name', store=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
-    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     
     @api.multi
     @api.depends('product_id')
@@ -62,7 +62,7 @@ class SupplierConsolidationLine(models.Model):
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
-    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     
 class PickingCustomerConsolidation(models.Model):    
     
@@ -85,5 +85,5 @@ class CustomerConsolidationLine(models.Model):
     product_id = fields.Many2one('product.product', string='Product', required=True, readonly=True)
     product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=True, readonly=True)
-    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'))
+    qty_delivered = fields.Float(string='Delivered', digits=dp.get_precision('Product Unit of Measure'), required=True, readonly=True)
     

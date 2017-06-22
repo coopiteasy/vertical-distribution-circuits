@@ -6,7 +6,7 @@ class DeliveryRoundWizard(models.TransientModel):
     
     _name="picking.consolidation.wizard"
     
-    time_frame_id = fields.Many2one('time.frame', string="Time Frame", domaine=[('state','=', 'open')], required=True)
+    time_frame_id = fields.Many2one('time.frame', string="Time Frame", domain=[('state','=', 'closed')], required=True)
     
     @api.one
     def compute_consolidation(self):
@@ -39,25 +39,28 @@ class DeliveryRoundWizard(models.TransientModel):
                         if picking.partner_id.raliment_point_id:
                             raliment_point = picking.partner_id.raliment_point_id
                             customer = picking.partner_id
-                            for move_line in picking.move_lines:
+                            #for move_line in picking.move_lines:
+                            for pack_operation in picking.pack_operation_product_ids:
                                 # raliment consolidaiton
-                                if product_consols.get(move_line.product_id):
-                                    product_consols[move_line.product_id][0] += move_line.product_uom_qty
+                                if product_consols.get(pack_operation.product_id):
+                                    product_consols[pack_operation.product_id][0] += pack_operation.product_qty
+                                    product_consols[pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                    product_consols[move_line.product_id] = [move_line.product_uom_qty, move_line.product_uom]
+                                    product_consols[pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id, pack_operation.qty_done]
                                 
                                 # supplier consolidation
-                                supplier = move_line.product_id.product_tmpl_id.supplier_id
+                                supplier = pack_operation.product_id.product_tmpl_id.supplier_id
                                 if not supplier_consols.get(supplier):
                                     supplier_consols[supplier] = {}
                                 if not supplier_consols.get(supplier).get(raliment_point):
                                     supplier_consols[supplier][raliment_point] = {}
                                 if (supplier_consols.get(supplier) and 
                                     supplier_consols.get(supplier).get(raliment_point) and
-                                    supplier_consols.get(supplier).get(raliment_point).get(move_line.product_id)):
-                                    supplier_consols[supplier][raliment_point][move_line.product_id][0] += move_line.product_uom_qty
+                                    supplier_consols.get(supplier).get(raliment_point).get(pack_operation.product_id)):
+                                    supplier_consols[supplier][raliment_point][pack_operation.product_id][0] += pack_operation.product_qty
+                                    supplier_consols[supplier][raliment_point][pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                     supplier_consols[supplier][raliment_point][move_line.product_id] = [move_line.product_uom_qty, move_line.product_uom]
+                                     supplier_consols[supplier][raliment_point][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
                                 
                                 # customer consolidation
                                 if not customer_consols.get(raliment_point):
@@ -66,11 +69,12 @@ class DeliveryRoundWizard(models.TransientModel):
                                     customer_consols[raliment_point][customer] = {}
                                 if (customer_consols.get(raliment_point) and 
                                     customer_consols.get(raliment_point).get(customer) and
-                                    customer_consols.get(raliment_point).get(customer).get(move_line.product_id)):
-                                    customer_consols[raliment_point][customer][move_line.product_id][0] += move_line.product_uom_qty
+                                    customer_consols.get(raliment_point).get(customer).get(pack_operation.product_id)):
+                                    customer_consols[raliment_point][customer][pack_operation.product_id][0] += pack_operation.product_qty
+                                    customer_consols[raliment_point][customer][pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                     customer_consols[raliment_point][customer][move_line.product_id] = [move_line.product_uom_qty, move_line.product_uom]
-                    # raliment consolidaiton
+                                     customer_consols[raliment_point][customer][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
+                    # raliment consolidation
                     if len(product_consols) > 0:
                         picking_consol = consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
                                                             'delivery_address':delivery_line.picking_wave.round_line.delivery_address.id})
@@ -78,7 +82,8 @@ class DeliveryRoundWizard(models.TransientModel):
                             pick_consol_line_obj.create({'picking_consolidation_id':picking_consol.id,
                                                      'product_id':product_id.id,
                                                      'product_uom_qty':product_consol[0],
-                                                     'product_uom':product_consol[1].id})
+                                                     'product_uom':product_consol[1].id,
+                                                     'qty_delivered':product_consol[2]})
                 # supplier consolidation
                 for supplier, raliment_point_consols in supplier_consols.items():
                         supplier_consol = sup_consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
@@ -89,7 +94,8 @@ class DeliveryRoundWizard(models.TransientModel):
                                                      'raliment_point_id':rali_point.id,
                                                      'product_id':product.id,
                                                      'product_uom_qty':prod_quant[0],
-                                                     'product_uom':prod_quant[1].id})
+                                                     'product_uom':prod_quant[1].id,
+                                                     'qty_delivered':prod_quant[2]})
                 # customer consolidation
                 for raliment_point, cust_consols in customer_consols.items():
                         cust_consol = cust_consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
@@ -101,7 +107,8 @@ class DeliveryRoundWizard(models.TransientModel):
                                                      'supplier_id':product.product_tmpl_id.supplier_id.id,
                                                      'product_id':product.id,
                                                      'product_uom_qty':prod_quant[0],
-                                                     'product_uom':prod_quant[1].id})
+                                                     'product_uom':prod_quant[1].id,
+                                                     'qty_delivered':prod_quant[2]})
             else:
                 raise UserError(_('You have to generate the delivery round wizard before to run this process.'))
         else:
