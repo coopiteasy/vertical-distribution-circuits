@@ -19,7 +19,8 @@ class TimeFrame(models.Model):
                               ('validated','Validated'),
                               ('open','Open'),
                               ('cancel','Cancelled'),
-                              ('closed','Closed')], default="draft",string="State")
+                              ('closed','Closed'),
+                              ('enclosed','Enclosed')], default="draft",string="State")
     start = fields.Datetime(string="Start", required=True)
     end = fields.Datetime(string="End", required=True)
     delivery_date = fields.Date(string="Delivery date", required=True)
