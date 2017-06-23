@@ -41,7 +41,11 @@ class TimeFrame(models.Model):
     @api.one
     def action_close(self):
         self.write({'state':'closed'})
-
+    
+    @api.one
+    def action_enclose(self):
+        self.write({'state':'enclosed'})
+    
     @api.one
     def action_draft(self):
         self.write({'state':'draft'})

@@ -25,6 +25,7 @@
 	                    <button name="action_cancel"  type="object" states="draft,closed" string="Cancel"/>
 	                    <button name="action_draft" type="object"  string="Set to Draft"/>
 	                    <button name="action_close" type="object" states="open" string="Close"/>
+	                    <button name="action_enclose" type="object" states="closed" string="Enclose"/>
 	                    <field name="state" widget="statusbar" statusbar_visible="draft,validated,open,cancel,closed"/>
 	                </header>
 	                <sheet>
