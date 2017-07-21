@@ -10,14 +10,7 @@ class WebSite(models.Model):
     
     current_time_frame = fields.Many2one('time.frame', string='Selected time frame')
     
-#     def get_current_time_frame(self):
-#         if request.session.get('selected_time_frame') is None:
-#             time_frame_ids = self.env['time.frame'].sudo().search([('state','=','open')]).ids
-#             if len(time_frame_ids) > 0:
-#                 request.session['selected_time_frame'] = time_frame_ids[0]
-#         return request.session.get('selected_time_frame')
-    
-    #TODO refactor the code once the fix has been validated
+    #TODO refactor the code
     def get_current_time_frame(self):
         time_frame_ids = self.env['time.frame'].sudo().search([('state','=','open')]).ids
         if request.session.get('selected_time_frame'):
@@ -46,7 +39,8 @@ class WebSite(models.Model):
     def sale_get_order(self, force_create=False, code=None, update_pricelist=False, force_pricelist=False, context=None):
         sale_order = super(WebSite, self).sale_get_order(force_create=force_create, code=code, update_pricelist=update_pricelist, force_pricelist=force_pricelist, context=context) 
         if sale_order and (not sale_order.time_frame_id or sale_order.time_frame_id.state != 'open') and request.session.get('selected_time_frame'):
-            sale_order.time_frame_id = int(request.session.get('selected_time_frame'))
+            if sale_order.state == 'draft':
+                sale_order.time_frame_id = int(request.session.get('selected_time_frame'))
         return sale_order
     
     @api.multi

@@ -44,9 +44,21 @@ class WebsiteSale(website_sale):
             time_frame = env['time.frame'].sudo().browse(int(time_frame_id))
             if request.website.sale_get_order():
                 order = request.website.sale_get_order()
-                order.sudo().write({'time_frame_id':time_frame.id})
-            request.session['selected_time_frame'] = time_frame.id
-            return {time_frame.id: time_frame.name}
+                request.session['selected_time_frame'] = time_frame.id
+                
+                # don't update the time frame on the sale order and invalidate the 
+                # cart(sale order) if it's not in draft state 
+                # then return to the shop
+                if order.state != 'draft':
+                    request.session.update({
+                        'sale_order_id': False,
+                        'sale_transaction_id': False,
+                        'website_sale_current_pl': False,
+                    })
+                    request.redirect('/shop')
+                else:
+                    order.sudo().write({'time_frame_id':time_frame.id})
+                    return {time_frame.id: time_frame.name}
         else:
             request.session['selected_time_frame'] = None
         return {0:""}
