@@ -4,6 +4,7 @@
 
 from openerp import models, fields, api
 from openerp.addons.web.http import request
+from openerp.exceptions import UserError
 
 class WebSite(models.Model):
     _inherit = 'website'
