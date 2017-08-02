@@ -34,7 +34,14 @@ class SaleOrder(models.Model):
                 return True
             else:
                 return False
-            
+
+class SaleOrderLine(models.Model):
+    
+    _inherit = "sale.order.line"
+    
+    raliment_point_id = fields.Many2one(related='order_id.raliment_point', store=True, string='Raliment point')
+    time_frame_id = fields.Many2one(related='order_id.time_frame_id', store=True, string="Time Frame")
+    
 class ProductTemplate(models.Model):
     _inherit = "product.template"
     

@@ -65,6 +65,30 @@
             id="menu_easy_my_hub_sale_order" parent="menu_easy_my_hub_main_sale"
             sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user"/>
         
+        <record id="view_easy_my_hub_order_line_tree" model="ir.ui.view">
+            <field name="name">sale.order.line.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_tree"/>
+            <field name="arch" type="xml">
+                    <field name="order_id" position="before">
+                    	<field name="time_frame_id"/>
+                    	<field name="raliment_point_id"/>
+                    </field>
+            </field>
+        </record>
+        
+        <record id="view_easy_my_hub_order_line_filter" model="ir.ui.view">
+            <field name="name">sale.order.line.select</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+            <field name="arch" type="xml">
+                    <group position="inside">
+                        <filter string="Time Frame" domain="[]" context="{'group_by':'time_frame_id'}"/>
+                        <filter string="Raliment point" domain="[]" context="{'group_by':'raliment_point_id'}"/>
+                    </group>
+            </field>
+        </record>
+        
         <record id="action_easy_my_hub_quotation" model="ir.actions.act_window">
             <field name="name">Quotations</field>
             <field name="type">ir.actions.act_window</field>
