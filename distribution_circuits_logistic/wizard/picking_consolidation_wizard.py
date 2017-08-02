@@ -39,14 +39,14 @@ class DeliveryRoundWizard(models.TransientModel):
                         if picking.partner_id.raliment_point_id:
                             raliment_point = picking.partner_id.raliment_point_id
                             customer = picking.partner_id
-                            #for move_line in picking.move_lines:
-                            for pack_operation in picking.pack_operation_product_ids:
+                            for pack_operation in picking.move_lines:
                                 # raliment consolidaiton
                                 if product_consols.get(pack_operation.product_id):
-                                    product_consols[pack_operation.product_id][0] += pack_operation.product_qty
-                                    product_consols[pack_operation.product_id][2] += pack_operation.qty_done
+                                    product_consols[pack_operation.product_id][0] += pack_operation.product_uom_qty
+                                    #product_consols[pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                    product_consols[pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id, pack_operation.qty_done]
+                                    #product_consols[pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id, pack_operation.qty_done]
+                                    product_consols[pack_operation.product_id] = [pack_operation.product_uom_qty, pack_operation.product_uom, 0]
                                 
                                 # supplier consolidation
                                 supplier = pack_operation.product_id.product_tmpl_id.supplier_id
@@ -57,10 +57,11 @@ class DeliveryRoundWizard(models.TransientModel):
                                 if (supplier_consols.get(supplier) and 
                                     supplier_consols.get(supplier).get(raliment_point) and
                                     supplier_consols.get(supplier).get(raliment_point).get(pack_operation.product_id)):
-                                    supplier_consols[supplier][raliment_point][pack_operation.product_id][0] += pack_operation.product_qty
-                                    supplier_consols[supplier][raliment_point][pack_operation.product_id][2] += pack_operation.qty_done
+                                    supplier_consols[supplier][raliment_point][pack_operation.product_id][0] += pack_operation.product_uom_qty
+                                    #supplier_consols[supplier][raliment_point][pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                     supplier_consols[supplier][raliment_point][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
+                                    #supplier_consols[supplier][raliment_point][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
+                                    supplier_consols[supplier][raliment_point][pack_operation.product_id] = [pack_operation.product_uom_qty, pack_operation.product_uom,0]
                                 
                                 # customer consolidation
                                 if not customer_consols.get(raliment_point):
@@ -70,10 +71,11 @@ class DeliveryRoundWizard(models.TransientModel):
                                 if (customer_consols.get(raliment_point) and 
                                     customer_consols.get(raliment_point).get(customer) and
                                     customer_consols.get(raliment_point).get(customer).get(pack_operation.product_id)):
-                                    customer_consols[raliment_point][customer][pack_operation.product_id][0] += pack_operation.product_qty
-                                    customer_consols[raliment_point][customer][pack_operation.product_id][2] += pack_operation.qty_done
+                                    customer_consols[raliment_point][customer][pack_operation.product_id][0] += pack_operation.product_uom_qty
+                                    #customer_consols[raliment_point][customer][pack_operation.product_id][2] += pack_operation.qty_done
                                 else:
-                                     customer_consols[raliment_point][customer][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
+                                    #customer_consols[raliment_point][customer][pack_operation.product_id] = [pack_operation.product_qty, pack_operation.product_uom_id,pack_operation.qty_done]
+                                    customer_consols[raliment_point][customer][pack_operation.product_id] = [pack_operation.product_uom_qty, pack_operation.product_uom,0]
                     # raliment consolidation
                     if len(product_consols) > 0:
                         picking_consol = consol_obj.create({'time_frame_consolidation_id':time_frame_consol.id,
