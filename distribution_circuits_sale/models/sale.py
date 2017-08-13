@@ -12,10 +12,19 @@ class SaleOrder(models.Model):
     time_frame_id = fields.Many2one('time.frame', string="Time Frame")
     
     @api.multi
+    def action_confirm(self):
+        for order in self:
+            if order.raliment_point:
+                order.partner_shipping_id = order.raliment_point
+            elif order.partner_id.delivery_point_id:
+                order.partner_shipping_id = order.delivery_point_id
+        return super(SaleOrder,self).action_confirm()
+    
+    @api.multi
     @api.depends('partner_id')
     def _compute_raliment(self):
         for order in self:
-            if order.partner_id.raliment_point_id and order.partner_id.raliment_point_id:
+            if order.partner_id.raliment_point_id:
                 order.raliment_point = order.partner_id.raliment_point_id
     
     @api.multi
