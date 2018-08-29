@@ -28,9 +28,12 @@
         "stock_picking_wave",
         "theme_light"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
+    "licence": "AGPLv3",
+    "website": "www.coopiteasy.be",
     "category": "Short distribution circuits",
     "description": """
-    This module implements the features managing the sales of your distribution circuits.    
+    This module implements the features managing
+    the sales of your distribution circuits.
     """,
     'data': [
         'security/ir.model.access.csv',
