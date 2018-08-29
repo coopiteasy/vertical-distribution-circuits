@@ -6,11 +6,19 @@
     'website': 'http://www.coopiteasy.be',
     'version': '9.0.1.0.0',
     'license': 'AGPL-3',
-    "depends": ["product","sale","purchase","distribution_circuits_base"],
-    "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
+    "depends": [
+        "product",
+        "sale",
+        "purchase",
+        "distribution_circuits_base"
+        ],
+    "author": "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
+    "licence": "AGPLv3",
+    "website": "www.coopiteasy.be",
     "category": "Short distribution circuits",
     "description": """
-    This module implements the features manage the sales of your distribution circuits.    
+    This module implements the features manage the sales
+    of your distribution circuits.
     """,
     'data': [
         'security/ir.model.access.csv',
