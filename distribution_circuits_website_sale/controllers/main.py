@@ -1,53 +1,56 @@
-# -*- coding: utf-8 -*-
-# © 2016 Coop IT Easy (http://www.coopiteasy.be)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-import datetime
-from openerp import http
-from openerp.http import request
-from openerp import SUPERUSER_ID
-from openerp.addons.website_sale.controllers.main import QueryURL
-from openerp.tools.translate import _
-from openerp import tools
-from openerp.addons.website_sale.controllers.main import website_sale
-from openerp.addons.website_portal_sale.controllers.main import website_account
+from odoo import http
+from odoo.http import request
+from odoo.tools.translate import _
+from odoo import tools
+from odoo.addons.website_sale.controllers.main import WebsiteSale
+from odoo.addons.website_portal_sale.controllers.main import WebsiteAccount
 
-from openerp.exceptions import UserError
+from odoo.addons.auth_signup.res_users import SignupError
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.addons.base_iban import base_iban
+
+from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
-class WebsiteSale(website_sale):
+
+class WebsiteSale(WebsiteSale):
 
     @http.route(['/shop',
                  '/shop/page/<int:page>',
                  '/shop/category/<model("product.public.category"):category>',
                  '/shop/category/<model("product.public.category"):category>/page/<int:page>',
                  '/shop/time_frame'
-    ],type='http',auth='user',website=True)
+                 ], type='http', auth='user', website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
-#         if time_frame:
-#             context = dict(request.env.context)
-#             context.setdefault('time_frame_id', int(time_frame))
-#             request.env.context = context
-        time_frames = request.env['time.frame'].sudo().search([('state','=','open')])
+        time_frames = request.env['time.frame'].sudo().search([
+            ('state', '=', 'open')])
         if len(time_frames) == 0:
-            return request.website.render("distribution_circuits_website_sale.shop_closed", post)
+            return request.website.render(
+                "distribution_circuits_website_sale.shop_closed",
+                post)
         else:
             return super(WebsiteSale, self).shop(page=page, category=category,
-                                             time_frame=time_frame, search=search,
-                                             **post)
+                                                 time_frame=time_frame,
+                                                 search=search,
+                                                 **post)
 
-
-    @http.route(['/shop/set_current_time_frame'], type='json', auth="public", methods=['POST'], website=True)
+    @http.route(['/shop/set_current_time_frame'],
+                type='json',
+                auth="public",
+                methods=['POST'],
+                website=True)
     def set_current_time_frame(self, time_frame_id=None, **kw):
-        env  = request.env
-        if time_frame_id :
+        env = request.env
+        if time_frame_id:
             time_frame = env['time.frame'].sudo().browse(int(time_frame_id))
             if request.website.sale_get_order():
                 order = request.website.sale_get_order()
                 request.session['selected_time_frame'] = time_frame.id
-                
+
                 # don't update the time frame on the sale order and invalidate the 
                 # cart(sale order) if it's not in draft state 
                 # then return to the shop
@@ -59,46 +62,55 @@ class WebsiteSale(website_sale):
                     })
                     request.redirect('/shop')
                 else:
-                    order.sudo().write({'time_frame_id':time_frame.id})
+                    order.sudo().write({'time_frame_id': time_frame.id})
                     return {time_frame.id: time_frame.name}
         else:
             request.session['selected_time_frame'] = None
-        return {0:""}
-    
-    @http.route('/shop/payment/validate', type='http', auth="public", website=True)
-    def payment_validate(self, transaction_id=None, sale_order_id=None, **post):
+        return {0: ""}
+
+    @http.route('/shop/payment/validate',
+                type='http',
+                auth="public",
+                website=True)
+    def payment_validate(self, transaction_id=None, sale_order_id=None,
+                         **post):
         if transaction_id is None:
             tx = request.website.sale_get_transaction()
         else:
-            tx = request.env['payment.transaction'].sudo().browse(transaction_id)
+            tx = request.env['payment.transaction'].sudo().browse(
+                transaction_id)
 
         if sale_order_id is None:
             order = request.website.sale_get_order()
         else:
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')
-        
-        #sometime without knowing yet why we loose the order so we add this last attempt to get the current sale order
+
+        # sometime without knowing yet why we loose the order so we add this
+        # last attempt to get the current sale order
         if not order:
             order = request.website.sale_get_order()
-            #if it still not defined we redirect to the shop
+            # if it still not defined we redirect to the shop
             if not order:
                 _logger.error('The order is not defined')
                 if tx:
-                    _logger.error('The transaction was reference %s' % (tx.reference))
-                return request.redirect('/shop')    
-        
+                    _logger.error('The transaction was reference %s' %
+                                  (tx.reference))
+                return request.redirect('/shop')
+
         if order.check_customer_credit():
             if tx:
-                tx.write({'state':'done'})
-            return super(WebsiteSale, self).payment_validate(transaction_id, sale_order_id, **post)
+                tx.write({'state': 'done'})
+            return super(WebsiteSale, self).payment_validate(transaction_id,
+                                                             sale_order_id,
+                                                             **post)
         else:
             _logger.error('The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference))
             return request.redirect('/shop')
-    
+
     def get_delivery_points(self):
         return request.env['res.partner'].sudo().get_delivery_points()
-    
+
     def set_show_company(self, checkout, partner):
         if partner.is_company:
             checkout['show_company'] = True
@@ -108,26 +120,26 @@ class WebsiteSale(website_sale):
             checkout['company_name'] = partner.parent_id.name
         else:
             checkout['show_company'] = False
-        
+
         return checkout
 
     def _get_mandatory_billing_fields(self):
         mandatory_billing_fields = super(WebsiteSale, self)._get_mandatory_billing_fields()
-        if 'street2' in mandatory_billing_fields: 
+        if 'street2' in mandatory_billing_fields:
             mandatory_billing_fields.remove('street2')
         return mandatory_billing_fields
-        
+
     def get_shipping_id(self, partner):
         if partner.raliment_point_id:
             return partner.raliment_point_id.id
         else:
             return partner.delivery_point_id.id
-        
+
     def checkout_values(self, data=None):
         values = super(WebsiteSale, self).checkout_values(data)
         order = request.website.sale_get_order()
         partner = order.partner_id
-        
+
         checkout = self.set_show_company(values.get('checkout'), partner)
         if checkout.get('shipping_id') == False or checkout.get('shipping_id') in [-2,0]:
             checkout['shipping_id'] = self.get_shipping_id(partner)
@@ -135,25 +147,39 @@ class WebsiteSale(website_sale):
         values['shippings'] = self.get_delivery_points()
         return values
 
-    @http.route(['/shop/cart/update'], type='http', auth="public", methods=['POST'], website=True)
+    @http.route(['/shop/cart/update'], 
+                type='http',
+                auth="public",
+                methods=['POST'],
+                website=True)
     def cart_update(self, product_id, add_qty=1, set_qty=0, **kw):
         try:
-            super(WebsiteSale, self).cart_update(product_id, add_qty, set_qty, **kw)
+            super(WebsiteSale, self).cart_update(product_id, add_qty, set_qty,
+                                                 **kw)
         except(UserError):
             request.redirect("/shop")
         return request.redirect("/shop/cart")
 
-    @http.route(['/shop/cart/update_json'], type='json', auth="public", methods=['POST'], website=True)
-    def cart_update_json(self, product_id, line_id=None, add_qty=None, set_qty=None, display=True):
+    @http.route(['/shop/cart/update_json'],
+                type='json',
+                auth="public",
+                methods=['POST'],
+                website=True)
+    def cart_update_json(self, product_id, line_id=None, add_qty=None,
+                         set_qty=None, display=True):
         try:
-            value = super(WebsiteSale, self).cart_update_json(product_id, line_id, add_qty, set_qty, display)
+            value = super(WebsiteSale, self).cart_update_json(product_id,
+                                                              line_id,
+                                                              add_qty,
+                                                              set_qty,
+                                                              display)
         except(UserError):
             request.redirect("/shop")
         return value
 
 
-class WebsiteAccount(website_account):
-    
+class WebsiteAccount(WebsiteAccount):
+
     @http.route()
     def account(self, **kw):
         """ Add sales documents to main account page """
@@ -209,8 +235,10 @@ class WebsiteAccount(website_account):
         error = dict()
         error_message = []
 
-        mandatory_billing_fields = ["name", "phone", "email", "city", "country_id"]
-        optional_billing_fields = ["zipcode", "company_name", "state_id", "vat", "street"]
+        mandatory_billing_fields = ["name", "phone", "email", "city",
+                                    "country_id"]
+        optional_billing_fields = ["zipcode", "company_name", "state_id",
+                                   "vat", "street"]
 
         # Validation
         for field_name in mandatory_billing_fields:
@@ -244,24 +272,29 @@ class WebsiteAccount(website_account):
 
         return error, error_message
 
-from openerp.addons.auth_signup.res_users import SignupError
-from openerp.addons.auth_signup.controllers.main import AuthSignupHome
-from openerp.addons.base_iban import base_iban
-from openerp.exceptions import ValidationError
-    
-class AuthSignupHome(AuthSignupHome):    
+
+class AuthSignupHome(AuthSignupHome):
     def _signup_with_values(self, token, values):
-        db, login, password = request.env['res.users'].sudo().signup(values, token)
-        request.cr.commit()     # as authenticate will use its own cursor we need to commit the current transaction
+        db, login, password = request.env['res.users'].sudo().signup(values,
+                                                                     token)
+        # as authenticate will use its own cursor we need to commit
+        # the current transaction
+        request.cr.commit()
         uid = request.session.authenticate(db, login, password)
         if not uid:
             raise SignupError(_('Authentication Failed.'))
         return uid
-    
+
     def do_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
-        values = dict((key, qcontext.get(key)) for key in ('login', 'name', 'password','phone','street','city','zip_code',
-                                                           'country_id','raliment_point_id','delivery_point_id'))
+        values = dict((key, qcontext.get(key)) for key in ('login', 'name',
+                                                           'password', 'phone',
+                                                           'street', 'city',
+                                                           'zip_code',
+                                                           'country_id',
+                                                           'raliment_point_id',
+                                                           'delivery_point_id'
+                                                           ))
         assert any([k for k in values.values()]), "The form was not properly filled in."
         assert values.get('password') == qcontext.get('confirm_password'), "Passwords do not match; please retype them."
         supported_langs = [lang['code'] for lang in request.env['res.lang'].sudo().search_read([], ['code'])]
@@ -272,21 +305,27 @@ class AuthSignupHome(AuthSignupHome):
         qcontext['need_validation'] = True
         uid = self._signup_with_values(qcontext.get('token'), values)
         iban = qcontext.get('iban')
-        user = request.env['res.users'].sudo().search([('id','=',uid)])
-        request.env['res.partner.bank'].sudo().create({'partner_id':user.partner_id.id,'acc_number':iban})
+        user = request.env['res.users'].sudo().search([('id', '=', uid)])
+        request.env['res.partner.bank'].sudo().create(
+            {'partner_id': user.partner_id.id, 'acc_number': iban})
         request.cr.commit()
-    
+
     @http.route('/web/signup', type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-        
-        if not qcontext.get('raliment_point_id',False) and not qcontext.get('delivery_point_id',False):
-            qcontext['error'] = _("You must at least choose a Raliment or a Delivery point")
-        if qcontext.get('raliment_point_id',False) and qcontext.get('delivery_point_id',False):
-            qcontext['error'] = _("You can not choose a Raliment and a Delivery point")
-        if qcontext.get("login", False) and not tools.single_email_re.match(qcontext.get("login", "")):
+
+        if not qcontext.get('raliment_point_id', False) and \
+                not qcontext.get('delivery_point_id', False):
+            qcontext['error'] = _("You must at least choose a Raliment or a "
+                                  "Delivery point")
+        if qcontext.get('raliment_point_id', False) and \
+                qcontext.get('delivery_point_id', False):
+            qcontext['error'] = _("You can not choose a Raliment and a "
+                                  "Delivery point")
+        if qcontext.get("login", False) and \
+                not tools.single_email_re.match(qcontext.get("login", "")):
             qcontext["error"] = _("That does not seem to be an email address.")
-        if qcontext.get("iban",False):
+        if qcontext.get("iban", False):
             try:
                 base_iban.validate_iban(qcontext.get("iban"))
             except ValidationError:
@@ -298,19 +337,21 @@ class AuthSignupHome(AuthSignupHome):
             try:
                 self.do_signup(qcontext)
                 return super(AuthSignupHome, self).web_login(*args, **kw)
-            except (SignupError, AssertionError), e:
-                if request.env["res.users"].sudo().search([("login", "=", qcontext.get("login"))]):
-                    qcontext["error"] = _("Another user is already registered using this email address.")
+            except (SignupError, AssertionError) as e:
+                if request.env["res.users"].sudo().search([
+                        ("login", "=", qcontext.get("login"))]):
+                    qcontext["error"] = _("Another user is already registered "
+                                          "using this email address.")
                 else:
                     _logger.error(e.message)
                     qcontext['error'] = _("Could not create a new account.")
-        if not qcontext.get('raliment_point_id',False):
+        if not qcontext.get('raliment_point_id', False):
             qcontext['raliment_point_id'] = 0
-        if not qcontext.get('delivery_point_id',False):
+        if not qcontext.get('delivery_point_id', False):
             qcontext['delivery_point_id'] = 0
         qcontext['raliment_points'] = request.env['res.partner'].sudo().get_raliment_points()
         qcontext['delivery_points'] = request.env['res.partner'].sudo().get_delivery_points()
         qcontext['countries'] = request.env['res.country'].sudo().search([])
         qcontext['country_id'] = '21'
-        
+
         return request.render('auth_signup.signup', qcontext)
