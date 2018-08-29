@@ -13,7 +13,7 @@
         "distribution_circuits_base"
         ],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
-    "licence": "AGPLv3",
+    "licence": "AGPL-3",
     "website": "www.coopiteasy.be",
     "category": "Short distribution circuits",
     "description": """
