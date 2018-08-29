@@ -6,18 +6,22 @@
     'name': 'Distribution Circuits in E-Commerce',
     'category': 'e-commerce',
     'author': "Coop IT Easy - Houssine BAKKALI",
-    'website': 'http://www.coopiteasy.be',
-    'version': '9.0.1.0.0',
+    'website': 'www.coopiteasy.be',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': ['distribution_circuits_sale',
                 'website_sale',
                 'website_portal_sale',
                 'website_payment',
                 'auth_signup'
-    ],
+                ],
+    "category": "Website Short distribution circuits",
+    "description": """
+    This module implements the ec-commerce features manage the sales
+    of your distribution circuits.
+    """,
     'data': [
         "security/ir.model.access.csv",
-      #  "data/website_menu.xml",
         "views/website_sale_template.xml",
         "views/website_portal_sale_template.xml",
         "views/auth_signup_template.xml",
