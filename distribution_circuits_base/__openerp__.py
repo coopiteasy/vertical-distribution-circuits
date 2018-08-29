@@ -21,11 +21,12 @@
 {
     "name": "Short distribution circuits base",
     "version": "1.0",
-    "depends": ["base","purchase"],
+    "depends": ["base", "purchase"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine.bakkali@gmail.com>",
     "category": "Short distribution circuits",
     "description": """
-    This module give the base features to enable the short distribution circuits.    
+    This module give the base features to enable the
+    short distribution circuits.
     """,
     'data': [
         'security/easy_my_hub_security.xml',
