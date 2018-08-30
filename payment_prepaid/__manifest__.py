@@ -7,7 +7,7 @@
     'category': 'Accounting',
     'summary': 'Payment Acquirer: Prepaid Implementation',
     'author': "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be",
-    'website': 'http://www.coopiteasy.be',
+    'website': 'www.coopiteasy.be',
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'description': """Prepaid Payment Acquirer""",
