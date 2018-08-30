@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Short distribution circuits base",
-    "version": "1.0",
+    "version": "11.0.1.0.0",
     "depends": ["base", "purchase"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
     "licence": "AGPL-3",
