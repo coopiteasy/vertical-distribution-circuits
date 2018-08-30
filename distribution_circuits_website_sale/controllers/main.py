@@ -5,11 +5,11 @@ from odoo.http import request
 from odoo.tools.translate import _
 from odoo import tools
 from odoo.addons.website_sale.controllers.main import WebsiteSale
-from odoo.addons.website_portal_sale.controllers.main import WebsiteAccount
+from odoo.addons.portal.controllers.portal import CustomerPortal
 
-from odoo.addons.auth_signup.res_users import SignupError
+from odoo.addons.auth_signup.models.res_partner import SignupError
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
-from odoo.addons.base_iban import base_iban
+from odoo.addons.base_iban.models import res_partner_bank
 
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
@@ -178,7 +178,7 @@ class WebsiteSale(WebsiteSale):
         return value
 
 
-class WebsiteAccount(WebsiteAccount):
+class WebsiteAccount(CustomerPortal):
 
     @http.route()
     def account(self, **kw):
