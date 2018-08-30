@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Short distribution circuits logistic",
-    "version": "1.0",
+    "version": "11.0.1.0.0",
     "depends": [
         "distribution_circuits_base",
         "distribution_circuits_sale",
