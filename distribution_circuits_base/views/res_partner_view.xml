@@ -26,7 +26,7 @@
             <field name="arch" type="xml">
                 <filter name="customer" position="after">
                 	<filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),('raliment_point_id','!=',False)]"/>
-                	<filter string="Individual customers" name="individual_customer"  domain="[('raliment_point_id','=',False),('is_raliment_point','=',False),('is_gac','=',False)]"/>
+                	<filter string="Individual customers" name="individual_customer"  domain="[('raliment_point_id','=',False),('is_raliment_point','=',False),('is_gac','=',False),('customer','=',True)]"/>
                 </filter>
                 <filter name="supplier" position="after">
                 	<filter string="Gac" name="gac" domain="[('is_gac','=',1), ('customer','=',1), ('raliment_point_id','=',False)]"/>
@@ -106,7 +106,7 @@
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="context">{"search_default_gac":1,"default_is_gac":1}</field>
+            <field name="context">{"search_default_gac":1,"default_is_gac":1,"default_customer":1}</field>
             <field name="search_view_id" ref="base.view_res_partner_filter"/>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
