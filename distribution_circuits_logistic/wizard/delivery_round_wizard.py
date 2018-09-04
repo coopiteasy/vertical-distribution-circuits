@@ -34,7 +34,7 @@ class DeliveryRoundWizard(models.TransientModel):
                         wave_found = True
                         break
                 if not wave_found:
-                    new_wave = self.env['stock.picking.wave'].create(
+                    new_wave = self.env['stock.picking.batch'].create(
                         {'name': 'Lalalalala'})
                     picking.wave_id = new_wave.id
                     self.env['delivery.round.line'].create(

@@ -25,7 +25,7 @@
         "distribution_circuits_base",
         "distribution_circuits_sale",
         "sale_stock",
-        "stock_picking_wave",
+        "stock_picking_batch",
         "theme_light"],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
     "licence": "AGPL-3",

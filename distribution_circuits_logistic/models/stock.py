@@ -47,19 +47,19 @@ class StockPicking(models.Model):
                 picking.time_frame_id = picking.sale_id.time_frame_id
 
 
-class StockPickingWave(models.Model):
+class StockPickingBatch(models.Model):
 
-    _inherit = "stock.picking.wave"
+    _inherit = "stock.picking.batch"
 
     round_line = fields.One2many(
         'delivery.round.line',
-        'picking_wave',
+        'picking_batch',
         string="Delivery round line")
 
 
-class StockPackOperation(models.Model):
+class StockMoveLine(models.Model):
 
-    _inherit = "stock.pack.operation"
+    _inherit = "stock.move.line"
 
     raliment_point = fields.Many2one(
         related="picking_id.raliment_point",

@@ -14,7 +14,7 @@
 				            	<field name="delivery_address"/>
 			            	</group>
 			            	<group>
-				            	<field name="picking_wave"/>
+				            	<field name="picking_batch"/>
 				            	<field name="delivered"/>
 			            	</group>
 		   				</group>         		
@@ -65,7 +65,7 @@
 		            			<field name="sequence" widget="handle"/>
 		            			<field name="raliment_point" readonly="True"/>
 		            			<field name="delivery_address" readonly="True"/>
-		            			<field name="picking_wave" readonly="True"/>
+		            			<field name="picking_batch" readonly="True"/>
 		            			<field name="order_quantity" readonly="True"/>
 		            			<field name="delivered" editable="True"/>
 		            		</tree>
@@ -80,8 +80,9 @@
             <field name="model">delivery.round</field>
             <field name="arch" type="xml">
             	<search>
-            		<filter name="Incoming" string="Incoming" domain="[('delivery_date','&gt;', datetime.datetime.combine(context_today(), datetime.time(0,0,0))]" help="Delivery rounds to come"/> 
-            		<filter name="Today" string="Today" domain="[('delivery_date','=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))]" help="Delivery rounds for today"/>
+            		<!--<filter string="Today" domain="[('delivery_date','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59))), ('delivery_date','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" help="Orders processed today or scheduled for today"/>--> 
+            		<filter name="Incoming" string="Incoming" domain="[('delivery_date','&gt;=',datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" help="Delivery rounds to come"/>
+            		<filter name="Today" string="Today" domain="[('delivery_date','=',datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]" help="Delivery rounds for today"/>
             	</search>
             </field>
         </record>
