@@ -19,19 +19,19 @@ _logger = logging.getLogger(__name__)
 
 class WebsiteSale(WebsiteSale):
 
-    @http.route(['/shop',
-                 '/shop/page/<int:page>',
-                 '/shop/category/<model("product.public.category"):category>',
-                 '/shop/category/<model("product.public.category"):category>/page/<int:page>',
-                 '/shop/time_frame'
-                 ], type='http', auth='user', website=True)
+    @http.route([
+        '/shop',
+        '/shop/page/<int:page>',
+        '/shop/category/<model("product.public.category"):category>',
+        '/shop/category/<model("product.public.category"):category>/page/<int:page>',
+        '/shop/time_frame'
+    ], type='http', auth='user', website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
         time_frames = request.env['time.frame'].sudo().search([
             ('state', '=', 'open')])
         if len(time_frames) == 0:
-            return request.website.render(
-                "distribution_circuits_website_sale.shop_closed",
-                post)
+            return request.render(
+                "distribution_circuits_website_sale.shop_closed", post)
         else:
             return super(WebsiteSale, self).shop(page=page, category=category,
                                                  time_frame=time_frame,
