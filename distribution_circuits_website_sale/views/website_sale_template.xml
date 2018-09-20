@@ -40,7 +40,7 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
-	     <xpath expr="//t[@t-esc='int(line.product_uom_qty)']" position="after">
+	     <xpath expr="//t[@t-esc='int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty']" position="after">
 	     	<span>
 	     		* (<t t-esc="int(line.product_id.weight)"/>
 	     		<t t-esc="line.product_uom.name"/>)
@@ -50,7 +50,7 @@
 	</template>	
 
 	<template id="time_frame_cart" inherit_id="website_sale.cart" name="Shopping Cart">
-		<xpath expr="//h1[@class='mb32']" position="after">
+		<xpath expr="//h2[@class='mb8 mt8']" position="after">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-if="website_sale_order">
@@ -74,13 +74,11 @@
 	     	</t>
 	     	<span t-if="website_sale_order and not website_sale_order.check_customer_credit()"> Your account doesn't allow you to pay this order </span>
 	     </xpath>
-	     <xpath expr="//div[@class='col-lg-3 col-lg-offset-1 col-sm-3 col-md-3 text-muted']" position="replace">
-	     </xpath>
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
-	     <xpath expr="//th[@width='100' and @class='text-center']" position="before">
-	     	<th width="100" class="text-center">Unit of mesure</th>
+	     <xpath expr="//th[@class='text-center td-price']" position="before">
+	     	<th class="text-center">Unit of mesure</th>
 	     </xpath>
 	     <xpath expr="//td[@name='price']" position="before">
 	     	<td class="text-center" id="td-qty">

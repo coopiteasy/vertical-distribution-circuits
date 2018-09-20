@@ -180,15 +180,13 @@ class WebsiteSale(WebsiteSale):
 
 class WebsiteAccount(CustomerPortal):
 
-    @http.route()
-    def account(self, **kw):
-        """ Add sales documents to main account page """
-        response = super(WebsiteAccount, self).account()
-
-        response.qcontext.update({
+    @http.route(['/my/credit_account'], type='http',
+                auth="user", website=True)
+    def portal_my_credit_account(self, **kw):
+        values = {
             'user_partner': request.env.user.partner_id,
-        })
-        return response
+        }
+        return request.render("distribution_circuits_website_sale.credit_account", values)
 
     @http.route(['/my/account'], type='http', auth='user', website=True)
     def details(self, redirect=None, **post):

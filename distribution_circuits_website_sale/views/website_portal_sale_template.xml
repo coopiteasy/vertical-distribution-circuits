@@ -1,12 +1,16 @@
 <odoo>
-	<template id="account" name="Account" inherit_id="website_portal.account">
-        <xpath expr="//div[contains(@class,'o_my_documents')]" position="inside">
-            <t t-call="distribution_circuits_website_sale.credit_account" />
+	<template id="portal_my_home_credit_account" name="Account" inherit_id="portal.portal_my_home">
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li class="list-group-item">
+                <span class="badge" t-esc="invoice_count"/>
+                <a href="/my/credit_account">Financial Account</a>
+            </li>
         </xpath>
     </template>
     
 	<template id="credit_account" name="Credit account">
-        <h3 class="page-header">Your Financial Account</h3>
+        <t t-call="portal.portal_layout">
+        	<h3 class="page-header">Your Financial Account</h3>
 	        <table class="table table-hover o_my_status_table">
 	            <thead>
 	              <tr class="active">
@@ -23,9 +27,10 @@
 	            	</tr>
 	            </tbody>
 	        </table>
+	     </t>
     </template>
-	
-	<template id="website_portal.details">
+
+	<template id="portal.details">
         <t t-call="website.layout">
             <t t-set="additional_title">Contact Details</t>
             <div id="wrap">
@@ -123,9 +128,9 @@
         </t>
     </template>
     
-    <template id="website_payment.pay_meth_link" inherit_id="website_portal.account"/>
+<!--     <template id="website_payment.pay_meth_link" inherit_id="portal.account"/> -->
         
-    <template id="portal_invoices_easymyhub" inherit_id="website_portal_sale.invoices">
+    <!-- <template id="portal_invoices_easymyhub" inherit_id="portal.invoices">
     	<xpath expr="//a[@t-attf-href='/website_payment/pay?reference=#{invoice.number}&amp;amount=#{invoice.residual}&amp;currency_id=#{invoice.currency_id.id}&amp;country_id=#{invoice.partner_id.country_id.id}']" position="replace"/>
-    </template>
+    </template> -->
 </odoo>

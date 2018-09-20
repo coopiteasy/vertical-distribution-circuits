@@ -10,13 +10,13 @@
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': ['distribution_circuits_sale',
+                'portal',
                 'website_sale',
-                'website_portal_sale',
                 'website_payment',
                 'auth_signup'
                 ],
     "description": """
-    This module implements the ec-commerce features manage the sales
+    This module implements the e-commerce features manage the sales
     of your distribution circuits.
     """,
     'data': [
