@@ -325,7 +325,7 @@ class AuthSignupHome(AuthSignupHome):
             qcontext["error"] = _("That does not seem to be an email address.")
         if qcontext.get("iban", False):
             try:
-                base_iban.validate_iban(qcontext.get("iban"))
+                res_partner_bank.validate_iban(qcontext.get("iban"))
             except ValidationError:
                 qcontext["error"] = _("Please give a correct IBAN number.")
         if not qcontext.get('token') and not qcontext.get('signup_enabled'):
@@ -350,6 +350,6 @@ class AuthSignupHome(AuthSignupHome):
         qcontext['raliment_points'] = request.env['res.partner'].sudo().get_raliment_points()
         qcontext['delivery_points'] = request.env['res.partner'].sudo().get_delivery_points()
         qcontext['countries'] = request.env['res.country'].sudo().search([])
-        qcontext['country_id'] = '21'
+        qcontext['country_id'] = request.env['res.country'].sudo().search([('code','=','BE')]).id
 
         return request.render('auth_signup.signup', qcontext)
