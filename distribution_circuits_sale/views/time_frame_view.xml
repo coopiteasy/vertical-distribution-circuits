@@ -30,10 +30,15 @@
 	                </header>
 	                <sheet>
 	                	<group>
-			            	<field name="delivery_date"/>
-			            	<field name="start"/>
-			            	<field name="end"/>
-		                	<field name="name"/>
+		                	<group>
+				            	<field name="delivery_date"/>
+				            	<field name="start"/>
+				            	<field name="end"/>
+			            	</group>
+			            	<group></group>
+		                	<group colspan="4">
+		                		<field name="name"/>
+		                	</group>
 		            	</group>
 		            	<notebook>
 		            		<page string="Sale orders" name="sale_orders">
