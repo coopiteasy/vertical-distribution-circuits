@@ -158,7 +158,7 @@
 	     a smooth flow. Check if this override made the other module incompatible.
 	     For now there no budget nor time to make such investigation.  
 	-->
-	<template id="website_sale.checkout">
+<!--	<template id="website_sale.checkout">
 	  <t t-call="website.layout">
 	    <t t-set="additional_title">Shop - Checkout</t>
 	    <div id="wrap">
@@ -316,6 +316,6 @@
 	    </div>
 	    </div>
 	  </t>
-	</template>
+	</template>-->
 </data>
 </odoo>
