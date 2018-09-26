@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo.addons.payment.models.payment_acquirer import ValidationError
-from odoo import models, api
+from odoo import models, api, fields
 from odoo.tools.float_utils import float_compare
 from odoo.tools.translate import _
 
@@ -12,6 +12,8 @@ _logger = logging.getLogger(__name__)
 
 class PrepaidPaymentAcquirer(models.Model):
     _inherit = 'payment.acquirer'
+
+    provider = fields.Selection(selection_add=[('prepaid', 'Prepaid')])
 
     @api.model
     def _get_providers(self):
