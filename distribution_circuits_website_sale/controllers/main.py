@@ -111,17 +111,17 @@ class WebsiteSale(WebsiteSale):
     def get_delivery_points(self):
         return request.env['res.partner'].sudo().get_delivery_points()
 
-    def set_show_company(self, checkout, partner):
-        if partner.is_company:
-            checkout['show_company'] = True
-            checkout['company_name'] = partner.name
-        elif partner.parent_id:
-            checkout['show_company'] = True
-            checkout['company_name'] = partner.parent_id.name
-        else:
-            checkout['show_company'] = False
-
-        return checkout
+#     def set_show_company(self, checkout, partner):
+#         if partner.is_company:
+#             checkout['show_company'] = True
+#             checkout['company_name'] = partner.name
+#         elif partner.parent_id:
+#             checkout['show_company'] = True
+#             checkout['company_name'] = partner.parent_id.name
+#         else:
+#             checkout['show_company'] = False
+# 
+#         return checkout
 
     def _get_mandatory_billing_fields(self):
         mandatory_billing_fields = super(WebsiteSale, self)._get_mandatory_billing_fields()
@@ -135,15 +135,15 @@ class WebsiteSale(WebsiteSale):
         else:
             return partner.delivery_point_id.id
 
-    def checkout_values(self, data=None):
-        values = super(WebsiteSale, self).checkout_values(data)
+    def checkout_values(self):
+        values = super(WebsiteSale, self).checkout_values()
         order = request.website.sale_get_order()
         partner = order.partner_id
 
-        checkout = self.set_show_company(values.get('checkout'), partner)
-        if checkout.get('shipping_id') == False or checkout.get('shipping_id') in [-2,0]:
-            checkout['shipping_id'] = self.get_shipping_id(partner)
-        values['checkout'] = checkout
+        #checkout = self.set_show_company(values.get('checkout'), partner)
+#         if checkout.get('shipping_id') == False or checkout.get('shipping_id') in [-2,0]:
+#             checkout['shipping_id'] = self.get_shipping_id(partner)
+       # values['checkout'] = checkout
         values['shippings'] = self.get_delivery_points()
         return values
 

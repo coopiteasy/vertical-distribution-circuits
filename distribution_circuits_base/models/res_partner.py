@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class ResPartner(models.Model):
@@ -20,6 +20,13 @@ class ResPartner(models.Model):
         'res.partner',
         string="Delivery Point",
         domain=[('is_delivery_point', '=', True)])
+
+    @api.multi
+    def address_get(self, adr_pref=None):
+        result = super(ResPartner, self).address_get(adr_pref)
+        if self.delivery_point_id:
+            result['delivery'] = self.delivery_point_id.id
+        return result
 
     def get_delivery_address(self):
         if len(self.child_ids) > 0:
