@@ -92,7 +92,7 @@
 	
 	<template id="short_distri_product_quantity" inherit_id="website_sale.product_quantity" customize_show="True" name="Select Quantity">
 		<xpath expr="//h1[@t-field='product.name']" position="after">
-        	<strong><t t-esc="product.supplier_id.display_name"/></strong><br/>
+        	<strong><t t-esc="product.display_name"/></strong><br/>
         	<strong>
         		<t t-esc="int(product.weight)"/>
         		<t t-esc="product.uom_name"/>
@@ -109,7 +109,7 @@
 					<t t-esc="product.uom_name"/>)
 					</strong>
 			</h5>
-			<h5><strong><t t-esc="product.supplier_id.display_name"/></strong></h5>
+			<h5><strong><t t-esc="product.display_name"/></strong></h5>
 		</xpath>
 	</template>	
 

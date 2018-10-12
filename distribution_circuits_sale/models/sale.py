@@ -85,11 +85,12 @@ class ProductTemplate(models.Model):
         compute="get_first_supplier",
         comodel_name="res.partner",
         string="Supplier")
+    supplier_name = fields.Char(related='supplier_id.display_name', string="Supplier Name")
 
     @api.multi
     def get_first_supplier(self):
         for product in self:
-            for seller in product.seller_ids:
+            for seller in product.sudo().seller_ids:
                 product.supplier_id = seller.name
                 break
 
