@@ -43,7 +43,7 @@ class DeliveryRoundWizard(models.TransientModel):
                 customer_consols = {}
                 for delivery_line in delivery_round.lines:
                     product_consols = {}
-                    for picking in delivery_line.picking_wave.picking_ids:
+                    for picking in delivery_line.picking_batch.picking_ids:
                         if picking.partner_id.raliment_point_id:
                             raliment_point = picking.partner_id.raliment_point_id
                             customer = picking.partner_id
@@ -82,7 +82,7 @@ class DeliveryRoundWizard(models.TransientModel):
                     if len(product_consols) > 0:
                         picking_consol = consol_obj.create(
                             {'time_frame_consolidation_id': time_frame_consol.id,
-                             'delivery_address': delivery_line.picking_wave.round_line.delivery_address.id})
+                             'delivery_address': delivery_line.picking_batch.round_line.delivery_address.id})
                         for product_id, product_consol in product_consols.items():
                             pick_consol_line_obj.create(
                                 {'picking_consolidation_id': picking_consol.id,
