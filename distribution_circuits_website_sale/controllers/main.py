@@ -51,7 +51,7 @@ class WebsiteSale(WebsiteSale):
                 order = request.website.sale_get_order()
                 request.session['selected_time_frame'] = time_frame.id
 
-                # don't update the time frame on the sale order and invalidate the 
+                # don't update the time frame on the sale order and invalidate the
                 # cart(sale order) if it's not in draft state 
                 # then return to the shop
                 if order.state != 'draft':
@@ -138,7 +138,7 @@ class WebsiteSale(WebsiteSale):
     def checkout_values(self):
         values = super(WebsiteSale, self).checkout_values()
         order = request.website.sale_get_order()
-        partner = order.partner_id
+#        partner = order.partner_id
 
         #checkout = self.set_show_company(values.get('checkout'), partner)
 #         if checkout.get('shipping_id') == False or checkout.get('shipping_id') in [-2,0]:
