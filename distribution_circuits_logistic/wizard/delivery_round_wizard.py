@@ -16,7 +16,7 @@ class DeliveryRoundWizard(models.TransientModel):
         time_frame = self.time_frame_id
 
         pickings = self.env['stock.picking'].search([
-            ('time_frame_id.id', '=', time_frame.id), ('wave_id', '=', None)])
+            ('time_frame_id.id', '=', time_frame.id), ('batch_id', '=', None)])
 
         if len(pickings) > 0:
             delivery_round = self.env['delivery.round'].search(
