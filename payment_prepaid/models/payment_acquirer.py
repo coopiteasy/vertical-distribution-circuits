@@ -46,7 +46,6 @@ class PrepaidPaymentTransaction(models.Model):
 
         return payment_tx
 
-    @api.model
     def _prepaid_form_get_invalid_parameters(self, tx, data):
         invalid_parameters = []
 
@@ -59,7 +58,6 @@ class PrepaidPaymentTransaction(models.Model):
 
         return invalid_parameters
 
-    @api.model
     def _prepaid_form_validate(self, tx, data):
         """
         handle the different cases here or just manage them in another model?
