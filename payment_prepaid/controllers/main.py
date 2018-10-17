@@ -17,7 +17,6 @@ class PrepaidController(http.Controller):
     ], type='http', auth='none', csrf=False)
     def prepaid_form_feedback(self, **post):
         _logger.info('Beginning form_feedback with post data %s',
-                     pprint.pformat(post))  # debug
-        request.registry['payment.transaction'].sudo().form_feedback(
-            post, 'prepaid')
+                     pprint.pformat(post))
+        request.env['payment.transaction'].sudo().form_feedback(post, 'prepaid')
         return werkzeug.utils.redirect(post.pop('return_url', '/'))
