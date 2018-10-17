@@ -46,22 +46,19 @@ class PrepaidPaymentTransaction(models.Model):
 
         return payment_tx
 
-    def _prepaid_form_get_invalid_parameters(self, tx, data):
+    def _prepaid_form_get_invalid_parameters(self, data):
         invalid_parameters = []
 
-        if float_compare(float(data.get('amount', '0.0')), tx.amount, 2) != 0:
+        if float_compare(float(data.get('amount', '0.0')), self.amount, 2) != 0:
             invalid_parameters.append(('amount', data.get('amount'), '%.2f' %
-                                       tx.amount))
-        if data.get('currency') != tx.currency_id.name:
+                                       self.amount))
+        if data.get('currency') != self.currency_id.name:
             invalid_parameters.append(('currency', data.get('currency'),
-                                       tx.currency_id.name))
+                                       self.currency_id.name))
 
         return invalid_parameters
 
-    def _prepaid_form_validate(self, tx, data):
-        """
-        handle the different cases here or just manage them in another model?
-        """
+    def _prepaid_form_validate(self, data):
         _logger.info('Validated prepaid payment for tx %s: set as pending' %
-                     (tx.reference))
-        return tx.write({'state': 'pending'})
+                     (self.reference))
+        return self.write({'state': 'pending'})
