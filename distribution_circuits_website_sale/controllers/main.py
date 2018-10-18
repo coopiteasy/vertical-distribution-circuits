@@ -263,7 +263,7 @@ class WebsiteAccount(CustomerPortal):
         if [err for err in error.values() if err == 'missing']:
             error_message.append(_('Some required fields are empty.'))
 
-        unknown = [k for k in data.iterkeys() if k not in mandatory_billing_fields + optional_billing_fields]
+        unknown = [k for k in data if k not in mandatory_billing_fields + optional_billing_fields]
         if unknown:
             error['common'] = 'Unknown field'
             error_message.append("Unknown field '%s'" % ','.join(unknown))
