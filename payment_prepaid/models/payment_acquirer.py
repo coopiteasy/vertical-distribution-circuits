@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo.addons.payment.models.payment_acquirer import ValidationError
+from odoo.exceptions import ValidationError
 from odoo import models, api, fields
 from odoo.tools.float_utils import float_compare
 from odoo.tools.translate import _
