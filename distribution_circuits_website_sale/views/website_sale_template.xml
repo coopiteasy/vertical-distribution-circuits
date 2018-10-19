@@ -22,8 +22,27 @@
 	     </xpath>
 	</template>
 
+	<template id="wizard_checkout_customer_credit" inherit_id="website_sale.wizard_checkout" name="Wizard Checkout">
+        <xpath expr="//li[@id='step10']" position="before">
+       		<div name="customer_credit">
+	    	 	<t t-if="website_sale_order">
+	            	<label class="control-label" for="name">Your account credit : </label>
+	            	<t t-esc="website.sale_get_order().partner_id.customer_credit"/>
+	            	<t t-esc="res_company.currency_id.symbol"/>
+	            </t>
+	    	 </div>
+       	</xpath>
+    </template>
+    
 	<template id="cart_popover_time_frame" inherit_id="website_sale.cart_popover" name="Cart popover time frame">
 		 <xpath expr="//t[@t-if='website_sale_order and website_sale_order.website_order_line']" position="before">
+			 <div name="customer_credit" class="input-group">
+	    	 	<t t-if="website_sale_order">
+	            	<label class="control-label" for="name">Your account credit : </label>
+	            	<t t-esc="website.sale_get_order().partner_id.customer_credit"/>
+	            	<t t-esc="res_company.currency_id.symbol"/>
+	            </t>
+	    	 </div>
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	            <t t-if="website_sale_order">
