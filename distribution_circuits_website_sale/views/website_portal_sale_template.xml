@@ -11,6 +11,32 @@
 	<template id="credit_account" name="Credit account">
         <t t-call="portal.portal_layout">
         	<h3 class="page-header">Your Financial Account</h3>
+	    <t t-if="not move_lines">
+            <p>There are currently no invoices and payments for your account.</p>
+        </t>
+        <div t-if="move_lines" class="panel panel-default">
+            <div class="table-responsive"><table class="table table-hover o_portal_my_doc_table">
+                <thead>
+                  <tr class="active">
+                    <th>Move #</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <t t-foreach="move_lines" t-as="line">
+                    <tr>
+                        <td><t t-esc="line.name"/></td>
+                        <td><span t-field="line.date"/></td>
+                        <td><t t-esc="-line.balance"/></td>
+                        <!-- <td><span t-esc="-invoice.residual if invoice.type == 'out_refund' else invoice.residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td> -->
+                    </tr>
+                </t>
+            </table>
+            </div>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="portal.pager"/>
+            </div>
+        </div>
 	        <table class="table table-hover o_my_status_table">
 	            <thead>
 	              <tr class="active">
@@ -127,10 +153,4 @@
             </div>
         </t>
     </template>
-    
-<!--     <template id="website_payment.pay_meth_link" inherit_id="portal.account"/> -->
-        
-    <!-- <template id="portal_invoices_easymyhub" inherit_id="portal.invoices">
-    	<xpath expr="//a[@t-attf-href='/website_payment/pay?reference=#{invoice.number}&amp;amount=#{invoice.residual}&amp;currency_id=#{invoice.currency_id.id}&amp;country_id=#{invoice.partner_id.country_id.id}']" position="replace"/>
-    </template> -->
 </odoo>

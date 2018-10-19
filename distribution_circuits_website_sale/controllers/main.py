@@ -183,14 +183,22 @@ class WebsiteAccount(CustomerPortal):
     @http.route(['/my/credit_account'], type='http',
                 auth="user", website=True)
     def portal_my_credit_account(self, **kw):
+        env = request.env
+        partner = env.user.partner_id
+        move_lines = env['account.move.line'].sudo().search(
+            [('partner_id', '=', partner.id),
+             ('account_id', '=', partner.property_account_receivable_id.id)]
+            )
         values = {
-            'user_partner': request.env.user.partner_id,
+            'user_partner': partner,
+            'move_lines': move_lines,
         }
         return request.render("distribution_circuits_website_sale.credit_account", values)
 
     @http.route(['/my/account'], type='http', auth='user', website=True)
     def details(self, redirect=None, **post):
-        partner = request.env['res.users'].browse(request.uid).partner_id
+        #partner = request.env['res.users'].browse(request.uid).partner_id
+        partner = request.env.user.partner_id
         values = {
             'error': {},
             'error_message': []
