@@ -5,6 +5,7 @@ from odoo.tools.misc import ustr
 from odoo import api, fields, models
 from odoo.addons.auth_signup.models.res_partner import SignupError
 
+
 class ResUsers(models.Model):
 
     _inherit = "res.users"
