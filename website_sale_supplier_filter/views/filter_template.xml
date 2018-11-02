@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  <template id="products_suppliers"
+    inherit_id="website_sale.products"
+    active="True"
+    customize_show="True"
+    name="Products Suppliers Filter">
+
+    <xpath expr="//div[@id='products_grid_before']" position="inside">
+      <ul id="product_suppliers_list" class="nav nav-pills nav-stacked mt16">
+        <li t-att-class="None if supplier else 'active'">
+          <a t-att-href="keep(supplier=None)" class="o_not_editable">
+            All Suppliers
+          </a>
+        </li>
+        <li t-foreach="suppliers" t-as="s"
+            t-att-class="'active' if s.id == int(supplier or 0) else None">
+          <a t-att-href="keep(supplier=s.id)" t-field="s.name"/>
+        </li>
+      </ul>
+    </xpath>
+
+    <xpath expr="//div[@id='products_grid_before']" position="attributes">
+      <attribute name="class">col-md-3 col-sm-4 col-xs-12</attribute>
+    </xpath>
+
+    <xpath expr="//div[@id='products_grid']" position="attributes">
+      <attribute name="class">col-md-9 col-sm-8</attribute>
+    </xpath>
+
+  </template>
+
+  <template id="option_products_suppliers_list_title"
+    inherit_id="website_sale_supplier_filter.products_suppliers"
+    active="False"
+    customize_show="True"
+    name="Show Suppliers List Title">
+
+    <xpath expr="//ul[@id='product_suppliers_list']" position="before">
+      <h3>Suppliers</h3>
+    </xpath>
+
+  </template>
+
+</odoo>
