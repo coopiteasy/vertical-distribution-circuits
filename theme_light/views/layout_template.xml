@@ -62,7 +62,7 @@
 <template id="theme_light.invoice_footer">
 	<div class="footer">
         <table style="width: 100%;font-size:13;color:black;font-family:Roboto-Regular;text-align:center">
-            <tr style="height:20px;">
+<!--            <tr style="height:20px;">
                 <td/>
                 <td/>
                 <t t-if="company.display_logo1">
@@ -77,11 +77,11 @@
 	                	<img t-if="not company.bottom_logo2" src="/theme_light/static/img/gallery/cnc_agree.jpg" style="width:162px;height:auto;padding-bottom:5px;"/>
 	            	</td>
                 </t>
-            </tr>
+            </tr>-->
             <tr style="height:20px;">
             	<td style="align: left;"> 
-            		<t t-if="company.rml_header1">
-            			<span t-field="company.rml_header1"/> -
+            		<t t-if="company.report_header">
+            			<span t-field="company.report_header"/> -
             		</t> 
             		<b><span t-field="company.name"/></b> 
             	</td>
@@ -102,7 +102,7 @@
             	<td/>
             	<td/>
             </tr>   
-            <tr style="height:20px">
+            <!--<tr style="height:20px">
             	<td style="align: left;">
             		<t t-if="company.company_registry">
 	            		<span>N.Entr.</span> : 
@@ -126,7 +126,7 @@
             	<td/>
             	<td/>
             	<td/>
-            </tr> 
+            </tr> -->
         </table>  
     </div>      
 </template>
