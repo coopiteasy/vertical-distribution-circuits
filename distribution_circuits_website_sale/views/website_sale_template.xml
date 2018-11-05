@@ -27,8 +27,7 @@
        		<div name="customer_credit">
 	    	 	<t t-if="website_sale_order">
 	            	<label class="control-label" for="name">Your account credit : </label>
-	            	<t t-esc="website.sale_get_order().partner_id.customer_credit"/>
-	            	<t t-esc="res_company.currency_id.symbol"/>
+	            	<span t-field="website.sale_get_order().partner_id.customer_credit"/>
 	            </t>
 	    	 </div>
        	</xpath>
@@ -39,8 +38,7 @@
 			 <div name="customer_credit" class="input-group">
 	    	 	<t t-if="website_sale_order">
 	            	<label class="control-label" for="name">Your account credit : </label>
-	            	<t t-esc="website.sale_get_order().partner_id.customer_credit"/>
-	            	<t t-esc="res_company.currency_id.symbol"/>
+	            	<span t-field="website.sale_get_order().partner_id.customer_credit"/>
 	            </t>
 	    	 </div>
 			 <div name="time_frames" class="input-group">
