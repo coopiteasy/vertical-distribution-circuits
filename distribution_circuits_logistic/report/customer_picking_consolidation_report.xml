@@ -3,43 +3,11 @@
 <data>
 
 <template id="theme_customer_picking_consolidation_document">
-    <t t-call="theme_light.invoice_layout">
+    <t t-call="web.external_layout">
         <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />
         <div class="page">
-        	<head>
-				<link href="/easy_my_coop/static/src/css/coop_report.css" rel="stylesheet"/>
-				
-				<style type="text/css">
-				/* Montserrat */
-				  @font-face {
-				  font-family: 'Montserrat-Regular';
-				  font-style: normal;
-				  src: local('Montserrat Regular'), url('/theme_light/static/font/Montserrat-Regular.ttf') format('truetype');
-				}
-				/* Roboto Regular */
-				  @font-face {
-				  font-family: 'Roboto-Regular';
-				  font-style: normal;
-				  src: local('Roboto Regular'), url('/theme_light/static/font/Roboto-Regular.ttf') format('truetype');
-				}
-				/* Roboto Bold */
-				  @font-face {
-				  font-family: 'Roboto-Bold';
-				  font-style: normal;
-				  src: local('Roboto Bold'), url('/theme_light/static/font/Roboto-Bold.ttf') format('truetype');
-				}
-				/* BEBASNEUE Bold */
-				  @font-face {
-				  font-family: 'Bebasneue-Bold';
-				  font-style: normal;
-				  src: local('Bebasneue-Bold'), url('/theme_light/static/font/BEBASNEUE_BOLD.ttf') format('truetype');
-				}
-				</style>
-			</head>
-        	<t t-call="theme_light.invoice_header"/>
-        	
 			<div>
-	            <div class="row mt32 mb32 easymy-coop-info-title">
+	            <div class="row mt32 mb32">
 	                <div class="col-xs-2" t-if="o.time_frame_id">
 	                    <strong>Time frame:</strong>
 	                    <p t-field="o.time_frame_id.name"/>
@@ -51,15 +19,15 @@
 	            </div>
 				
 				<t t-foreach="o.picking_customer_consolidation" t-as="cc">
-					<div class="row mt32 mb32 easymy-coop-info-title" style="position:relative;top:30px;">
+					<div class="row mt32 mb32" style="position:relative;top:30px;">
 		                <div class="col-xs-2" t-if="o.time_frame_id">
 		                    <strong>Delivery address:</strong>
 		                    <address t-field="cc.delivery_address"
                         	t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
 		                </div>
 		            </div>
-		            <table class="table border-easymy-coop" style="position:relative;top:20px;width:90%;align:center;">
-		                <thead class="easymy-coop-info-title">
+		            <table class="table table-condensed" style="position:relative;top:20px;width:90%;align:center;">
+		                <thead>
 		                    <tr>
 		                        <th>Supplier</th>
 		                        <th>Product</th>
@@ -68,7 +36,7 @@
 		                        <th class="text-right">Delivered</th>
 		                    </tr>
 		                </thead>
-		                <tbody class="invoice_tbody easymy-coop-normal">
+		                <tbody class="table table-condensed">
 		                    <tr t-foreach="cc.customer_consolidation_lines" t-as="ccl">
 		                        <td><span t-field="ccl.supplier_id"/></td>
 		                        <td><span t-field="ccl.product_id.name"/></td>
@@ -93,7 +61,7 @@
     </template>
 
 	<template id="theme_customer_picking_consolidation">
-	    <t t-call="theme_light.html_container">
+	    <t t-call="web.html_container">
 	        <t t-set="data_report_margin_top" t-value="10"/>
 	        <t t-set="data_report_header_spacing" t-value="5"/>
 	        <t t-set="data_report_dpi" t-value="110"/>
