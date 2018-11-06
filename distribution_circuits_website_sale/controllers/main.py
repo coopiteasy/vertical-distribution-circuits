@@ -322,7 +322,7 @@ class AuthSignupHome(AuthSignupHome):
     @http.route('/web/signup', type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
-        qcontext['name'] = qcontext['firstname'] + ' ' + qcontext['lastname']
+        qcontext['name'] = qcontext.get('firstname','') + ' ' + qcontext.get('lastname','')
 
         if not qcontext.get('raliment_point_id', False) and \
                 not qcontext.get('delivery_point_id', False):
