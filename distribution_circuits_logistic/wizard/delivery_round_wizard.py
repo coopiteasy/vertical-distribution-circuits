@@ -34,8 +34,10 @@ class DeliveryRoundWizard(models.TransientModel):
                         wave_found = True
                         break
                 if not wave_found:
+                    pick_batch_seq = self.env.ref('distribution_circuits_logistic.sequence_stock_picking_batch', False)
+                    name = pick_batch_seq.next_by_id()
                     new_batch = self.env['stock.picking.batch'].create(
-                        {'name': 'Lalalalala'})
+                        {'name': name})
                     picking.batch_id = new_batch.id
                     self.env['delivery.round.line'].create(
                         {'delivery_round': delivery_round.id,
