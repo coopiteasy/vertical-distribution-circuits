@@ -19,12 +19,24 @@ _logger = logging.getLogger(__name__)
 
 class WebsiteSale(WebsiteSale):
 
+    def _get_search_domain(self, search, category, attrib_values):
+        domain = super(WebsiteSale, self)._get_search_domain(search, category,
+                                                             attrib_values)
+        time_frame_obj = request.env['time.frame']
+        tf_id = request.website.get_current_time_frame()
+        if tf_id:
+            time_frame = time_frame_obj.sudo().browse(tf_id)
+            if time_frame.filter_on_products:
+                domain.append(
+                    ('id', 'in', time_frame.products.ids))
+        return domain
+
     @http.route([
         '/shop',
         '/shop/page/<int:page>',
         '/shop/category/<model("product.public.category"):category>',
-        '/shop/category/<model("product.public.category"):category>/page/<int:page>',
-        '/shop/time_frame'
+        '/shop/category/<model("product.public.category"):category'
+        '>/page/<int:page>',  # Continue previous line
     ], type='http', auth='user', website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
         time_frames = request.env['time.frame'].sudo().search([
@@ -33,10 +45,12 @@ class WebsiteSale(WebsiteSale):
             return request.render(
                 "distribution_circuits_website_sale.shop_closed", post)
         else:
-            return super(WebsiteSale, self).shop(page=page, category=category,
-                                                 time_frame=time_frame,
-                                                 search=search,
-                                                 **post)
+            values = super(WebsiteSale, self).shop(page=page,
+                                                   category=category,
+                                                   time_frame=time_frame,
+                                                   search=search,
+                                                   **post)
+            return values
 
     @http.route(['/shop/set_current_time_frame'],
                 type='json',
@@ -44,15 +58,15 @@ class WebsiteSale(WebsiteSale):
                 methods=['POST'],
                 website=True)
     def set_current_time_frame(self, time_frame_id=None, **kw):
-        env = request.env
+        tf_obj = request.env['time.frame']
         if time_frame_id:
-            time_frame = env['time.frame'].sudo().browse(int(time_frame_id))
+            time_frame = tf_obj.sudo().browse(int(time_frame_id))
             if request.website.sale_get_order():
                 order = request.website.sale_get_order()
                 request.session['selected_time_frame'] = time_frame.id
 
-                # don't update the time frame on the sale order and invalidate the
-                # cart(sale order) if it's not in draft state 
+                # don't update the time frame on the sale order and invalidate
+                # the cart(sale order) if it's not in draft state
                 # then return to the shop
                 if order.state != 'draft':
                     request.session.update({
@@ -137,17 +151,11 @@ class WebsiteSale(WebsiteSale):
 
     def checkout_values(self):
         values = super(WebsiteSale, self).checkout_values()
-        order = request.website.sale_get_order()
-#        partner = order.partner_id
-
-        #checkout = self.set_show_company(values.get('checkout'), partner)
-#         if checkout.get('shipping_id') == False or checkout.get('shipping_id') in [-2,0]:
-#             checkout['shipping_id'] = self.get_shipping_id(partner)
-       # values['checkout'] = checkout
         values['shippings'] = self.get_delivery_points()
+
         return values
 
-    @http.route(['/shop/cart/update'], 
+    @http.route(['/shop/cart/update'],
                 type='http',
                 auth="public",
                 methods=['POST'],
