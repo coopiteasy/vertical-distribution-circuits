@@ -1,62 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-	<data>
-		<record id="view_partner_form" model="ir.ui.view">
+    <data>
+        <record id="view_partner_form" model="ir.ui.view">
             <field name="name">res.partner.form</field>
             <field name="model">res.partner</field>
-			<field name="inherit_id" ref="base.view_partner_form"/>            
+            <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-            	<field name="type" position="before">
-            		<field name="raliment_point_id" attrs="{'invisible':['|',('is_raliment_point','=',True),('is_delivery_point','=',True)]}"/>
-            		<field name="delivery_point_id" attrs="{'invisible':['|',('is_raliment_point','=',True),('is_delivery_point','=',True)]}"/>
-            	</field>
-            	<xpath expr="/form/sheet/notebook/page[@name='sales_purchases']/group/group[@name='sale']/field[@name='customer']" position="after">
-            		<field name="is_delivery_point"/>
-            		<field name="is_raliment_point"/>
-            		<field name="is_gac"/>
-            		<field name="raliment_point_manager" attrs="{'invisible':[('is_raliment_point','=',False)]}"/>
-            	</xpath>
+                <field name="type" position="before">
+                    <field name="raliment_point_id" attrs="{'invisible':['|',('is_raliment_point','=',True),('is_delivery_point','=',True)]}" />
+                    <field name="delivery_point_id" attrs="{'invisible':['|',('is_raliment_point','=',True),('is_delivery_point','=',True)]}" />
+                </field>
+                <xpath expr="/form/sheet/notebook/page[@name='sales_purchases']/group/group[@name='sale']/field[@name='customer']" position="after">
+                    <field name="is_delivery_point" />
+                    <field name="is_raliment_point" />
+                    <field name="is_gac" />
+                    <field name="raliment_point_manager" attrs="{'invisible':[('is_raliment_point','=',False)]}" />
+                </xpath>
             </field>
         </record>
-		
-		<record id="view_res_partner_easymyhub_filter" model="ir.ui.view">
-            <field name="name">res.partner.select</field>
+
+        <record id="res_partner_raliment_search" model="ir.ui.view">
+            <field name="name">res.partner.search</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_res_partner_filter"/>
             <field name="arch" type="xml">
-                <filter name="customer" position="after">
-                	<filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),('raliment_point_id','!=',False)]"/>
-                	<filter string="Individual customers" name="individual_customer"  domain="[('raliment_point_id','=',False),('is_raliment_point','=',False),('is_gac','=',False),('customer','=',True)]"/>
-                </filter>
-                <filter name="supplier" position="after">
-                	<filter string="Gac" name="gac" domain="[('is_gac','=',1), ('customer','=',1), ('raliment_point_id','=',False)]"/>
-                	<filter string="Raliment points" name="raliment_point" domain="[('is_raliment_point','=',1),('parent_id','=',False)]"/>
-                	<filter string="Delivery points" name="delivery_point" domain="[('is_delivery_point','=',1),('parent_id','=',False)]"/>
-                </filter>
+                <search string="Search Partner">
+                    <field name="name" filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]" />
+                    <filter name="filter_my_partners" help="My Partners" domain="[('user_id','=',uid)]" />
+                    <separator />
+                    <filter string="Persons" name="type_person" domain="[('is_company','=',0)]" />
+                    <filter string="Companies" name="type_company" domain="[('is_company','=',1)]" />
+                    <separator />
+                    <filter string="Customers" name="customer" domain="[('customer','=',1), ('parent_id', '=', False)]" />
+                    <filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),                                      ('raliment_point_id','!=',False)]" />
+                    <filter string="Individual customers" name="individual_customer" domain="[('raliment_point_id','=',False),                                      ('is_raliment_point','=',False),                                      ('is_gac','=',False),                                      ('customer','=',True)]" />
+                    <filter string="Vendors" name="supplier" domain="[('supplier','=',1), ('parent_id', '=', False)]" />
+                    <filter string="Gac" name="gac" domain="[('is_gac','=',1),                                      ('customer','=',1),                                      ('raliment_point_id','=',False)]" />
+                    <filter string="Raliment points" name="raliment_point" domain="[('is_raliment_point','=',1),                                      ('parent_id','=',False)]" />
+                    <filter string="Delivery points" name="delivery_point" domain="[('is_delivery_point','=',1),                                      ('parent_id','=',False)]" />
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
+                    <separator/>
+                    <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]" />
+                    <field name="user_id" />
+                    <field name="parent_id" domain="[('is_company','=',1)]" operator="child_of" />
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="group_raliment_point" string="Raliment Point" context="{'group_by': 'raliment_point_id'}" />
+                    </group>
+                </search>
             </field>
         </record>
-		
-		<record id="action_partner_raliment" model="ir.actions.act_window">
+
+        <record id="action_partner_raliment" model="ir.actions.act_window">
             <field name="name">raliment points</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{"search_default_raliment_point":1,"default_is_raliment_point":1}</field>
-            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="search_view_id" ref="base.view_res_partner_filter" />
             <field name="help" type="html">
-              <p class="oe_view_nocontent_create">
-                Click to add a raliment point in your address book.
-              </p><p>
-                Odoo helps you easily track all activities related to
+                <p class="oe_view_nocontent_create">Click to add a raliment point in your address book.</p>
+                <p>Odoo helps you easily track all activities related to
                 a customer; discussions, history of business opportunities,
-                documents, etc.
-              </p>
+                documents, etc.</p>
             </field>
         </record>
+        <menuitem action="action_partner_raliment" id="menu_partner_raliment" name="Raliment point" parent="menu_easy_my_hub_main_contact" sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user" />
 
-        <menuitem action="action_partner_raliment" id="menu_partner_raliment" name="Raliment point" parent="menu_easy_my_hub_main_contact" sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user"/>
-        
         <record id="action_raliment_customer" model="ir.actions.act_window">
             <field name="name">raliment customers</field>
             <field name="type">ir.actions.act_window</field>
@@ -65,19 +74,15 @@
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{"search_default_type_person":1,"search_default_raliment_customer":1,"default_customer":1}</field>
             <!-- <field name="domain">[('type','!=','delivery')]</field> -->
-            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="search_view_id" ref="res_partner_raliment_search" />
             <field name="help" type="html">
-              <p class="oe_view_nocontent_create">
-                Click to add a customer in your address book.
-              </p><p>
-                Odoo helps you easily track all activities related to
+                <p class="oe_view_nocontent_create">Click to add a customer in your address book.</p>
+                <p>Odoo helps you easily track all activities related to
                 a customer; discussions, history of business opportunities,
-                documents, etc.
-              </p>
+                documents, etc.</p>
             </field>
         </record>
-
-        <menuitem action="action_raliment_customer" id="menu_raliment_customer" name="Raliment customers" parent="menu_easy_my_hub_main_contact" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+        <menuitem action="action_raliment_customer" id="menu_raliment_customer" name="Raliment customers" parent="menu_easy_my_hub_main_contact" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user" />
 
         <record id="action_individual_customer" model="ir.actions.act_window">
             <field name="name">Individual customers</field>
@@ -86,20 +91,16 @@
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{"search_default_type_person":1,"search_default_individual_customer":1,"default_customer":1}</field>
-            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="search_view_id" ref="base.view_res_partner_filter" />
             <field name="help" type="html">
-              <p class="oe_view_nocontent_create">
-                Click to add a customer in your address book.
-              </p><p>
-                Odoo helps you easily track all activities related to
+                <p class="oe_view_nocontent_create">Click to add a customer in your address book.</p>
+                <p>Odoo helps you easily track all activities related to
                 a customer; discussions, history of business opportunities,
-                documents, etc.
-              </p>
+                documents, etc.</p>
             </field>
         </record>
+        <menuitem action="action_individual_customer" id="menu_individual_customer" name="Individual customers" parent="menu_easy_my_hub_main_contact" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user" />
 
-        <menuitem action="action_individual_customer" id="menu_individual_customer" name="Individual customers" parent="menu_easy_my_hub_main_contact" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user"/>        
-       
         <record id="action_partner_gac" model="ir.actions.act_window">
             <field name="name">GACs</field>
             <field name="type">ir.actions.act_window</field>
@@ -107,18 +108,15 @@
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{"search_default_gac":1,"default_is_gac":1,"default_customer":1}</field>
-            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="search_view_id" ref="base.view_res_partner_filter" />
             <field name="help" type="html">
-              <p class="oe_view_nocontent_create">
-                Click to add a gac in your address book.
-              </p><p>
-                Odoo helps you easily track all activities related to
+                <p class="oe_view_nocontent_create">Click to add a gac in your address book.</p>
+                <p>Odoo helps you easily track all activities related to
                 a customer; discussions, history of business opportunities,
-                documents, etc.
-              </p>
+                documents, etc.</p>
             </field>
         </record>
+        <menuitem action="action_partner_gac" id="menu_partner_gac" name="GAC" parent="menu_easy_my_hub_main_contact" sequence="20" groups="distribution_circuits_base.group_easy_my_hub_user" />
 
-        <menuitem action="action_partner_gac" id="menu_partner_gac" name="GAC" parent="menu_easy_my_hub_main_contact" sequence="20" groups="distribution_circuits_base.group_easy_my_hub_user"/>          
-	</data>
+    </data>
 </odoo>
