@@ -14,6 +14,7 @@ odoo.define('distribution_circuits_website_sale.website_sale', function (require
   		.then(function (data) {
 			$.each(data, function(i, obj) {
 			}); 
+			window.location.href = '/shop';
         });
 	});
     $("select[name='shipping_id']", oe_website_sale).trigger('change');
