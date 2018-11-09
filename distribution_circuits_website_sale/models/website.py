@@ -13,19 +13,26 @@ class WebSite(models.Model):
     def get_current_time_frame(self):
         time_frame_ids = self.env['time.frame'].sudo().search([
             ('state', '=', 'open')]).ids
+        selected_tf = request.session.get('selected_time_frame')
         if request.session.get('selected_time_frame'):
-            session_time_frame = request.session.get('selected_time_frame')
-            if session_time_frame in time_frame_ids:
-                return session_time_frame
+            if selected_tf in time_frame_ids:
+                return selected_tf
             elif len(time_frame_ids) > 0:
-                request.session['selected_time_frame'] = time_frame_ids[0]
+                selected_tf = time_frame_ids[0]
             else:
-                request.session['selected_time_frame'] = None
+                selected_tf = None
         else:
+            order = self.sale_get_order()
             if len(time_frame_ids) > 0:
-                request.session['selected_time_frame'] = time_frame_ids[0]
+                if order:
+                    selected_tf = order.time_frame_id.id
+                else:
+                    selected_tf = time_frame_ids[0]
             else:
-                request.session['selected_time_frame'] = None
+                selected_tf = None
+
+        request.session['selected_time_frame'] = selected_tf
+
         return request.session.get('selected_time_frame')
 
     @api.multi
@@ -50,12 +57,3 @@ class WebSite(models.Model):
             if sale_order.state == 'draft':
                 sale_order.time_frame_id = int(request.session.get('selected_time_frame'))
         return sale_order
-
-    @api.multi
-    def sale_product_domain(self):
-        domain = super(WebSite, self).sale_product_domain()
-        # won't work
-#         if 'time_frame_id' in self.env.context:
-#             domain.append(
-#                 ('time_frame_id', '=', self.env.context['time_frame_id']))
-        return domain
