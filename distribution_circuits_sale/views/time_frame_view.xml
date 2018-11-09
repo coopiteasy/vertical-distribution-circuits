@@ -38,6 +38,7 @@
 			            	<group></group>
 		                	<group colspan="4">
 		                		<field name="name"/>
+		                		<field name="filter_on_products"/>
 		                	</group>
 		            	</group>
 		            	<notebook>
@@ -51,6 +52,13 @@
                     					<field name="amount_total" sum="Total Tax Included" widget="monetary"/>
                     					<field name="state"/>
                     					<field name="invoice_status"/>
+		            				</tree>
+		            			</field>
+		            		</page>
+		            		<page string="Products" name="products" attrs="{'invisible':[('filter_on_products','=',False)]}">
+		            			<field name="products">
+		            				<tree>
+		            					<field name="name"/>
 		            				</tree>
 		            			</field>
 		            		</page>

@@ -20,6 +20,10 @@ class TimeFrame(models.Model):
     start = fields.Datetime(string="Start", required=True)
     end = fields.Datetime(string="End", required=True)
     delivery_date = fields.Date(string="Delivery date", required=True)
+    filter_on_products = fields.Boolean(string="Activate filter on products")
+    products = fields.Many2many('product.product', string='Products',
+                                domain=[('sale_ok', '=', True),
+                                        ('active', '=', True)])
     state = fields.Selection([('draft', 'Draft'),
                               ('validated', 'Validated'),
                               ('open', 'Open'),
