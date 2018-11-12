@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="ir_cron_abandoned_cart_reminder_before_timeframe_end"
+          model="ir.cron">
+    <field name="name">
+      Send Email for Abandoned Cart Before Timeframe End
+    </field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+    <field name="numbercall">-1</field>
+    <field name="model_id" ref="model_sale_order"/>
+    <field name="state">code</field>
+    <field name="code">
+      model._cron_send_mail_before_timeframe_end()
+    </field>
+    <field name="active" eval="False"/>
+  </record>
+</odoo>

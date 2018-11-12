@@ -13,17 +13,21 @@
                 'portal',
                 'website_sale',
                 'website_payment',
-                'auth_signup'
+                'auth_signup',
+                'mail',
                 ],
     "description": """
     This module implements the e-commerce features manage the sales
     of your distribution circuits.
     """,
     'data': [
+        "data/cron.xml",
+        "data/mail_templates.xml",
         "security/ir.model.access.csv",
         "views/website_sale_template.xml",
         "views/website_portal_sale_template.xml",
         "views/auth_signup_template.xml",
+        "views/res_config_settings_views.xml",
         "views/res_users_view.xml",
     ],
     'installable': True,
