@@ -21,6 +21,7 @@ class TimeFrame(models.Model):
     end = fields.Datetime(string="End", required=True)
     delivery_date = fields.Date(string="Delivery date", required=True)
     filter_on_products = fields.Boolean(string="Activate filter on products")
+    resellers_only = fields.Boolean(string="For resellers only")
     products = fields.Many2many('product.product', string='Products',
                                 domain=[('sale_ok', '=', True),
                                         ('active', '=', True)])

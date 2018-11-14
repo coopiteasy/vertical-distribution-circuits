@@ -8,6 +8,7 @@ class ResPartner(models.Model):
     is_gac = fields.Boolean(string="Est un GAC")
     is_raliment_point = fields.Boolean(string="Is a gathering point")
     is_delivery_point = fields.Boolean(string="Is a delivery point")
+    is_reseller = fields.Boolean(string="Is a reseller")
     raliment_point_id = fields.Many2one(
         'res.partner',
         string="Point de Raliment",

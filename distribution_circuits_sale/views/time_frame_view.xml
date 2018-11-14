@@ -9,6 +9,7 @@
 	            	<field name="delivery_date"/>
 	            	<field name="start"/>
 	            	<field name="end"/>
+	            	<field name="resellers_only"/>
 	            	<field name="state"/>
                 </tree>
             </field>
@@ -39,6 +40,7 @@
 		                	<group colspan="4">
 		                		<field name="name"/>
 		                		<field name="filter_on_products"/>
+		                		<field name="resellers_only"/>
 		                	</group>
 		            	</group>
 		            	<notebook>

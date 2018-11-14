@@ -38,8 +38,10 @@ class WebSite(models.Model):
     @api.multi
     def get_open_time_frames(self):
         res = []
-        for time_frame in self.env['time.frame'].sudo().search([
-                ('state', '=', 'open')]):
+        domain = [('state', '=', 'open')]
+        if not request.env.user.partner_id.is_reseller:
+            domain.append(('resellers_only', '=', False))
+        for time_frame in self.env['time.frame'].sudo().search(domain):
             res.append((time_frame.id, time_frame.name))
         return res
 
