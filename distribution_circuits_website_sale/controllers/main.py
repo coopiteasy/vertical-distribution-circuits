@@ -91,8 +91,7 @@ class WebsiteSale(WebsiteSale):
         if transaction_id is None:
             tx = request.website.sale_get_transaction()
         else:
-            tx = request.env['payment.transaction'].sudo().browse(
-                transaction_id)
+            tx = request.env['payment.transaction'].browse(transaction_id)
 
         if sale_order_id is None:
             order = request.website.sale_get_order()
@@ -100,27 +99,23 @@ class WebsiteSale(WebsiteSale):
             order = request.env['sale.order'].sudo().browse(sale_order_id)
             assert order.id == request.session.get('sale_last_order_id')
 
-        # sometime without knowing yet why we loose the order so we add this
-        # last attempt to get the current sale order
-        if not order:
-            order = request.website.sale_get_order()
-            # if it still not defined we redirect to the shop
-            if not order:
-                _logger.error('The order is not defined')
-                if tx:
-                    _logger.error('The transaction was reference %s' %
-                                  (tx.reference))
-                return request.redirect('/shop')
+        if not order or (order.amount_total and not tx):
+            return request.redirect('/shop')
 
-        if order.check_customer_credit():
-            if tx:
-                tx.write({'state': 'done'})
+        if order.payment_acquirer_id.provider == "prepaid":
+            if order.check_customer_credit():
+                if tx:
+                    tx.write({'state': 'done'})
+                    order.with_context(send_email=True).action_confirm()
+                    return request.redirect('/shop/confirmation')
+            else:
+                _logger.error('The customer credit is not sufficient to cover'
+                              'the payment %s set as error' % (tx.reference))
+                return request.redirect('/shop')
+        else:
             return super(WebsiteSale, self).payment_validate(transaction_id,
                                                              sale_order_id,
                                                              **post)
-        else:
-            _logger.error('The customer credit is not sufficient to cover the payment %s set as error' % (tx.reference))
-            return request.redirect('/shop')
 
     def get_delivery_points(self):
         return request.env['res.partner'].sudo().get_delivery_points()
