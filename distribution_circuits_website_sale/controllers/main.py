@@ -39,8 +39,7 @@ class WebsiteSale(WebsiteSale):
         '>/page/<int:page>',  # Continue previous line
     ], type='http', auth='user', website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
-        time_frames = request.env['time.frame'].sudo().search([
-            ('state', '=', 'open')])
+        time_frames = request.website.get_open_time_frames()
         if len(time_frames) == 0:
             return request.render(
                 "distribution_circuits_website_sale.shop_closed", post)
