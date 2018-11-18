@@ -74,7 +74,6 @@
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="context">{"search_default_type_person":1,"search_default_raliment_customer":1,"default_customer":1}</field>
-            <!-- <field name="domain">[('type','!=','delivery')]</field> -->
             <field name="search_view_id" ref="res_partner_raliment_search" />
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Click to add a customer in your address book.</p>
