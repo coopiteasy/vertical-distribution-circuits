@@ -32,12 +32,12 @@
                     <filter string="Companies" name="type_company" domain="[('is_company','=',1)]" />
                     <separator />
                     <filter string="Customers" name="customer" domain="[('customer','=',1), ('parent_id', '=', False)]" />
-                    <filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),                                      ('raliment_point_id','!=',False)]" />
-                    <filter string="Individual customers" name="individual_customer" domain="[('raliment_point_id','=',False),                                      ('is_raliment_point','=',False),                                      ('is_gac','=',False),                                      ('customer','=',True)]" />
+                    <filter string="Raliment customers" name="raliment_customer" domain="[('customer','=',1),('raliment_point_id','!=',False)]" />
+                    <filter string="Individual customers" name="individual_customer" domain="[('raliment_point_id','=',False),('is_raliment_point','=',False),                                      ('is_gac','=',False),                                      ('customer','=',True)]" />
                     <filter string="Vendors" name="supplier" domain="[('supplier','=',1), ('parent_id', '=', False)]" />
-                    <filter string="Gac" name="gac" domain="[('is_gac','=',1),                                      ('customer','=',1),                                      ('raliment_point_id','=',False)]" />
-                    <filter string="Raliment points" name="raliment_point" domain="[('is_raliment_point','=',1),                                      ('parent_id','=',False)]" />
-                    <filter string="Delivery points" name="delivery_point" domain="[('is_delivery_point','=',1),                                      ('parent_id','=',False)]" />
+                    <filter string="Gac" name="gac" domain="[('is_gac','=',1),('customer','=',1),('raliment_point_id','=',False)]" />
+                    <filter string="Raliment points" name="raliment_point" domain="[('is_raliment_point','=',1),('parent_id','=',False)]" />
+                    <filter string="Delivery points" name="delivery_point" domain="[('is_delivery_point','=',1),('parent_id','=',False)]" />
                     <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
                     <separator/>
                     <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]" />
