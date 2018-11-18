@@ -119,18 +119,6 @@ class WebsiteSale(WebsiteSale):
     def get_delivery_points(self):
         return request.env['res.partner'].sudo().get_delivery_points()
 
-#     def set_show_company(self, checkout, partner):
-#         if partner.is_company:
-#             checkout['show_company'] = True
-#             checkout['company_name'] = partner.name
-#         elif partner.parent_id:
-#             checkout['show_company'] = True
-#             checkout['company_name'] = partner.parent_id.name
-#         else:
-#             checkout['show_company'] = False
-# 
-#         return checkout
-
     def _get_mandatory_billing_fields(self):
         mandatory_billing_fields = super(WebsiteSale, self)._get_mandatory_billing_fields()
         if 'street2' in mandatory_billing_fields:
