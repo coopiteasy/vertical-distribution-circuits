@@ -16,6 +16,9 @@ class SaleOrder(models.Model):
         string="Raliment Point",
         domain=[('is_raliment_point', '=', True)],
         store=True)
+    enough_credit = fields.Boolean(
+        compute="_compute_enough_credit",
+        string="Enough credit")
 
     @api.multi
     def action_confirm(self):
@@ -32,6 +35,11 @@ class SaleOrder(models.Model):
         for order in self:
             if order.partner_id.raliment_point_id:
                 order.raliment_point = order.partner_id.raliment_point_id
+
+    @api.multi
+    def _compute_enough_credit(self):
+        for order in self:
+            order.enough_credit = order.check_customer_credit()
 
     @api.multi
     def check_customer_credit(self):
