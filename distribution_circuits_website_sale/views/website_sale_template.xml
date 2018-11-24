@@ -84,13 +84,6 @@
 	         	</select>
 	    	 </div>
 	     </xpath>
-	     
-	     <!--<xpath expr="//a[@href='/shop/checkout']" position="replace">
-	     	<t t-if="website_sale_order and website_sale_order.check_customer_credit()">
-	     		<a t-if="not optional_products and website_sale_order and website_sale_order.website_order_line" class="btn btn-primary pull-right mb32" href="/shop/checkout"><span class="hidden-xs">Process Checkout</span><span class="visible-xs-inline">Checkout</span> <span class="fa fa-long-arrow-right"/></a>
-	     	</t>
-	     	<span t-if="website_sale_order and not website_sale_order.check_customer_credit()"> Your account doesn't allow you to pay this order </span>
-	     </xpath>-->
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
@@ -156,20 +149,20 @@
 	    </t>
 	</template>
 	
+	<template id="easy_my_hub_payment_tokens_list" inherit_id="payment.payment_tokens_list" name="EasyMyHub Payment Tokens list">
+ 		<xpath expr="//t[@t-foreach='form_acquirers']//input[@name='pm_id']" position="attributes">
+ 			<attribute name="t-att-disabled" add="acq.provider == 'prepaid' and not activate"/>
+ 		</xpath>
+ 		
+ 		<xpath expr="//t[@t-foreach='form_acquirers']//span[@t-esc='acq.name']" position="after">
+ 			<span t-if="acq.provider == 'prepaid' and not activate" style="color:red"> Your account doesn't allow you to pay this order </span>
+ 		</xpath>
+	</template>
+	
 	<template id="easy_my_hub_payment" inherit_id="website_sale.payment" name="EasyMyHub Payment">
- 		<xpath expr="//a[@class='btn btn-primary a-submit']" position="replace">	
-			<t t-if="website_sale_order and website_sale_order.check_customer_credit()">
-				<a style="width:127px;" class="btn btn-primary a-submit">
-		          <span t-if="order.amount_total > 0">Pay Now <span class="fa fa-long-arrow-right"></span></span>
-		          <span t-if="order.amount_total == 0">Confirm Order <span class="fa fa-long-arrow-right"></span></span>
-		        </a>
-		        <span>Your account doesn't allow</span>
-	        </t>
-	        <span t-if="website_sale_order and not website_sale_order.check_customer_credit()"> Your account doesn't allow you to pay this order </span>
-	    </xpath> 
-	    <!--<xpath expr="//form[@action='/shop/payment/validate']" position="before">
-	    	<span> Your account doesn't allow you to pay this order </span>
-	    </xpath>-->
+ 		<xpath expr="//t[@t-call='payment.payment_tokens_list']" position="inside">
+ 			<t t-set="activate" t-value="website_sale_order.enough_credit"/>
+ 		</xpath>
 	</template>
 
 </data>
