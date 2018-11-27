@@ -39,7 +39,7 @@ class DeliveryRoundLine(models.Model):
     sequence = fields.Integer(string="Sequence")
     delivered = fields.Boolean(string="Delivered")
     picking_batch = fields.Many2one('stock.picking.batch',
-                                    string="Picking bacth")
+                                    string="Picking batch")
     delivery_round = fields.Many2one('delivery.round', string="Delivery round",
                                      required=True)
     raliment_point = fields.Many2one('res.partner',
