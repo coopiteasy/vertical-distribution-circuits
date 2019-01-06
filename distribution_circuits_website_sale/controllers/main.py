@@ -305,6 +305,8 @@ class AuthSignupHome(AuthSignupHome):
         uid = self._signup_with_values(qcontext.get('token'), values)
         iban = qcontext.get('iban')
         user = request.env['res.users'].sudo().search([('id', '=', uid)])
+        user.partner_id.write({'firstname': values['firstname'],
+                               'lastname': values['lastname']})
         request.env['res.partner.bank'].sudo().create(
             {'partner_id': user.partner_id.id, 'acc_number': iban})
         request.cr.commit()
