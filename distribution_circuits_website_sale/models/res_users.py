@@ -21,6 +21,8 @@ class ResPartner(models.Model):
         res = super(ResPartner, self).signup_retrieve_info(token)
         partner = self.sudo().search([('email', '=', res.get('login'))])
 
+        res['lastname'] = partner.lastname
+        res['firstname'] = partner.firstname
         res['raliment_point_id'] = partner.raliment_point_id.id if len(partner.raliment_point_id) > 0 else 0
         res['delivery_point_id'] = partner.delivery_point_id.id if len(partner.delivery_point_id) > 0 else 0
         res['phone'] = partner.phone
