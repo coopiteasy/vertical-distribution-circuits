@@ -24,7 +24,7 @@ class WebsiteSale(website_sale):
                  '/shop/category/<model("product.public.category"):category>',
                  '/shop/category/<model("product.public.category"):category>/page/<int:page>',
                  '/shop/time_frame'
-    ],type='http',auth='user',website=True)
+    ],type='http',auth='public',website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
 #         if time_frame:
 #             context = dict(request.env.context)
