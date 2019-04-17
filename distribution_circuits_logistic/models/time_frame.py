@@ -7,9 +7,22 @@ class TimeFrame(models.Model):
 
     _inherit = "time.frame"
 
-    pickings_consolidation = fields.One2many('picking.consolidation',
-                                             'time_frame_id',
-                                             string="Picking consolidation")
+    pickings_consolidation = fields.One2many(
+        'picking.consolidation',
+        'time_frame_id',
+        string="Picking consolidation")
+    picking_supplier_consolidation = fields.One2many(
+        'picking.supplier.consolidation',
+        'time_frame_id',
+        string="Picking supplier consolidation")
+    picking_customer_consolidation = fields.One2many(
+        'picking.customer.consolidation',
+        'time_frame_id',
+        string="Picking customer consolidation")
+    delivery_round = fields.One2many(
+        'delivery.round',
+        'time_frame_id',
+        string="Delivery round")
 
     @api.one
     def action_consolidate(self):

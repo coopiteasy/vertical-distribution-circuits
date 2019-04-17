@@ -9,8 +9,40 @@
 	            	<button name="action_consolidate" type="object" states="closed" string="Consolidate picking"/>
             	</button>
             	<page name="products" position="after">
+            	
+            		<page string="Delivery round" name="delivery_round">
+						<field name="delivery_round">
+							<tree>
+				            	<field name="name"/>
+				            	<field name="delivery_date"/>
+				            	<field name="deliverer"/>
+				            	<field name="responsible"/>
+				            </tree>
+						</field>
+					</page>
             		<page string="Consolidation" name="consolidation">
-						<field name="pickings_consolidation"/>
+						<field name="pickings_consolidation">
+							<tree delete="false" create="false">
+		            			<field name="delivery_address"/>
+		            			<field name="consolidation_lines"/>
+		            		</tree>
+						</field>
+					</page>
+					<page string="Customer consolidation" name="customer_consolidation">
+						<field name="picking_customer_consolidation">
+		            		<tree delete="false" create="false">
+		            			<field name="delivery_address"/>
+		            			<field name="customer_consolidation_lines"/>
+		            		</tree>
+		            	</field>
+					</page>
+					<page string="Supplier Consolidation" name="supplier_consolidation">
+						<field name="picking_supplier_consolidation">
+		            		<tree delete="false" create="false">
+		            			<field name="supplier"/>
+		            			<field name="supplier_consolidation_lines"/>
+		            		</tree>
+		            	</field>
 					</page>
             	</page>
             </field>
