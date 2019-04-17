@@ -41,6 +41,7 @@
         'views/stock_view.xml',
         'views/delivery_round_view.xml',
         'views/picking_consolidation_view.xml',
+        'views/time_frame_view.xml',
         'wizard/delivery_round_wizard.xml',
         'wizard/picking_consolidation_wizard.xml',
         'report/picking_consolidation_report.xml',

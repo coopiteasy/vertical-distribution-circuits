@@ -48,7 +48,7 @@ class DeliveryRoundWizard(models.TransientModel):
                             raliment_point = picking.partner_id.raliment_point_id
                             customer = picking.partner_id
                             for pack_op in picking.move_lines:
-                                # raliment consolidaiton
+                                # raliment consolidation
                                 if product_consols.get(pack_op.product_id):
                                     product_consols[pack_op.product_id][0] += pack_op.product_uom_qty
                                 else:
@@ -120,6 +120,8 @@ class DeliveryRoundWizard(models.TransientModel):
                                      'product_uom': prod_quant[1].id,
                                      'qty_delivered': prod_quant[2]})
             else:
-                raise UserError(_('You have to generate the delivery round wizard before to run this process.'))
+                raise UserError(_('You have to generate the delivery round '
+                                  'wizard before to run this process.'))
         else:
-            raise UserError(_('You can only run a consolidation on a closed time frame.'))
+            raise UserError(_('You can only run a consolidation on a '
+                              'closed time frame.'))

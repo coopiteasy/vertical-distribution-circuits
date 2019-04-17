@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+		<record id="view_time_frame_consol_form" model="ir.ui.view">
+            <field name="name">time.frame.form</field>
+            <field name="model">time.frame</field>
+            <field name="inherit_id" ref="distribution_circuits_sale.view_time_frame_form"/>
+            <field name="arch" type="xml">
+            	<page name="products" position="after">
+            		<page string="Consolidation" name="consolidation">
+						<field name="pickings_consolidation"/>
+					</page>
+            	</page>
+            </field>
+        </record>
+	</data>
+</odoo>
