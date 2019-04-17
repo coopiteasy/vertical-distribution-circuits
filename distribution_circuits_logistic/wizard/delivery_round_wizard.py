@@ -13,17 +13,20 @@ class DeliveryRoundWizard(models.TransientModel):
 
     @api.one
     def run_delivery_scheduler(self):
+        delivery_round_obj = self.env['delivery.round']
+        delivery_round_line_obj = self.env['delivery.round.line']
+
         time_frame = self.time_frame_id
 
         pickings = self.env['stock.picking'].search([
             ('time_frame_id.id', '=', time_frame.id), ('batch_id', '=', None)])
 
         if len(pickings) > 0:
-            delivery_round = self.env['delivery.round'].search(
+            delivery_round = delivery_round_obj.search(
                 [('time_frame_id.id', '=', time_frame.id)])
 
             if len(delivery_round) == 0:
-                delivery_round = self.env['delivery.round'].create(
+                delivery_round = delivery_round_obj.create(
                     {'time_frame_id': time_frame.id})
 
             for picking in pickings:
@@ -39,7 +42,7 @@ class DeliveryRoundWizard(models.TransientModel):
                     new_batch = self.env['stock.picking.batch'].create(
                         {'name': name})
                     picking.batch_id = new_batch.id
-                    self.env['delivery.round.line'].create(
+                    delivery_round_line_obj.create(
                         {'delivery_round': delivery_round.id,
                          'delivery_address': picking.delivery_address.id,
                          'raliment_point': picking.raliment_point.id,

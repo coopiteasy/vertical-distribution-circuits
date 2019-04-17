@@ -5,6 +5,9 @@
             <field name="model">time.frame</field>
             <field name="inherit_id" ref="distribution_circuits_sale.view_time_frame_form"/>
             <field name="arch" type="xml">
+            	<button name="action_enclose" position="after">
+	            	<button name="action_consolidate" type="object" states="closed" string="Consolidate picking"/>
+            	</button>
             	<page name="products" position="after">
             		<page string="Consolidation" name="consolidation">
 						<field name="pickings_consolidation"/>
