@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2017 Coop IT Easy (http://www.coopiteasy.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
@@ -26,6 +25,7 @@
         'views/time_frame_view.xml',
         'views/sale_view.xml',
         'views/partner_view.xml',
+        'views/purchase_view.xml',
         'views/sale_order_report_template.xml'
     ],
     'installable': True,
