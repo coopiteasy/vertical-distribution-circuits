@@ -1,2 +1,2 @@
 from . import main
-from . import AuthSignupHome
+from . import authsignup
