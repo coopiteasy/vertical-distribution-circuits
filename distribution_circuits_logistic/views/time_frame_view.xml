@@ -9,7 +9,6 @@
 	            	<button name="action_consolidate" type="object" states="closed" string="Consolidate picking"/>
             	</button>
             	<page name="products" position="after">
-            	
             		<page string="Delivery round" name="delivery_round">
 						<field name="delivery_round">
 							<tree>

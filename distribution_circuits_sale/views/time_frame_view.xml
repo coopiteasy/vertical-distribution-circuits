@@ -57,6 +57,18 @@
 		            				</tree>
 		            			</field>
 		            		</page>
+		            		<page string="Purchase orders" name="purchase_orders">
+		            			<field name="purchase_orders">
+		            				<tree>
+		            					<field name="name" string="Order Number"/>
+					                    <field name="date_order"/>
+					                    <field name="partner_id"/>
+                    					<field name="amount_total" sum="Total Tax Included" widget="monetary"/>
+                    					<field name="state"/>
+                    					<field name="invoice_status"/>
+		            				</tree>
+		            			</field>
+		            		</page>
 		            		<page string="Products" name="products" attrs="{'invisible':[('filter_on_products','=',False)]}">
 		            			<field name="products">
 		            				<tree>

@@ -38,6 +38,12 @@ class TimeFrame(models.Model):
         string="Sale orders",
         readonly=True)
 
+    purchase_orders = fields.One2many(
+        'purchase.order',
+        'time_frame_id',
+        string="Purchase orders",
+        readonly=True)
+
     @api.one
     def action_validate(self):
         self.write({'state': 'validated'})
