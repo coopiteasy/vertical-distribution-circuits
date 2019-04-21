@@ -1,0 +1,50 @@
+<odoo>
+	<data>
+		<record id="view_time_frame_consol_form" model="ir.ui.view">
+            <field name="name">time.frame.form</field>
+            <field name="model">time.frame</field>
+            <field name="inherit_id" ref="distribution_circuits_sale.view_time_frame_form"/>
+            <field name="arch" type="xml">
+            	<button name="action_enclose" position="after">
+	            	<button name="action_consolidate" type="object" states="closed" string="Consolidate picking"/>
+            	</button>
+            	<page name="products" position="after">
+            		<page string="Delivery round" name="delivery_round">
+						<field name="delivery_round">
+							<tree>
+				            	<field name="name"/>
+				            	<field name="delivery_date"/>
+				            	<field name="deliverer"/>
+				            	<field name="responsible"/>
+				            </tree>
+						</field>
+					</page>
+            		<page string="Consolidation" name="consolidation">
+						<field name="pickings_consolidation">
+							<tree delete="false" create="false">
+		            			<field name="delivery_address"/>
+		            			<field name="consolidation_lines"/>
+		            		</tree>
+						</field>
+					</page>
+					<page string="Customer consolidation" name="customer_consolidation">
+						<field name="picking_customer_consolidation">
+		            		<tree delete="false" create="false">
+		            			<field name="delivery_address"/>
+		            			<field name="customer_consolidation_lines"/>
+		            		</tree>
+		            	</field>
+					</page>
+					<page string="Supplier Consolidation" name="supplier_consolidation">
+						<field name="picking_supplier_consolidation">
+		            		<tree delete="false" create="false">
+		            			<field name="supplier"/>
+		            			<field name="supplier_consolidation_lines"/>
+		            		</tree>
+		            	</field>
+					</page>
+            	</page>
+            </field>
+        </record>
+	</data>
+</odoo>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
 from odoo import api, fields, models
@@ -37,6 +36,12 @@ class TimeFrame(models.Model):
         'sale.order',
         'time_frame_id',
         string="Sale orders",
+        readonly=True)
+
+    purchase_orders = fields.One2many(
+        'purchase.order',
+        'time_frame_id',
+        string="Purchase orders",
         readonly=True)
 
     @api.one

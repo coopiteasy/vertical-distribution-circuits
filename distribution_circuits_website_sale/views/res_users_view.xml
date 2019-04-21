@@ -47,6 +47,6 @@
             <field name="act_window_id" ref="action_easy_my_hub_res_users"/>
         </record>
         
-        <menuitem action="action_easy_my_hub_res_users" id="menu_action_easy_my_hub_res_users" parent="distribution_circuits_base.menu_easy_my_hub_main_contact" sequence="0" groups="distribution_circuits_base.group_easy_my_hub_manager"/>
+        <menuitem action="action_easy_my_hub_res_users" id="menu_action_easy_my_hub_res_users" parent="distribution_circuits_base.menu_easy_my_hub_main_contact" sequence="100" groups="distribution_circuits_base.group_easy_my_hub_manager"/>
 	</data>
 </odoo>
