@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+
+        <record id="distribution_circuits_base.partner_raliment_customer_1" model="res.partner">
+            <field name="nb_household">2</field>
+            <field name="cart_subscription" eval="True"/>
+        </record>
+
+        <record id="distribution_circuits_base.partner_raliment_customer_2" model="res.partner">
+            <field name="nb_household">3</field>
+            <field name="cart_subscription" eval="True"/>
+            <field name="cart_suspended_date" eval="(datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="distribution_circuits_base.partner_raliment_customer_3" model="res.partner">
+            <field name="nb_household">5</field>
+            <field name="cart_subscription" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
