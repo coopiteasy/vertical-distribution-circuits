@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-		<menuitem name="Sale" id="menu_easy_my_hub_main_sale" parent="distribution_circuits_base.menu_main_easy_my_hub" sequence="10" groups="distribution_circuits_base.group_easy_my_hub_user"/>
-		<menuitem name="Purchase" id="menu_easy_my_hub_main_purchase" parent="distribution_circuits_base.menu_main_easy_my_hub" sequence="20" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+		<menuitem name="Sale"
+				  id="menu_easy_my_hub_main_sale"
+				  parent="distribution_circuits_base.menu_main_easy_my_hub"
+				  sequence="10"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+		<menuitem name="Purchase"
+				  id="menu_easy_my_hub_main_purchase"
+				  parent="distribution_circuits_base.menu_main_easy_my_hub"
+				  sequence="20"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
+
+		<menuitem id="menu_time_frame"
+				  name="Time frames"
+				  action="action_time_frame"
+				  parent="menu_easy_my_hub_main_sale"
+				  sequence="1"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
+        <menuitem id="menu_easy_my_hub_quotation"
+				  action="action_easy_my_hub_quotation"
+				  parent="menu_easy_my_hub_main_sale"
+				  sequence="5"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
+		<menuitem id="menu_easy_my_hub_sale_order"
+				  action="action_easy_my_hub_sale_orders"
+				  parent="menu_easy_my_hub_main_sale"
+				  sequence="10"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
+        <menuitem id="menu_easy_my_hub_product_template_action"
+				  action="action_easy_my_hub_product_template"
+				  parent="menu_easy_my_hub_main_sale"
+				  sequence="15"
+				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
 	</data>
 </odoo>

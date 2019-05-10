@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 Coop IT Easy SCRLfs
+   Robin Keunen <robin@coopiteasy.be>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <data noupdate="0"> <!-- fixme -->
+
+        <record id="demo_timeframe_past" model="time.frame">
+            <field name="name" eval="(datetime.now() - timedelta(days=12)).strftime('%Y-W%W')"/>
+            <field name="state">closed</field>
+            <field name="start" eval="(datetime.now() - timedelta(days=12)).strftime('%Y-%m-%d')"/>
+            <field name="end" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+            <field name="delivery_date" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_timeframe_current" model="time.frame">
+            <field name="name" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-W%W')"/>
+            <field name="state">open</field>
+            <field name="start" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+            <field name="end" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="delivery_date" eval="(datetime.now() + timedelta(days=4)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_timeframe_future" model="time.frame">
+            <field name="name" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-W%W')"/>
+            <field name="state">draft</field>
+            <field name="start" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="end" eval="(datetime.now() + timedelta(days=9)).strftime('%Y-%m-%d')"/>
+            <field name="delivery_date" eval="(datetime.now() + timedelta(days=11)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <record id="demo_agri_product_1" model="product.product">
+            <field name="name">Poire Conférence</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="list_price">2.3</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_kgm"/>
+            <field name="uom_po_id" ref="product.product_uom_kgm"/>
+            <field name="website_published"/>
+        </record>
+
+        <record id="demo_agri_product_2" model="product.product">
+            <field name="name">Pomme Fiji</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="list_price">3.3</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_kgm"/>
+            <field name="uom_po_id" ref="product.product_uom_kgm"/>
+            <field name="website_published"/>
+        </record>
+
+        <record id="demo_agri_product_3" model="product.product">
+            <field name="name">Grenade Iran</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="list_price">5.7</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_kgm"/>
+            <field name="uom_po_id" ref="product.product_uom_kgm"/>
+            <field name="website_published"/>
+        </record>
+
+        <record id="demo_agri_product_4" model="product.product">
+            <field name="name">Tomate Chant des Cailles</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="sale_ok" eval="True"/>
+            <field name="list_price">4.70</field>
+            <field name="type">consu</field>
+            <field name="uom_id" ref="product.product_uom_kgm"/>
+            <field name="uom_po_id" ref="product.product_uom_kgm"/>
+            <field name="website_published"/>
+        </record>
+
+    </data>
+</odoo>

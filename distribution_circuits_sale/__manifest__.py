@@ -19,6 +19,9 @@
     This module implements the features manage the sales
     of your distribution circuits.
     """,
+    "demo": [
+        'demo/demo.xml',
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/menu_item.xml',

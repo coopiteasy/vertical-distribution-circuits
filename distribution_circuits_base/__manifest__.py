@@ -36,6 +36,7 @@
     """,
     'data': [
         'security/easy_my_hub_security.xml',
+        'demo/demo.xml',
         'views/res_partner_view.xml',
         'views/menu_item.xml',
     ],
