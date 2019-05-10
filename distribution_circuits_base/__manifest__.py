@@ -36,8 +36,8 @@
     """,
     'data': [
         'security/easy_my_hub_security.xml',
-        'views/menu_item.xml',
         'views/res_partner_view.xml',
+        'views/menu_item.xml',
     ],
     'installable': True,
     'application': True,

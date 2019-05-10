@@ -3,5 +3,31 @@
 	<data>
 		<menuitem name="Easy-My Hub" id="menu_main_easy_my_hub" sequence="40" groups="distribution_circuits_base.group_easy_my_hub_user,distribution_circuits_base.group_easy_my_hub_raliment_point_manager"/>
 		<menuitem name="Contact" id="menu_easy_my_hub_main_contact" parent="menu_main_easy_my_hub" sequence="5" groups="distribution_circuits_base.group_easy_my_hub_user"/>
+
+		<menuitem id="menu_partner_raliment"
+				  action="action_partner_raliment"
+				  name="Raliment point"
+				  parent="menu_easy_my_hub_main_contact"
+				  sequence="5"
+				  groups="distribution_circuits_base.group_easy_my_hub_user" />
+		<menuitem id="menu_raliment_customer"
+				  action="action_raliment_customer"
+				  name="Raliment customers"
+				  parent="menu_easy_my_hub_main_contact"
+				  sequence="10"
+				  groups="distribution_circuits_base.group_easy_my_hub_user" />
+        <menuitem id="menu_individual_customer"
+				  action="action_individual_customer"
+				  name="Individual customers"
+				  parent="menu_easy_my_hub_main_contact"
+				  sequence="15"
+				  groups="distribution_circuits_base.group_easy_my_hub_user" />
+        <menuitem id="menu_partner_gac"
+				  action="action_partner_gac"
+				  name="GAC"
+				  parent="menu_easy_my_hub_main_contact"
+				  sequence="20"
+				  groups="distribution_circuits_base.group_easy_my_hub_user" />
+
 	</data>
 </odoo>
