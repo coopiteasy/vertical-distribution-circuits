@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 Coop IT Easy SCRLfs
+   Robin Keunen <robin@coopiteasy.be>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_time_frame_form" model="ir.ui.view">
+        <field name="name">view_time_frame_form</field>
+        <field name="model">time.frame</field>
+        <field name="inherit_id" ref="distribution_circuits_sale.view_time_frame_form"/>
+        <field name="arch" type="xml">
+
+            <field name="filter_on_products" position="before">
+                <field name="preset_cart_id" context="{'form_view_ref':'website_sale_preset_carts.view_preset_cart_form_easy_create'}"/>
+            </field>
+
+            <xpath expr="//page[@name='purchase_orders']" position="after">
+                <page name="preset_cart" string="Preset Cart">
+                    <field name="preset_cart_line_ids">
+                        <tree create="false" edit="false">
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

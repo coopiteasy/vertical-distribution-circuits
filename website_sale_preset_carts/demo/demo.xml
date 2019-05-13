@@ -17,5 +17,30 @@
             <field name="cart_subscription" eval="True"/>
         </record>
 
+        <record id="demo_preset_cart_1" model="preset.cart">
+            <field name="name" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-W%W')"/>
+        </record>
+
+        <record id="distribution_circuits_sale.demo_timeframe_current" model="time.frame">
+            <field name="preset_cart_id" ref="demo_preset_cart_1"/>
+        </record>
+
+        <record id="demo_preset_cart_line_1_1" model="preset.cart.line">
+            <field name="cart_id" ref="demo_preset_cart_1"/>
+            <field name="product_id" ref="distribution_circuits_sale.demo_agri_product_1"/>
+            <field name="quantity">1.1</field>
+        </record>
+
+        <record id="demo_preset_cart_line_1_2" model="preset.cart.line">
+            <field name="cart_id" ref="demo_preset_cart_1"/>
+            <field name="product_id" ref="distribution_circuits_sale.demo_agri_product_2"/>
+            <field name="quantity">2.2</field>
+        </record>
+
+        <record id="demo_preset_cart_line_1_3" model="preset.cart.line">
+            <field name="cart_id" ref="demo_preset_cart_1"/>
+            <field name="product_id" ref="distribution_circuits_sale.demo_agri_product_3"/>
+            <field name="quantity">3.3</field>
+        </record>
     </data>
 </odoo>

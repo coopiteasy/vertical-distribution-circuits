@@ -22,6 +22,10 @@
     "data": [
         "demo/demo.xml",
         "security/ir.model.access.csv",
+        "views/preset_cart.xml",
         "views/res_partner.xml",
+        "views/time_frame.xml",
+        "views/actions.xml",
+        "views/menu.xml",
     ]
 }
