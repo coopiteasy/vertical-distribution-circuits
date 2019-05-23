@@ -32,13 +32,12 @@
 	                <sheet>
 	                	<group>
 		                	<group>
+		                		<field name="name"/>
 				            	<field name="delivery_date"/>
 				            	<field name="start"/>
 				            	<field name="end"/>
 			            	</group>
-			            	<group></group>
-		                	<group colspan="4">
-		                		<field name="name"/>
+		                	<group>
 		                		<field name="filter_on_products"/>
 		                		<field name="resellers_only"/>
 		                	</group>
