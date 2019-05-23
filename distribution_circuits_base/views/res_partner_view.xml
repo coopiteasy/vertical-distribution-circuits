@@ -37,7 +37,6 @@
                     <filter string="Vendors" name="supplier" domain="[('supplier','=',1), ('parent_id', '=', False)]" />
                     <filter string="Gac" name="gac" domain="[('is_gac','=',1),('customer','=',1),('raliment_point_id','=',False)]" />
                     <filter string="Raliment points" name="raliment_point" domain="[('is_raliment_point','=',1),('parent_id','=',False)]" />
-<!--                    todo Q: pourquoi ('parent_id', '=', False) ? ca m'enpeche de voir les partner qui sont dans des company-->
                     <filter string="Delivery points" name="delivery_point" domain="[('is_delivery_point','=',1),('parent_id','=',False)]" />
                     <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
                     <separator/>
