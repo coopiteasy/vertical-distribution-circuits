@@ -4,9 +4,7 @@ from odoo import api, fields, models
 
 
 class TimeFrame(models.Model):
-
     _name = "time.frame"
-
     _order = "delivery_date, id"
 
     @api.onchange('delivery_date')
@@ -44,26 +42,32 @@ class TimeFrame(models.Model):
         string="Purchase orders",
         readonly=True)
 
-    @api.one
+    @api.multi
     def action_validate(self):
+        self.ensure_one()
         self.write({'state': 'validated'})
 
-    @api.one
+    @api.multi
     def action_cancel(self):
+        self.ensure_one()
         self.write({'state': 'cancel'})
 
-    @api.one
+    @api.multi
     def action_open(self):
+        self.ensure_one()
         self.write({'state': 'open'})
 
-    @api.one
+    @api.multi
     def action_close(self):
+        self.ensure_one()
         self.write({'state': 'closed'})
 
-    @api.one
+    @api.multi
     def action_enclose(self):
+        self.ensure_one()
         self.write({'state': 'enclosed'})
 
-    @api.one
+    @api.multi
     def action_draft(self):
+        self.ensure_one()
         self.write({'state': 'draft'})

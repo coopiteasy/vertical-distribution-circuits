@@ -36,7 +36,7 @@ class PresetCartLine(models.Model):
         comodel_name='product.template',
         string='Product',
         required=True)
-    quantity = fields.Float(
+    quantity = fields.Float(  # fixme product_uom_qty
         string='Quantity')
     uom_id = fields.Many2one(
         comodel_name='product.uom',

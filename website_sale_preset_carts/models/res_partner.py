@@ -11,9 +11,11 @@ class ResPartner(models.Model):
 
     nb_household = fields.Integer(
         string='Number of People in Household',
+        default=1,
     )
     cart_subscription = fields.Boolean(
         string='Is Subscribed to Cart',
+        default=True,
     )
     cart_suspended_date = fields.Date(
         string='Cart Suspended Until',
