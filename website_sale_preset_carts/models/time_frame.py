@@ -17,9 +17,18 @@ class TimeFrame(models.Model):
     )
 
     @api.multi
+    def action_draft(self):
+        self.ensure_one()
+        self.sale_orders.write({'state': 'cancel'})
+        return super(TimeFrame, self).action_draft()
+
+    @api.multi
     def action_open(self):
         self.ensure_one()
         self.generate_sale_orders()
+        for order in self.sale_orders.filtered(lambda so: so.state == 'draft'):
+            order.force_quotation_send()
+            order.state = 'draft'
         return super(TimeFrame, self).action_open()
 
     def _prepare_order_lines(self):
@@ -34,7 +43,7 @@ class TimeFrame(models.Model):
                 'price_unit': cart_line.product_id.list_price,
             })
         return lines
-    
+
     def _create_sale_order(self, customer, lines):
 
         def adapt_qty_for_household(line):
@@ -56,7 +65,7 @@ class TimeFrame(models.Model):
             line['order_id'] = sale_order.id
             self.env['sale.order.line'].create(line)
         return sale_order
-    
+
     @api.model
     def generate_sale_orders(self):
         for frame in self:
@@ -69,7 +78,8 @@ class TimeFrame(models.Model):
                              '|', ('cart_suspended_date', '=', False),
                                   ('cart_suspended_date', '<=', frame.delivery_date)])
             )
+
             for customer in customers:
                 order = self._create_sale_order(customer, unit_lines)
                 frame.sale_orders += order
-
+                customer.write({'last_website_so_id': order.id})

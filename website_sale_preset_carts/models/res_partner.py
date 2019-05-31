@@ -15,7 +15,6 @@ class ResPartner(models.Model):
     )
     cart_subscription = fields.Boolean(
         string='Is Subscribed to Cart',
-        default=True,
     )
     cart_suspended_date = fields.Date(
         string='Cart Suspended Until',
