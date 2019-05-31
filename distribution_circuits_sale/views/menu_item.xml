@@ -15,7 +15,7 @@
 
 		<menuitem id="menu_time_frame"
 				  name="Time frames"
-				  action="action_time_frame"
+				  action="distribution_circuits_sale.action_time_frame"
 				  parent="menu_easy_my_hub_main_sale"
 				  sequence="1"
 				  groups="distribution_circuits_base.group_easy_my_hub_user"/>
