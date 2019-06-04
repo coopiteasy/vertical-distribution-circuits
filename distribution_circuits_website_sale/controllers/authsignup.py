@@ -57,6 +57,7 @@ class AuthSignupHome(AuthSignupHome):
         request.env['res.partner.bank'].sudo().create(
             {'partner_id': user.partner_id.id, 'acc_number': iban})
         request.cr.commit()
+        return uid
 
     @http.route('/web/signup', type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
