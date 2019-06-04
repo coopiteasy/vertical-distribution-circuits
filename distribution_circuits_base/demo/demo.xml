@@ -58,6 +58,19 @@
             <field name="country_id" ref="base.be"/>
         </record>
 
+        <record id="partner_raliment_customer_4" model="res.partner">
+            <field name="name">Rémy Commit</field>
+            <field name="customer" eval="True"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" ref="partner_raliment_point_1"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Rue Guido Van Rossum, 2</field>
+            <field name="city">Evere</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
         <record id="partner_gac_1" model="res.partner">
             <field name="name">Kas'ap</field>
             <field name="customer" eval="True"/>

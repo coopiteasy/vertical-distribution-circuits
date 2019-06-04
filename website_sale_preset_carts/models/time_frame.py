@@ -2,6 +2,8 @@
 #     Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
+from datetime import datetime, timedelta
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
 
 
 class TimeFrame(models.Model):
@@ -16,10 +18,35 @@ class TimeFrame(models.Model):
         related='preset_cart_id.cart_line_ids',
     )
 
+    @api.model
+    def open_timeframes(self):
+        now = datetime.now().replace(minute=0, second=0)
+        next_hour = now + timedelta(hours=1)
+        frames = self.search([
+            ('state', '=', 'validated'),
+            ('start', '>=', now.strftime(_format)),
+            ('start', '<', next_hour.strftime(_format)),
+        ])
+        for frame in frames:
+            frame.action_open()
+
+    @api.model
+    def close_timeframes(self):
+        now = datetime.now().replace(minute=0, second=0)
+        next_hour = now + timedelta(hours=1)
+
+        frames = self.search([
+            ('state', '=', 'open'),
+            ('end', '>=', now.strftime(_format)),
+            ('end', '<', next_hour.strftime(_format)),
+        ])
+        for frame in frames:
+            frame.action_close()
+
     @api.multi
     def action_draft(self):
         self.ensure_one()
-        self.sale_orders.write({'state': 'cancel'})
+        self.sale_orders.action_cancel()
         return super(TimeFrame, self).action_draft()
 
     @api.multi
@@ -30,6 +57,19 @@ class TimeFrame(models.Model):
             order.force_quotation_send()
             order.state = 'draft'
         return super(TimeFrame, self).action_open()
+
+    @api.multi
+    def action_close(self):
+        self.ensure_one()
+
+        for order in self.sale_orders:
+            if order.state == 'draft':
+                if order.partner_id.is_subscribed(self.delivery_date):
+                    # should I prevent sending email?
+                    order.action_confirm()
+                    order.action_done()
+
+        return super(TimeFrame, self).action_close()
 
     def _prepare_order_lines(self):
 

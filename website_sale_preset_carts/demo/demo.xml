@@ -17,6 +17,10 @@
             <field name="cart_subscription" eval="True"/>
         </record>
 
+        <record id="distribution_circuits_base.partner_raliment_customer_4" model="res.partner">
+            <field name="cart_subscription" eval="False"/>
+        </record>
+
         <record id="demo_preset_cart_1" model="preset.cart">
             <field name="name" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-W%W')"/>
         </record>

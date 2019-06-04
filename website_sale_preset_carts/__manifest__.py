@@ -19,8 +19,11 @@
         "distribution_circuits_sale",
         "distribution_circuits_website_sale",
     ],
-    "data": [
+    "demo": [
         "demo/demo.xml",
+    ],
+    "data": [
+        "data/cron.xml",
         "security/ir.model.access.csv",
         "views/preset_cart.xml",
         "views/res_partner.xml",
