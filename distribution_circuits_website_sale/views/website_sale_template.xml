@@ -9,7 +9,7 @@
 	</template>
 	
 	<template id="search_time_frames" inherit_id="website.website_search_box" name="Search time frame">
-		 <xpath expr="//div[@class='input-group']" position="before">
+		 <xpath expr="//div[hasclass('input-group')]" position="before">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
@@ -68,7 +68,7 @@
 	</template>	
 
 	<template id="time_frame_cart" inherit_id="website_sale.cart" name="Shopping Cart">
-		<xpath expr="//h2[@class='mb8 mt8']" position="after">
+		<xpath expr="//h2[hasclass('mb8')][hasclass('mt8')]" position="after">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-if="website_sale_order">
@@ -88,7 +88,7 @@
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
-	     <xpath expr="//th[@class='text-center td-price']" position="before">
+	     <xpath expr="//th[hasclass('text-center')][hasclass('td-price')]" position="before">
 	     	<th class="text-center">Unit of mesure</th>
 	     </xpath>
 	     <xpath expr="//td[@name='price']" position="before">
