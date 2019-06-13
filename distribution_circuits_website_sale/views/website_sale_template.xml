@@ -88,13 +88,29 @@
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
-	     <xpath expr="//th[hasclass('text-center')][hasclass('td-price')]" position="before">
+		<xpath expr="//th[hasclass('td-price')]" position="replace">
+			<th class="text-center td-price">Unit Price</th>
+		</xpath>
+
+
+	     <xpath expr="//th[hasclass('td-price')]" position="before">
 	     	<th class="text-center">Unit of mesure</th>
 	     </xpath>
 	     <xpath expr="//td[@name='price']" position="before">
 	     	<td class="text-center" id="td-qty">
                   <div>
                   	<strong t-esc="line.product_uom.name"/>
+                  </div>
+              </td>
+	     </xpath>
+
+		<xpath expr="//th[hasclass('td-price')]" position="after">
+	     	<th class="text-center">Price</th>
+	     </xpath>
+	     <xpath expr="//td[@name='price']" position="after">
+	     	<td class="text-center" id="td-qty">
+                  <div>
+                  	<strong t-esc="line.price_total"/>
                   </div>
               </td>
 	     </xpath>
