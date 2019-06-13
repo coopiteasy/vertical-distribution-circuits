@@ -21,11 +21,11 @@ class TimeFrame(models.Model):
     @api.model
     def open_timeframes(self):
         now = datetime.now().replace(minute=0, second=0)
-        next_hour = now + timedelta(hours=1)
+        last_hour = now - timedelta(hours=1)
         frames = self.search([
             ('state', '=', 'validated'),
-            ('start', '>=', now.strftime(_format)),
-            ('start', '<', next_hour.strftime(_format)),
+            ('start', '>=', last_hour.strftime(_format)),
+            ('start', '<=', now.strftime(_format)),
         ])
         for frame in frames:
             frame.action_open()
@@ -33,12 +33,12 @@ class TimeFrame(models.Model):
     @api.model
     def close_timeframes(self):
         now = datetime.now().replace(minute=0, second=0)
-        next_hour = now + timedelta(hours=1)
+        last_hour = now + timedelta(hours=1)
 
         frames = self.search([
             ('state', '=', 'open'),
-            ('end', '>=', now.strftime(_format)),
-            ('end', '<', next_hour.strftime(_format)),
+            ('end', '>=', last_hour.strftime(_format)),
+            ('end', '<=', now.strftime(_format)),
         ])
         for frame in frames:
             frame.action_close()
