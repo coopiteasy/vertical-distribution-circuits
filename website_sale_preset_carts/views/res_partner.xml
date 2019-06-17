@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 Coop IT Easy SCRLfs
+   Robin Keunen <robin@coopiteasy.be>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">view_partner_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='function']/.." position="after">
+                <group>
+                    <field name="nb_household"/>
+                    <field name="cart_subscription"/>
+                    <field name="cart_suspended_date"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

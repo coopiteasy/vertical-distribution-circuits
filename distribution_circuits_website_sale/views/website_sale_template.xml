@@ -9,7 +9,7 @@
 	</template>
 	
 	<template id="search_time_frames" inherit_id="website.website_search_box" name="Search time frame">
-		 <xpath expr="//div[@class='input-group']" position="before">
+		 <xpath expr="//div[hasclass('input-group')]" position="before">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-set="current_time_frame" t-value="website.get_current_time_frame()"/>
@@ -59,7 +59,8 @@
 	     </xpath>
 	     <xpath expr="//t[@t-esc='int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty']" position="after">
 	     	<span>
-	     		* (<t t-esc="int(line.product_id.weight)"/>
+	     		* (
+<!--				<t t-esc="int(line.product_id.weight)"/>-->
 	     		<t t-esc="line.product_uom.name"/>)
 	     	</span> 
 	     </xpath>
@@ -67,7 +68,7 @@
 	</template>	
 
 	<template id="time_frame_cart" inherit_id="website_sale.cart" name="Shopping Cart">
-		<xpath expr="//h2[@class='mb8 mt8']" position="after">
+		<xpath expr="//h2[hasclass('mb8')][hasclass('mt8')]" position="after">
 			 <div name="time_frames" class="input-group">
 	         	<t t-set="open_time_frames" t-value="website.get_open_time_frames()"/>
 	         	<t t-if="website_sale_order">
@@ -87,14 +88,29 @@
 	</template>
 	
 	<template id="time_frame_cart_lines" inherit_id="website_sale.cart_lines" name="Shopping Cart lines">
-	     <xpath expr="//th[@class='text-center td-price']" position="before">
+		<xpath expr="//th[hasclass('td-price')]" position="replace">
+			<th class="text-center td-price">Unit Price</th>
+		</xpath>
+
+
+	     <xpath expr="//th[hasclass('td-price')]" position="before">
 	     	<th class="text-center">Unit of mesure</th>
 	     </xpath>
 	     <xpath expr="//td[@name='price']" position="before">
 	     	<td class="text-center" id="td-qty">
                   <div>
-                  	<strong t-esc="int(line.product_id.weight)"/>
                   	<strong t-esc="line.product_uom.name"/>
+                  </div>
+              </td>
+	     </xpath>
+
+		<xpath expr="//th[hasclass('td-price')]" position="after">
+	     	<th class="text-center">Price</th>
+	     </xpath>
+	     <xpath expr="//td[@name='price']" position="after">
+	     	<td class="text-center" id="td-qty">
+                  <div>
+                  	<strong t-esc="line.price_total"/>
                   </div>
               </td>
 	     </xpath>
@@ -104,7 +120,6 @@
 		<xpath expr="//h1[@t-field='product.name']" position="after">
         	<strong><t t-esc="product.sudo().supplier_id.display_name"/></strong><br/>
         	<strong>
-        		<t t-esc="int(product.weight)"/>
         		<t t-esc="product.uom_name"/>
         	</strong>
 		</xpath>
@@ -115,8 +130,7 @@
 		<xpath expr="//a[@t-field='product.name']/../.." position="after">
 			<h5>
 				<strong>
-					(<t t-esc="int(product.weight)"/>
-					<t t-esc="product.uom_name"/>)
+					<t t-esc="product.uom_name"/>
 					</strong>
 			</h5>
 			<h5><strong><t t-esc="product.sudo().supplier_id.display_name"/></strong></h5>

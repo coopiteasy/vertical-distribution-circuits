@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 Coop IT Easy SCRLfs
+   Robin Keunen <robin@coopiteasy.be>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <data noupdate="0"> <!-- fixme -->
+
+        <record id="partner_raliment_point_1" model="res.partner">
+            <field name="name">Point de r'Aliment</field>
+            <field name="customer" eval="False"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="True"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Avenue des Dessus-de-Lives, 2</field>
+            <field name="city">Namur (Loyers)</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="partner_raliment_customer_1" model="res.partner">
+            <field name="name">Virginie Leloup</field>
+            <field name="customer" eval="True"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" ref="partner_raliment_point_1"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Avenue des Dessus-de-Lives, 2</field>
+            <field name="city">Namur (Loyers)</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="partner_raliment_customer_2" model="res.partner">
+            <field name="name">Houssine Intégrale</field>
+            <field name="customer" eval="True"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" ref="partner_raliment_point_1"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Avenue des Dessus-de-Lives, 2</field>
+            <field name="city">Namur (Loyers)</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="partner_raliment_customer_3" model="res.partner">
+            <field name="name">Vincent Bixolon</field>
+            <field name="customer" eval="True"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" ref="partner_raliment_point_1"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Avenue des Livres, 2</field>
+            <field name="city">Namur (Loyers)</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="partner_raliment_customer_4" model="res.partner">
+            <field name="name">Rémy Commit</field>
+            <field name="customer" eval="True"/>
+            <field name="is_company" eval="False"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" ref="partner_raliment_point_1"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Rue Guido Van Rossum, 2</field>
+            <field name="city">Evere</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+        <record id="partner_gac_1" model="res.partner">
+            <field name="name">Kas'ap</field>
+            <field name="customer" eval="True"/>
+            <field name="is_gac" eval="True"/>
+            <field name="is_company" eval="True"/>
+            <field name="is_raliment_point" eval="False"/>
+            <field name="raliment_point_id" eval="False"/>
+            <field name="email">demo@yourcompany.example.com</field>
+            <field name="street">Avenue des Dessus-de-Lives, 2</field>
+            <field name="city">Namur (Loyers)</field>
+            <field name="zip">5101</field>
+            <field name="country_id" ref="base.be"/>
+        </record>
+
+    </data>
+</odoo>

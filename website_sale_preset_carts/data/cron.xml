@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="0">    <!-- fixme -->
+    
+    <record id="ir_cron_open_timeframes_daily" model="ir.cron">
+        <field name="name">Open time frame hourly</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_time_frame"/>
+        <field name="state">code</field>
+        <field name="active" eval="True"/>
+        <field name="code">
+            model.open_timeframes()
+        </field>
+    </record>
+    
+    <record id="ir_cron_close_timeframes_daily" model="ir.cron">
+        <field name="name">Close time frame ending hourly</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_time_frame"/>
+        <field name="state">code</field>
+        <field name="active" eval="True"/>
+        <field name="code">
+            model.close_timeframes()
+        </field>
+    </record>
+</odoo>

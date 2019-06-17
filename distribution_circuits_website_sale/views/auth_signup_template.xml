@@ -4,47 +4,47 @@
 		<template id="easy_my_hub_auth_fields" inherit_id="auth_signup.fields" name="Auth Signup/ResetPassword form fields">
 			<xpath expr="//input[@name='name']/.." position="replace"/>
 			<xpath expr="//input[@name='login']/.." position="after">
-				<div class="form-group field-name">
+				<div name="firstname" class="form-group field-name">
 	                <label for="firstname" class="control-label">Your Firstname</label>
 	                <input type="text" name="firstname" t-att-value="firstname" id="firstname" class="form-control" placeholder="e.g. John"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None"
 	                    t-att-autofocus="'autofocus' if login and not only_passwords else None" />
 	            </div>
-	            <div class="form-group field-name">
+	            <div name="lastname" class="form-group field-name">
 		                <label for="lastname" class="control-label">Your Lastname</label>
 		                <input type="text" name="lastname" t-att-value="lastname" id="lastname" class="form-control" placeholder="e.g. Doe"
 		                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 		        </div>
-	            <div class="form-group field-name">
+	            <div name="iban" class="form-group field-name">
 	                <label for="iban" class="control-label">IBAN number</label>
 	                <input type="text" name="iban" t-att-value="iban" id="iban" class="form-control" placeholder="BE645215965478"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 	            </div>
-	            <div class="form-group field-name">
+	            <div name="phone" class="form-group field-name">
 	                <label for="phone" class="control-label">Your Phone</label>
 	                <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control" placeholder="+325552365"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 	            </div>
 	            
-	            <div class="form-group field-name">
+	            <div name="street" class="form-group field-name">
 	                <label for="street" class="control-label">Your Street and Number</label>
 	                <input type="text" name="street" t-att-value="street" id="street" class="form-control" placeholder="Rue de la transition, 63"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 	            </div> 
 	            
-	            <div class="form-group field-name">
+	            <div name="zip_code" class="form-group field-name">
 	                <label for="zip_code" class="control-label">Your Zip Code</label>
 	                <input type="text" name="zip_code" t-att-value="zip_code" id="zip_code" class="form-control" placeholder="1040"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 	            </div>
 	            
-	            <div class="form-group field-name">
+	            <div name="city" class="form-group field-name">
 	                <label for="city" class="control-label">Your City</label>
 	                <input type="text" name="city" t-att-value="city" id="city" class="form-control" placeholder="Bruxelles"
 	                    required="required" t-att-readonly="'readonly' if only_passwords else None" />
 	            </div>
 	            
-	            <div class="form-group field-name">
+	            <div name="country_id" class="form-group field-name">
 	                <label for="country_id" class="control-label">Your Country</label>
 					<select name="country_id" id="country_id" class="form-control" style="width:54%;" required="required" 
 						t-att-disabled="'disabled' if only_passwords else None" >
@@ -54,12 +54,14 @@
                          </t>
                      </select>	            
 	            </div>
-                <div class="form-group field-name">
+
+                <div name="raliment_choice_guide" class="form-group field-name">
                 Choisissez :<br/>
 				- Soit de devenir membre d'un point de r'aliment, qui prépare les commandes (prix réduits),<br/>
 				- Soit de faire préparer vos commandes par <span t-field="res_company.name"/>, qui les livre dans un point de livraison<br/>
                 </div>
-	            <div class="form-group field-name">
+
+				<div name="raliment_point" class="form-group field-name">
 	                <label for="raliment_point_id" class="control-label">Your Raliment Point</label>
 					<select name="raliment_point_id" id="raliment_point_id" class="form-control"
 						t-att-disabled="'disabled' if only_passwords else None" >
@@ -70,7 +72,7 @@
                      </select>	            
 	            </div>
 	            
-	            <div class="form-group field-name">
+	            <div name="delivery_point" class="form-group field-name">
 	                <label for="delivery_point_id" class="control-label">Your Delivery Point</label>
 					<select name="delivery_point_id" id="delivery_point_id" class="form-control"
 						t-att-disabled="'disabled' if only_passwords else None" >

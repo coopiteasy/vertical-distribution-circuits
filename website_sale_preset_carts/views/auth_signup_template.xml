@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <template id="easy_my_hub_auth_signup_preset_carts" inherit_id="distribution_circuits_website_sale.easy_my_hub_auth_fields">
+        <xpath expr="//div[@name='delivery_point']" position="after">
+
+            <div name="cart_subscription" class="form-group field-name">
+                <label for="cart_subscription" class="control-label">Subscribe to cart?</label>
+	                <input id="cart_subscription"
+                           name="cart_subscription"
+                           type="checkbox"
+                           t-att-value="cart_subscription"
+                           t-att-readonly="'readonly' if only_passwords else None"
+                           class="form-control"
+                    />
+            </div>
+
+            <div name="nb_household" class="form-group field-name">
+                <label for="nb_household" class="control-label">Number of people in household</label>
+	                <input id="nb_house_hold"
+                           name="nb_household"
+                           type="text"
+                           t-att-value="nb_household"
+                           placeholder="2"
+                           t-att-readonly="'readonly' if only_passwords else None"
+                           class="form-control"
+                    />
+            </div>
+
+        </xpath>
+    </template>
+</odoo>

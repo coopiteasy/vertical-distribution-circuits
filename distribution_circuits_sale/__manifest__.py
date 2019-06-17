@@ -19,14 +19,17 @@
     This module implements the features manage the sales
     of your distribution circuits.
     """,
+    "demo": [
+        'demo/demo.xml',
+    ],
     'data': [
         'security/ir.model.access.csv',
-        'views/menu_item.xml',
         'views/time_frame_view.xml',
         'views/sale_view.xml',
         'views/partner_view.xml',
         'views/purchase_view.xml',
-        'views/sale_order_report_template.xml'
+        'views/sale_order_report_template.xml',
+        'views/menu_item.xml',
     ],
     'installable': True,
 }

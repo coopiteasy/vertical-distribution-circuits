@@ -33,7 +33,7 @@ odoo.define('distribution_circuits_website_sale.website_sale', function (require
     	if ($input.data('update_change')) {
     		return;
     	}
-    	var value = parseInt($input.val() || 0, 10);
+		var value = parseFloat($input.val() || 0, 10);
     	var $dom = $(this).closest('tr');
     	var default_price = parseFloat($dom.find('.text-danger > span.oe_currency_value').text());
     	var $dom_optional = $dom.nextUntil(':not(.optional_product.info)');

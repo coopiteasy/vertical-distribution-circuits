@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 Coop IT Easy SCRLfs
+   Robin Keunen <robin@coopiteasy.be>
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <menuitem action="action_preset_cart_tree"
+              id="menu_preset_cart_tree"
+              name="Preset Carts"
+              parent="distribution_circuits_sale.menu_easy_my_hub_main_sale"
+              sequence="2"
+              groups="distribution_circuits_base.group_easy_my_hub_user"/>
+</odoo>
