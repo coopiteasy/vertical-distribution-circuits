@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 13:48+0000\n"
-"PO-Revision-Date: 2017-04-24 13:48+0000\n"
+"POT-Creation-Date: 2019-06-18 08:59+0000\n"
+"PO-Revision-Date: 2019-06-18 08:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,27 +16,385 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: distribution_circuits_website_sale
-#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.time_frame_cart
-msgid "<span class=\"hidden-xs\">Process Checkout</span><span class=\"visible-xs-inline\">Checkout</span> <span class=\"fa fa-long-arrow-right\"/>"
-msgstr "<span class=\"hidden-xs\">Passer à la caisse</span><span class=\"visible-xs-inline\">Caisse</span> <span class=\"fa fa-long-arrow-right\"/>"
+#: model:ir.actions.server,name:distribution_circuits_website_sale.ir_cron_abandoned_cart_reminder_before_timeframe_end_ir_actions_server
+#: model:ir.cron,cron_name:distribution_circuits_website_sale.ir_cron_abandoned_cart_reminder_before_timeframe_end
+#: model:ir.cron,name:distribution_circuits_website_sale.ir_cron_abandoned_cart_reminder_before_timeframe_end
+msgid "\n"
+"      Send Email for Abandoned Cart Before Timeframe End\n"
+"    "
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "+325552365"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid ", qui les livre dans un point de livraison<br/>"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "1040"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:mail.template,body_html:distribution_circuits_website_sale.mail_template_sale_cart_timeframe_recovery
+msgid "<?xml version=\"1.0\"?>\n"
+"<div style=\"margin:auto;width:100%;\">\n"
+"          <img src=\"/web/image/res.company/${user.company_id.id}/logo\" style=\"height: auto; width: 80px; margin-top:30px;\" alt=\"${user.company_id.name}\"/>\n"
+"          <h1 style=\"color:#A9A9A9;\">THERE'S SOMETHING IN YOUR CART.</h1>\n"
+"          <p>Would you like to complete your purchase?</p><br/><br/>\n"
+"          % if object.order_line:\n"
+"            % for line in object.order_line:\n"
+"            <hr/>\n"
+"            <table width=\"100%\">\n"
+"              <tr>\n"
+"                <td style=\"padding: 10px; width:150px;\">\n"
+"                  <img src=\"/web/image/product.product/${line.product_id.id}/image\" height=\"100px\" width=\"100px\"/>\n"
+"                </td>\n"
+"                <td>\n"
+"                  <strong>${line.product_id.display_name}</strong><br/>\n"
+"                  ${line.name}\n"
+"                </td>\n"
+"                <td width=\"100px\" align=\"right\">\n"
+"                  ${(line.product_uom_qty) | int} ${(line.product_uom.name)}\n"
+"                </td>\n"
+"              </tr>\n"
+"            </table>\n"
+"            % endfor\n"
+"            <hr/>\n"
+"          % endif\n"
+"          <br/><br/>\n"
+"          <center>\n"
+"            <a href=\"/shop/cart?access_token=${object.access_token}\" target=\"_blank\" style=\"background-color: #1abc9c;                       padding: 20px;                       text-decoration: none;                       color: #fff;                       border-radius: 5px;                       font-size: 16px;\" class=\"o_default_snippet_text\">\n"
+"               Resume order\n"
+"             </a><br/><br/><br/>\n"
+"            <p><b>Thank you for shopping with ${user.company_id.name}!</b></p>\n"
+"          </center>\n"
+"        </div>\n"
+"      "
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "== Choose a Delivery Point =="
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "== Choose a Raliment Point =="
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Amount"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Amount due not yet invoiced"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Amount of your financial account"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:104
+#, python-format
+msgid "Another user is already registered using this email address."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:28
+#, python-format
+msgid "Authentication Failed."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "BE645215965478"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Bruxelles"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model.fields,field_description:distribution_circuits_website_sale.field_sale_order_cart_reminder_email_before_timeframe_end_sent
+msgid "Cart reminder email before timeframe end already sent"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Choisissez :<br/>\n"
+"				- Soit de devenir membre d'un point de r'aliment, qui prépare les commandes (prix réduits),<br/>\n"
+"				- Soit de faire préparer vos commandes par"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model,name:distribution_circuits_website_sale.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:108
+#, python-format
+msgid "Could not create a new account."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Country..."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.actions.act_window,help:distribution_circuits_website_sale.action_easy_my_hub_res_users
+msgid "Create and manage users that will connect to the system. Users can be deactivated should there be a period of time during which they will/should not connect to the system. You can assign them groups in order to give them specific access to the applications they need to use in the system."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Date"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.res_config_settings_view_form_distrib
+msgid "Default recovery email to send when a cart is abandoned\n"
+"              and that the end of a timeframe is comming."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model.fields,field_description:distribution_circuits_website_sale.field_res_config_settings_cart_abandoned_before_timeframe_end_delay
+msgid "Delay Before End of Time Frame"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.res_config_settings_view_form_distrib
+msgid "Email for abandoned carts near a timeframe end"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.portal_my_home_credit_account
+msgid "Financial Account"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "IBAN number"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/main.py:241
+#, python-format
+msgid "Invalid Email! Please enter a valid email address."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model.fields,field_description:distribution_circuits_website_sale.field_sale_order_is_abandoned_cart_near_timeframe_end
+msgid "Is Abandoned Cart Near Timeframe End"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Move #"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model.fields,field_description:distribution_circuits_website_sale.field_res_users_need_validation
+msgid "Need validation"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model.fields,help:distribution_circuits_website_sale.field_res_config_settings_cart_abandoned_before_timeframe_end_delay
+msgid "Number of hours before the end of the time frame when a reminder is sent"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:82
+#, python-format
+msgid "Please give a correct IBAN number."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.shop_closed
+msgid "Please visit our shop later."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.time_frame_cart_lines
+msgid "Price"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model,name:distribution_circuits_website_sale.model_sale_order
+msgid "Quotation"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Rue de la transition, 63"
+msgstr ""
 
 #. module: distribution_circuits_website_sale
 #: model:ir.model.fields,field_description:distribution_circuits_website_sale.field_website_current_time_frame
 msgid "Selected time frame"
-msgstr "Selected time frame"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.res_config_settings_view_form_distrib
+msgid "Send a reminder email to authenticated shoppers"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/models/res_users.py:50
+#, python-format
+msgid "Signup is not allowed for uninvited users"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/main.py:256
+#, python-format
+msgid "Some required fields are empty."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:77
+#, python-format
+msgid "That does not seem to be an email address."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.shop_closed
+msgid "The shop is closed!"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "There are currently no invoices and payments for your account."
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.time_frame_cart_lines
+msgid "Unit Price"
+msgstr ""
 
 #. module: distribution_circuits_website_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_website_sale.time_frame_cart_lines
 msgid "Unit of mesure"
-msgstr "Unit of mesure"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.actions.act_window,name:distribution_circuits_website_sale.action_easy_my_hub_res_users
+#: model:ir.model,name:distribution_circuits_website_sale.model_res_users
+#: model:ir.ui.menu,name:distribution_circuits_website_sale.menu_action_easy_my_hub_res_users
+msgid "Users"
+msgstr ""
 
 #. module: distribution_circuits_website_sale
 #: model:ir.model,name:distribution_circuits_website_sale.model_website
 msgid "Website"
-msgstr "Site Web"
+msgstr ""
 
 #. module: distribution_circuits_website_sale
-#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.time_frame_cart
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:73
+#, python-format
+msgid "You can not choose a Raliment and a Delivery point"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:mail.template,subject:distribution_circuits_website_sale.mail_template_sale_cart_timeframe_recovery
+msgid "You left items in your cart"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: code:addons/distribution_circuits_website_sale/controllers/authsignup.py:69
+#, python-format
+msgid "You must at least choose a Raliment or a Delivery point"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your City"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Country"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Delivery Point"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.credit_account
+msgid "Your Financial Account"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Firstname"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Lastname"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Phone"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Raliment Point"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Street and Number"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "Your Zip Code"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.cart_popover_time_frame
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.wizard_checkout_customer_credit
+msgid "Your account credit :"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_payment_tokens_list
 msgid "Your account doesn't allow you to pay this order"
-msgstr "Your account doesn't allow you to pay this order"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "e.g. Doe"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.easy_my_hub_auth_fields
+msgid "e.g. John"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_website_sale.res_config_settings_view_form_distrib
+msgid "hours"
+msgstr ""
+
+#. module: distribution_circuits_website_sale
+#: model:ir.model,name:distribution_circuits_website_sale.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
 
