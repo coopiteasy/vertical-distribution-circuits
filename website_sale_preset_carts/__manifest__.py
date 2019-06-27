@@ -20,9 +20,9 @@
         "distribution_circuits_website_sale",
     ],
     "demo": [
+        "demo/demo.xml",  # fixme
     ],
     "data": [
-        "demo/demo.xml",  # fixme
         "data/cron.xml",
         "security/ir.model.access.csv",
         "views/auth_signup_template.xml",
