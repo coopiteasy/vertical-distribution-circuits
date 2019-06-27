@@ -4,16 +4,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
-from datetime import date, datetime
+import datetime as dt
 
 
 class TestTimeFrame(TransactionCase):
 
     def test_generate_sale_orders_based_on_cart_lines(self):
-        # fixme useful name and cases
-        partner1 = self.env.ref('distribution_circuits_base.partner_raliment_customer_1')  # noqa
-        partner2 = self.env.ref('distribution_circuits_base.partner_raliment_customer_3')  # noqa
-        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_current')
+        partner1 = self.env.ref(
+            'distribution_circuits_base.partner_raliment_customer_1')
+        partner3 = self.env.ref(
+            'distribution_circuits_base.partner_raliment_customer_3')
+        frame = self.env.ref(
+            'distribution_circuits_sale.demo_timeframe_future')
         frame.generate_sale_orders()
 
         generated_so = self.env['sale.order'].search([
@@ -22,7 +24,7 @@ class TestTimeFrame(TransactionCase):
         )
 
         self.assertTrue(partner1.id in generated_so.mapped('partner_id.id'))
-        self.assertTrue(partner2.id in generated_so.mapped('partner_id.id'))
+        self.assertFalse(partner3.id in generated_so.mapped('partner_id.id'))
 
         for order in generated_so:
             order_lines = sorted([
@@ -50,18 +52,19 @@ class TestTimeFrame(TransactionCase):
 
     def test_starting_validated_frames_are_opened(self):
         frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.start = datetime.now()
+        frame.start = dt.datetime.now() - dt.timedelta(hours=1)
         frame.action_validate()
-
         self.assertEqual(frame.state, 'validated')
         self.env['time.frame'].open_timeframes()
         self.assertEqual(frame.state, 'open')
         self.assertTrue(frame.sale_orders)
+        self.assertEqual(len(frame.sale_orders), 1)
         self.assertTrue(all((o.state == 'draft' for o in frame.sale_orders)))
 
     def test_closing_opened_frames_are_closed(self):
         frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.end = datetime.now()
+        frame.start = dt.datetime.now() - dt.timedelta(hours=1)
+        frame.end = dt.datetime.now() - dt.timedelta(hours=1)
         frame.action_validate()
         frame.action_open()
 

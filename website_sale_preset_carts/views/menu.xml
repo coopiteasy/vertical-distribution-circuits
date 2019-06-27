@@ -11,4 +11,10 @@
               parent="distribution_circuits_sale.menu_easy_my_hub_main_sale"
               sequence="2"
               groups="distribution_circuits_base.group_easy_my_hub_user"/>
+    <menuitem action="action_subscription_tree"
+              id="menu_subscription_tree"
+              name="Subscriptions"
+              parent="distribution_circuits_sale.menu_easy_my_hub_main_sale"
+              sequence="3"
+              groups="distribution_circuits_base.group_easy_my_hub_user"/>
 </odoo>

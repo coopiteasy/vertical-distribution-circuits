@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_preset_cart,access_preset_cart,model_preset_cart,distribution_circuits_base.group_easy_my_hub_user,1,1,1,1
 access_preset_cart_line,access_preset_cart_line,model_preset_cart_line,distribution_circuits_base.group_easy_my_hub_user,1,1,1,1
+access_subscription,access_subscription,model_subscription,distribution_circuits_base.group_easy_my_hub_user,1,1,1,1

@@ -15,7 +15,7 @@
             <xpath expr="//field[@name='function']/.." position="after">
                 <group>
                     <field name="nb_household"/>
-                    <field name="cart_subscription"/>
+                    <field name="subscription_id"/>
                     <field name="cart_suspended_date"/>
                 </group>
             </xpath>

@@ -14,9 +14,10 @@ class ResPartner(models.Model):
         string='Number of People in Household',
         default=1,
     )
-    cart_subscription = fields.Boolean(
-        string='Is Subscribed to Cart',
-    )
+    subscription_id = fields.Many2one(
+        comodel_name='subscription',
+        string='Subscription',
+        required=False)
     cart_suspended_date = fields.Date(
         string='Cart Suspended Until',
     )
@@ -31,5 +32,4 @@ class ResPartner(models.Model):
         else:
             suspended = False
 
-        return self.cart_subscription and not suspended
-
+        return self.subscription_id and not suspended

@@ -14,7 +14,7 @@ class AuthSignupHome(AuthSignupHome):
         user = request.env['res.users'].sudo().search([('id', '=', uid)])
         user.partner_id.write({
             'nb_household': qcontext.get('nb_household', False),
-            'cart_subscription': qcontext.get('cart_subscription', False),
+            'subscription_id': qcontext.get('subscription_id', False),
         })
 
 
