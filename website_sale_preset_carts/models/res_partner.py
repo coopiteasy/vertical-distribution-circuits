@@ -33,3 +33,17 @@ class ResPartner(models.Model):
             suspended = False
 
         return self.subscription_id and not suspended
+
+    @api.model  # todo necessary ?
+    def get_subscriptions(self):
+        return self.env['subscription'].search([('active', '=', True)])
+
+    @api.model
+    def signup_retrieve_info(self, token):
+        res = super(ResPartner, self).signup_retrieve_info(token)
+
+        partner = self.sudo().search([('email', '=', res.get('login'))])
+
+        res['subscription_id'] = partner.subscription_id.id if len(partner.subscription_id) > 0 else 0
+        res['subscriptions'] = self.sudo().get_subscriptions()
+        return res

@@ -8,14 +8,14 @@
         <xpath expr="//div[@name='delivery_point']" position="after">
 
             <div name="cart_subscription" class="form-group field-name">
-                <label for="subscription_id" class="control-label">Subscription</label>
-	                <input id="cart_subscription"
-                           name="cart_subscription"
-                           type="selection"
-                           t-att-value="subscription_id"
-                           t-att-readonly="'readonly' if only_passwords else None"
-                           class="form-control"
-                    />
+                <label for="subscription_id" class="control-label">Your subscription</label>
+                <select name="subscription_id" id="subscription_id" class="form-control"
+                    t-att-disabled="'disabled' if only_passwords else None" >
+                     <option value="">== Choose a subscription ==</option>
+                     <t t-foreach="subscriptions or []" t-as="subscription">
+                         <option t-att-value="subscription.id" t-att-selected="subscription.id == int(subscription_id)"><t t-esc="subscription.name"/></option>
+                     </t>
+                 </select>
             </div>
 
             <div name="nb_household" class="form-group field-name">

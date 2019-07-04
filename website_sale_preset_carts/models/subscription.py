@@ -22,8 +22,10 @@ class Subscription(models.Model):
     _description = 'Subscription'
 
     name = fields.Char(
-        required=True,
-    )
+        required=True)
+    active = fields.Boolean(
+        string='Active',
+        default=True)
     start = fields.Datetime(
         string='Start',
         required=True)
