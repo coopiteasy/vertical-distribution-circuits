@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 13:45+0000\n"
-"PO-Revision-Date: 2017-04-24 13:45+0000\n"
+"POT-Creation-Date: 2019-07-16 05:56+0000\n"
+"PO-Revision-Date: 2019-07-16 05:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Archived"
+msgstr "Archivé/s"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_individual_customer
 #: model:ir.actions.act_window,help:distribution_circuits_base.action_raliment_customer
 msgid "Click to add a customer in your address book."
 msgstr "Click to add a customer in your address book."
@@ -31,14 +37,31 @@ msgid "Click to add a raliment point in your address book."
 msgstr "Click to add a raliment point in your address book."
 
 #. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: distribution_circuits_base
+#: model:ir.model,name:distribution_circuits_base.model_res_partner
 #: model:ir.ui.menu,name:distribution_circuits_base.menu_easy_my_hub_main_contact
 msgid "Contact"
 msgstr "Contact"
 
 #. module: distribution_circuits_base
-#: model:res.groups,name:distribution_circuits_base.group_easy_delivery_point_manager
-msgid "Delivery point manager"
-msgstr "Delivery point manager"
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Customers"
+msgstr "Clients"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_delivery_point_id
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_delivery_point_id
+msgid "Delivery Point"
+msgstr "Point de livraison"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Delivery points"
+msgstr "Points de livraison"
 
 #. module: distribution_circuits_base
 #: model:ir.ui.menu,name:distribution_circuits_base.menu_main_easy_my_hub
@@ -51,9 +74,10 @@ msgid "EasyMy Hub"
 msgstr "EasyMy Hub"
 
 #. module: distribution_circuits_base
-#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_raliment_point
-msgid "Est un Point de Raliment"
-msgstr "Est un Point de Raliment"
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_gac
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_is_gac
+msgid "Est un GAC"
+msgstr "Est un GAC"
 
 #. module: distribution_circuits_base
 #: model:ir.ui.menu,name:distribution_circuits_base.menu_partner_gac
@@ -66,9 +90,14 @@ msgid "GACs"
 msgstr "GACs"
 
 #. module: distribution_circuits_base
-#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
 msgid "Gac"
 msgstr "Gac"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Group By"
+msgstr "Regrouper par"
 
 #. module: distribution_circuits_base
 #: model:ir.module.category,description:distribution_circuits_base.module_category_distribution_circuits
@@ -91,6 +120,37 @@ msgid "Hub User"
 msgstr "Hub User"
 
 #. module: distribution_circuits_base
+#: model:ir.actions.act_window,name:distribution_circuits_base.action_individual_customer
+#: model:ir.ui.menu,name:distribution_circuits_base.menu_individual_customer
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Individual customers"
+msgstr "Clients individuels"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_delivery_point
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_is_delivery_point
+msgid "Is a delivery point"
+msgstr "Est un point de livraison"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_raliment_point
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_is_raliment_point
+msgid "Is a gathering point"
+msgstr "Est un point de rassemblement"
+
+#. module: distribution_circuits_base
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_reseller
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_is_reseller
+msgid "Is a reseller"
+msgstr "Est un revendeur"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "My Partners"
+msgstr "Mes Partenaires"
+
+#. module: distribution_circuits_base
+#: model:ir.actions.act_window,help:distribution_circuits_base.action_individual_customer
 #: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_gac
 #: model:ir.actions.act_window,help:distribution_circuits_base.action_partner_raliment
 #: model:ir.actions.act_window,help:distribution_circuits_base.action_raliment_customer
@@ -102,39 +162,69 @@ msgstr "Odoo vous aide à suivre toutes les activités liées à un fournisseur 
 "documents, etc."
 
 #. module: distribution_circuits_base
-#: model:ir.model,name:distribution_circuits_base.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Persons"
+msgstr "Personnes"
 
 #. module: distribution_circuits_base
 #: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_raliment_point_id
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_raliment_point_id
 msgid "Point de Raliment"
 msgstr "Point de Raliment"
 
 #. module: distribution_circuits_base
+#: model:res.groups,name:distribution_circuits_base.group_easy_my_hub_raliment_point_manager
+msgid "R'Aliment point manager"
+msgstr "R'Aliment point manager"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Raliment Point"
+msgstr "Point de Raliment"
+
+#. module: distribution_circuits_base
 #: model:ir.ui.menu,name:distribution_circuits_base.menu_raliment_customer
-#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
 msgid "Raliment customers"
-msgstr "Raliment customers"
+msgstr "Clients d'un point de Raliment"
 
 #. module: distribution_circuits_base
 #: model:ir.ui.menu,name:distribution_circuits_base.menu_partner_raliment
-#: model:ir.ui.view,arch_db:distribution_circuits_base.view_res_partner_easymyhub_filter
 msgid "Raliment point"
-msgstr "Raliment point"
+msgstr "Point de Raliment"
 
 #. module: distribution_circuits_base
-#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_is_gac
-msgid "est un GAC"
-msgstr "est un GAC"
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_partner_raliment_point_manager
+#: model:ir.model.fields,field_description:distribution_circuits_base.field_res_users_raliment_point_manager
+msgid "Raliment point responsible"
+msgstr "Responsable du point de raliment"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Raliment points"
+msgstr "Points de raliment"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Search Partner"
+msgstr "Rechercher un partenaire"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Tag"
+msgstr "Étiquette"
+
+#. module: distribution_circuits_base
+#: model:ir.ui.view,arch_db:distribution_circuits_base.res_partner_raliment_search
+msgid "Vendors"
+msgstr "Fournisseurs"
 
 #. module: distribution_circuits_base
 #: model:ir.actions.act_window,name:distribution_circuits_base.action_raliment_customer
 msgid "raliment customers"
-msgstr "raliment customers"
+msgstr "Clients d'un point de Raliment"
 
 #. module: distribution_circuits_base
 #: model:ir.actions.act_window,name:distribution_circuits_base.action_partner_raliment
 msgid "raliment points"
-msgstr "raliment points"
-
+msgstr "Points de Raliment"
