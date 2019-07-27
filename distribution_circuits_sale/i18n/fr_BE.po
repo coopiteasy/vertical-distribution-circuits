@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 13:47+0000\n"
-"PO-Revision-Date: 2017-04-24 13:47+0000\n"
+"POT-Creation-Date: 2019-07-16 06:00+0000\n"
+"PO-Revision-Date: 2019-07-16 06:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: distribution_circuits_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.report_saleorder_easymyhub
+msgid "<strong>Delivery Date:</strong>"
+msgstr "<strong>Date de livraison:</strong>"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_filter_on_products
+msgid "Activate filter on products"
+msgstr "Filtre sur les produits actif"
+
+#. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_res_partner_amount_due
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_res_users_amount_due
 msgid "Amount due for sale orders"
-msgstr "Amount due for sale orders"
+msgstr "Montant du pour les bons de commandes"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
@@ -28,12 +39,17 @@ msgstr "Annuler"
 #. module: distribution_circuits_sale
 #: selection:time.frame,state:0
 msgid "Cancelled"
-msgstr "Cancelled"
+msgstr "Annulée"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,help:distribution_circuits_sale.action_time_frame
 msgid "Click to add a time frame in your sale calendar."
 msgstr "Click to add a time frame in your sale calendar."
+
+#. module: distribution_circuits_sale
+#: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_product_template
+msgid "Click to define a new product."
+msgstr "Cliquer pour définir un nouvel article."
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
@@ -43,7 +59,12 @@ msgstr "Fermer"
 #. module: distribution_circuits_sale
 #: selection:time.frame,state:0
 msgid "Closed"
-msgstr "Closed"
+msgstr "Fermée"
+
+#. module: distribution_circuits_sale
+#: model:ir.model,name:distribution_circuits_sale.model_res_partner
+msgid "Contact"
+msgstr "Contact"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_quotation
@@ -62,24 +83,50 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_res_partner_customer_credit
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_res_users_customer_credit
+msgid "Customer credit"
+msgstr "Crédit du client"
+
+#. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_delivery_date
 msgid "Delivery date"
-msgstr "Delivery date"
+msgstr "Date de livraison"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Nom à afficher"
 
 #. module: distribution_circuits_sale
 #: selection:time.frame,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr "Brouillon"
+
+#. module: distribution_circuits_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
+msgid "Enclose"
+msgstr "Clôturer"
+
+#. module: distribution_circuits_sale
+#: selection:time.frame,state:0
+msgid "Enclosed"
+msgstr "Enclosed"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_end
 msgid "End"
-msgstr "End"
+msgstr "Fin"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_enough_credit
+msgid "Enough credit"
+msgstr "Credit suffisant"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_resellers_only
+msgid "For resellers only"
+msgstr "Pour revendeurs uniquement"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_id
@@ -94,12 +141,12 @@ msgstr "Dernière modification le"
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_write_uid
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr "Dernière mise à jour par"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_write_date
 msgid "Last Updated on"
-msgstr "Mis à jour le"
+msgstr "Dernière mise à jour le"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_quotation
@@ -110,23 +157,23 @@ msgstr "Attention, dès que le devis devient un bon de commande, il bougera de l
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_filter
 msgid "Ongoing"
-msgstr "Ongoing"
+msgstr "En cours"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
 #: selection:time.frame,state:0
 msgid "Open"
-msgstr "Open"
+msgstr "Ouvert"
 
 #. module: distribution_circuits_sale
-#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_name
-msgid "Order closing date"
-msgstr "Order closing date"
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
+msgid "Order Number"
+msgstr "N° de commande"
 
 #. module: distribution_circuits_sale
-#: model:ir.model,name:distribution_circuits_sale.model_res_partner
-msgid "Partner"
-msgstr "Partenaire"
+#: model:ir.model,name:distribution_circuits_sale.model_procurement_rule
+msgid "Procurement Rule"
+msgstr "Règle d'approvisionnement"
 
 #. module: distribution_circuits_sale
 #: model:ir.model,name:distribution_circuits_sale.model_product_template
@@ -134,9 +181,33 @@ msgid "Product Template"
 msgstr "Modèle d'article"
 
 #. module: distribution_circuits_sale
+#: model:ir.actions.act_window,name:distribution_circuits_sale.action_easy_my_hub_product_template
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_products
+#: model:ir.ui.menu,name:distribution_circuits_sale.menu_easy_my_hub_product_template_action
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
+msgid "Products"
+msgstr "Articles"
+
+#. module: distribution_circuits_sale
 #: model:ir.ui.menu,name:distribution_circuits_sale.menu_easy_my_hub_main_purchase
 msgid "Purchase"
 msgstr "Achat"
+
+#. module: distribution_circuits_sale
+#: model:ir.model,name:distribution_circuits_sale.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_purchase_orders
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
+msgid "Purchase orders"
+msgstr "Bons d'achat"
+
+#. module: distribution_circuits_sale
+#: model:ir.model,name:distribution_circuits_sale.model_sale_order
+msgid "Quotation"
+msgstr "Devis"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,name:distribution_circuits_sale.action_easy_my_hub_quotation
@@ -147,34 +218,41 @@ msgstr "Devis"
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_raliment_point
 msgid "Raliment Point"
-msgstr "Raliment Point"
+msgstr "Point de Raliment"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_line_raliment_point_id
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_easy_my_hub_order_line_filter
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_easy_my_hub_sales_order_filter
+msgid "Raliment point"
+msgstr "Point de Raliment"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.menu,name:distribution_circuits_sale.menu_easy_my_hub_main_sale
 msgid "Sale"
-msgstr "Sale"
+msgstr "Vente"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_sale_orders
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
 msgid "Sale orders"
-msgstr "Sale orders"
+msgstr "Bons de commande"
 
 #. module: distribution_circuits_sale
-#: model:ir.model,name:distribution_circuits_sale.model_sale_order
-msgid "Sales Order"
-msgstr "Bon de commande"
+#: model:ir.model,name:distribution_circuits_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne du bon de commande"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,name:distribution_circuits_sale.action_easy_my_hub_sale_orders
 #: model:ir.ui.menu,name:distribution_circuits_sale.menu_easy_my_hub_sale_order
 msgid "Sales Orders"
-msgstr "Bons de commande"
+msgstr "Bons de commandes"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_filter
 msgid "Search Time Frame"
-msgstr "Search Time Frame"
+msgstr "Chercher une fenêtre de vente"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
@@ -184,48 +262,77 @@ msgstr "Marquer comme brouillon"
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_start
 msgid "Start"
-msgstr "Start"
+msgstr "Début"
 
 #. module: distribution_circuits_sale
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_state
 msgid "State"
-msgstr "État"
+msgstr "Région"
 
 #. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_product_supplier_id
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_template_supplier_id
 msgid "Supplier"
-msgstr "Supplier"
+msgstr "Fournisseur"
 
 #. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_product_supplier_name
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_template_supplier_name
+msgid "Supplier Name"
+msgstr "Nom du fournisseur"
+
+#. module: distribution_circuits_sale
+#: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_product_template
+msgid "The product form contains information to simplify the sale process: price, notes in the quotation, accounting data, procurement methods, etc."
+msgstr "La fiche article contient des informations pour simplifier les \n"
+"processus de vente: prix, note sur le devis, les données comptables,\n"
+"méthodes d'approvisionnement, etc."
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_purchase_order_time_frame_id
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_line_time_frame_id
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_time_frame_id
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_easy_my_hub_order_line_filter
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
 msgid "Time Frame"
-msgstr "Time Frame"
+msgstr "Fenêtre de vente"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_list
 msgid "Time Frames"
-msgstr "Time Frames"
+msgstr "Fenêtres de vente"
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,name:distribution_circuits_sale.action_time_frame
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_easy_my_hub_sales_order_filter
 msgid "Time frame"
-msgstr "Time frame"
+msgstr "Fenêtre de vente"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_time_frame_name
+msgid "Time frame name"
+msgstr "Time frame name"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.menu,name:distribution_circuits_sale.menu_time_frame
 msgid "Time frames"
-msgstr "Time frames"
+msgstr "Fenêtres de vente"
 
 #. module: distribution_circuits_sale
+#: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
+msgid "Total Tax Included"
+msgstr "Total taxes incluses"
+
+#. module: distribution_circuits_sale
+#: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_product_uom_name
 #: model:ir.model.fields,field_description:distribution_circuits_sale.field_product_template_uom_name
 msgid "UoM Name"
-msgstr "UoM Name"
+msgstr "Unité de mesure"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_filter
 msgid "Upcoming"
-msgstr "Upcoming"
+msgstr "A venir"
 
 #. module: distribution_circuits_sale
 #: model:ir.ui.view,arch_db:distribution_circuits_sale.view_time_frame_form
@@ -235,17 +342,12 @@ msgstr "Valider"
 #. module: distribution_circuits_sale
 #: selection:time.frame,state:0
 msgid "Validated"
-msgstr "Validated"
+msgstr "Validée"
 
 #. module: distribution_circuits_sale
-#: model:ir.model.fields,field_description:distribution_circuits_sale.field_sale_order_website_message_ids
-msgid "Website Messages"
-msgstr "Messages du site web"
-
-#. module: distribution_circuits_sale
-#: model:ir.model.fields,help:distribution_circuits_sale.field_sale_order_website_message_ids
-msgid "Website communication history"
-msgstr "Historique de communication du site web"
+#: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_product_template
+msgid "You must define a product for everything you sell, whether it's a physical product, a consumable or a service you offer to  customers."
+msgstr "You must define a product for everything you sell, whether it's a physical product, a consumable or a service you offer to  customers."
 
 #. module: distribution_circuits_sale
 #: model:ir.actions.act_window,help:distribution_circuits_sale.action_easy_my_hub_quotation
@@ -257,4 +359,3 @@ msgstr "Vos prochaines actions devraient circuler efficacement: confirmez le dev
 #: model:ir.model,name:distribution_circuits_sale.model_time_frame
 msgid "time.frame"
 msgstr "time.frame"
-
