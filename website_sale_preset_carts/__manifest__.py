@@ -20,7 +20,7 @@
         "distribution_circuits_website_sale",
     ],
     "demo": [
-        "demo/demo.xml",
+        "demo/demo.xml",  # fixme
     ],
     "data": [
         "data/cron.xml",
@@ -29,7 +29,7 @@
         "views/preset_cart.xml",
         "views/res_partner.xml",
         "views/time_frame.xml",
-        "views/actions.xml",
+        "views/subscription.xml",
         "views/menu.xml",
     ]
 }

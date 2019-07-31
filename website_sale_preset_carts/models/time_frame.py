@@ -17,6 +17,13 @@ class TimeFrame(models.Model):
         comodel_name='preset.cart.line',
         related='preset_cart_id.cart_line_ids',
     )
+    subscription_id = fields.Many2one(
+        comodel_name='subscription',
+        string='Subscription',
+        required=False)
+    subscriber_ids = fields.One2many(
+        related='subscription_id.subscriber_ids',
+        string='Subscribers')
 
     @api.model
     def open_timeframes(self):
@@ -33,7 +40,7 @@ class TimeFrame(models.Model):
     @api.model
     def close_timeframes(self):
         now = datetime.now().replace(minute=0, second=0)
-        last_hour = now + timedelta(hours=1)
+        last_hour = now - timedelta(hours=1)
 
         frames = self.search([
             ('state', '=', 'open'),
@@ -114,7 +121,7 @@ class TimeFrame(models.Model):
 
             customers = (
                 self.env['res.partner']
-                    .search([('cart_subscription', '=', True),
+                    .search([('subscription_id', '=', frame.subscription_id.id),
                              '|', ('cart_suspended_date', '=', False),
                                   ('cart_suspended_date', '<=', frame.delivery_date)])
             )

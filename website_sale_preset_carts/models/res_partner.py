@@ -14,9 +14,10 @@ class ResPartner(models.Model):
         string='Number of People in Household',
         default=1,
     )
-    cart_subscription = fields.Boolean(
-        string='Is Subscribed to Cart',
-    )
+    subscription_id = fields.Many2one(
+        comodel_name='subscription',
+        string='Subscription',
+        required=False)
     cart_suspended_date = fields.Date(
         string='Cart Suspended Until',
     )
@@ -31,5 +32,18 @@ class ResPartner(models.Model):
         else:
             suspended = False
 
-        return self.cart_subscription and not suspended
+        return self.subscription_id and not suspended
 
+    @api.model  # todo necessary ?
+    def get_subscriptions(self):
+        return self.env['subscription'].search([('active', '=', True)])
+
+    @api.model
+    def signup_retrieve_info(self, token):
+        res = super(ResPartner, self).signup_retrieve_info(token)
+
+        partner = self.sudo().search([('email', '=', res.get('login'))])
+
+        res['subscription_id'] = partner.subscription_id.id if len(partner.subscription_id) > 0 else 0
+        res['subscriptions'] = self.sudo().get_subscriptions()
+        return res
