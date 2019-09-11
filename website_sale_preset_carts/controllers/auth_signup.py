@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.addons.distribution_circuits_website_sale.controllers.authsignup import AuthSignupHome
 from odoo import http
 from odoo.http import request
 
@@ -17,7 +17,7 @@ class AuthSignupHome(AuthSignupHome):
             'nb_household': qcontext.get('nb_household', False),
             'subscription_id': qcontext.get('subscription_id', False),
         })
-
+        return uid
 
     @http.route('/web/signup', type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
