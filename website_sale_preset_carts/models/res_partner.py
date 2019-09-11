@@ -45,5 +45,6 @@ class ResPartner(models.Model):
         partner = self.sudo().search([('email', '=', res.get('login'))])
 
         res['subscription_id'] = partner.subscription_id.id if len(partner.subscription_id) > 0 else 0
+        res['nb_household'] = partner.nb_household
         res['subscriptions'] = self.sudo().get_subscriptions()
         return res
