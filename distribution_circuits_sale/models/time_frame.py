@@ -68,6 +68,11 @@ class TimeFrame(models.Model):
         self.write({'state': 'open'})
 
     @api.multi
+    def action_reopen(self):
+        self.ensure_one()
+        self.write({'state': 'open'})
+
+    @api.multi
     def action_close(self):
         self.ensure_one()
         self.write({'state': 'closed'})
