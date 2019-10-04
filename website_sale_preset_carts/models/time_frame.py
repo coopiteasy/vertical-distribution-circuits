@@ -5,7 +5,12 @@
 from odoo import api, fields, models, _
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
+# from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
+import pytz
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class TimeFrame(models.Model):
@@ -34,28 +39,53 @@ class TimeFrame(models.Model):
         string="Blocked orders")
 
     @api.model
+    def localize(self, d):
+        tz_name = self.env['res.users'].browse(1).tz
+        tz_name = tz_name if tz_name else 'UTC'
+
+        if not d.tzinfo:
+            utc_tz = pytz.timezone('UTC')
+            d = utc_tz.localize(d)
+
+        context_tz = pytz.timezone(tz_name)
+        return d.astimezone(context_tz)
+
+    @api.model
     def open_timeframes(self):
-        now = datetime.now().replace(minute=0, second=0)
+        now = datetime.now()
         last_hour = now - timedelta(hours=1)
+
+        now_str = fields.Datetime.to_string(now)
+        last_hour_str = fields.Datetime.to_string(last_hour)
+        _logger.info('opening frames from %s to %s' % (last_hour_str, now_str))
+
         frames = self.search([
             ('state', '=', 'validated'),
-            ('start', '>=', last_hour.strftime(_format)),
-            ('start', '<=', now.strftime(_format)),
+            ('start', '>=', last_hour_str),
+            ('start', '<=', now_str),
         ])
+        _logger.info('opening frames %s' % frames)
         for frame in frames:
+            _logger.info('opening frame %s' % frame.name)
             frame.action_open()
 
     @api.model
     def close_timeframes(self):
-        now = datetime.now().replace(minute=0, second=0)
+        now = datetime.now()
         last_hour = now - timedelta(hours=1)
+
+        now_str = fields.Datetime.to_string(now)
+        last_hour_str = fields.Datetime.to_string(last_hour)
+        _logger.info('closing frames from %s to %s' % (last_hour_str, now_str))
 
         frames = self.search([
             ('state', '=', 'open'),
-            ('end', '>=', last_hour.strftime(_format)),
-            ('end', '<=', now.strftime(_format)),
+            ('end', '>=', last_hour_str),
+            ('end', '<=', now_str),
         ])
+        _logger.info('closing frames %s' % (frames))
         for frame in frames:
+            _logger.info('closing frame %s' % frame.name)
             frame.action_close()
 
     @api.multi
