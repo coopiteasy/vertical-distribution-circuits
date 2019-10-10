@@ -9,7 +9,8 @@
         "product",
         "sale",
         "purchase",
-        "distribution_circuits_base"
+        "distribution_circuits_base",
+        "mail"
         ],
     "author": "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
     "licence": "AGPL-3",

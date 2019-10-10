@@ -6,6 +6,7 @@ from odoo import api, fields, models
 class TimeFrame(models.Model):
     _name = "time.frame"
     _order = "delivery_date, id"
+    _inherit = ["mail.thread"]
 
     @api.onchange('delivery_date')
     def onchange_delivery_date(self):
@@ -29,7 +30,8 @@ class TimeFrame(models.Model):
                               ('closed', 'Closed'),
                               ('enclosed', 'Enclosed')],
                              default="draft",
-                             string="State")
+                             string="State",
+                             track_visibility="onchange")
     sale_orders = fields.One2many(
         'sale.order',
         'time_frame_id',
