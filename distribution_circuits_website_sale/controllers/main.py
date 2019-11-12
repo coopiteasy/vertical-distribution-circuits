@@ -30,8 +30,7 @@ class WebsiteSale(WebsiteSale):
         '/shop',
         '/shop/page/<int:page>',
         '/shop/category/<model("product.public.category"):category>',
-        '/shop/category/<model("product.public.category"):category'
-        '>/page/<int:page>',  # Continue previous line
+        '/shop/category/<model("product.public.category"):category>/page/<int:page>',  # noqa
     ], type='http', auth='user', website=True)
     def shop(self, page=0, category=None, time_frame=None, search='', **post):
         time_frames = request.website.get_open_time_frames()

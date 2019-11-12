@@ -7,7 +7,8 @@ from werkzeug.exceptions import NotFound
 from odoo import http
 from odoo.http import request
 from odoo.addons.website.controllers.main import QueryURL
-from odoo.addons.website_sale.controllers.main import WebsiteSale as Base
+from odoo.addons.distribution_circuits_website_sale.controllers.main import WebsiteSale as Base
+
 
 class WebsiteSale(Base):
 
@@ -44,7 +45,7 @@ class WebsiteSale(Base):
             context['filter_supplier_id'] = supplier
             request.env.context = context
 
-        response = super().shop(page, category, search, ppg, **post)
+        response = super().shop(page=page, category=category, search=search, ppg=ppg, **post)
 
         # Build the new `keep` function to keep arguments in the URL
         attrib_list = request.httprequest.args.getlist('attrib')
