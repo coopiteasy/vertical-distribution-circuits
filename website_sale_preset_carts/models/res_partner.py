@@ -24,11 +24,11 @@ class ResPartner(models.Model):
 
     @api.model
     def is_subscribed(self, date=None):
-        date = date if date else dt.date.today()
-
         self.ensure_one()
+
+        date = date if date else fields.Date.today()
         if self.cart_suspended_date:
-            suspended = date.today() <= self.cart_suspended_date
+            suspended = date <= self.cart_suspended_date
         else:
             suspended = False
 
