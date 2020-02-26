@@ -119,14 +119,20 @@ class TimeFrame(models.Model):
 
             unit_lines = frame._prepare_order_lines()
 
+            # we first get the customers with the corresponding subscription
             customers = (
                 self.env['res.partner']
-                    .search([('subscription_id', '=', frame.subscription_id.id),
-                             '|', ('cart_suspended_date', '=', False),
-                                  ('cart_suspended_date', '<=', frame.delivery_date)])
+                    .search([('subscription_id', '=', frame.subscription_id.id)])
             )
 
-            for customer in customers:
-                order = self._create_sale_order(customer, unit_lines)
+            # we then filter based on suspended date if suspended
+            subscribers = customers.filtered(lambda cust: cust.suspend_cart == False or (
+                                             cust.cart_suspended_from > frame.delivery_date 
+                                             or cust.cart_suspended_date < frame.delivery_date
+                                             )
+                                            )
+
+            for subscriber in subscribers:
+                order = self._create_sale_order(subscriber, unit_lines)
                 frame.sale_orders += order
-                customer.write({'last_website_so_id': order.id})
+                subscriber.write({'last_website_so_id': order.id})
