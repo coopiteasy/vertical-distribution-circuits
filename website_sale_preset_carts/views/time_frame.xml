@@ -2,6 +2,7 @@
 <!--
  Copyright 2019 Coop IT Easy SCRLfs
    Robin Keunen <robin@coopiteasy.be>
+   Houssine Bakkali <houssine@coopiteasy.be>
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
@@ -14,8 +15,23 @@
             <field name="filter_on_products" position="before">
                 <field name="preset_cart_id" context="{'form_view_ref':'website_sale_preset_carts.view_preset_cart_form_easy_create'}"/>
                 <field name="subscription_id"/>
+                <field name="block_insufficient_credit"/>
             </field>
-
+			<xpath expr="//page[@name='sale_orders']" position="after">
+                <page name="blocked_orders" string="Blocked orders" attrs="{'invisible':[('block_insufficient_credit', '=', False)]}">
+                    <field name="blocked_order_ids">
+                        <tree create="false" edit="false">
+                            <field name="partner_id"/>
+                            <field name="customer_credit"/>
+                            <field name="necessary_amount"/>
+                            <field name="state"/>
+                            <field name="validated_by"/>
+                            <button type="object" name="action_validation" string="Force validation" states="insufficient"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        
             <xpath expr="//page[@name='purchase_orders']" position="after">
                 <page name="preset_cart" string="Preset Cart">
                     <field name="preset_cart_line_ids">
