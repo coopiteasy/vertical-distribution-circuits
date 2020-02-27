@@ -30,11 +30,10 @@ class ResPartner(models.Model):
         self.ensure_one()
 
         date = date if date else fields.Date.today()
-        if self.suspend_cart and (date <= self.cart_suspended_date
-                         and date >= self.cart_suspended_from):
-            suspended = True 
-        else:
-            suspended = False
+        suspended = bool(
+            self.suspend_cart 
+            and date <= self.cart_suspended_date
+            and date >= self.cart_suspended_from)
 
         return self.subscription_id and not suspended
 
