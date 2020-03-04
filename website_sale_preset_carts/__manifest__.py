@@ -31,5 +31,7 @@
         "views/time_frame.xml",
         "views/subscription.xml",
         "views/menu.xml",
+        "templates/suspend_cart_portal.xml",
+        "templates/suspend_cart_form.xml",
     ]
 }
