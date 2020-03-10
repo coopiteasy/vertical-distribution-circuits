@@ -122,7 +122,8 @@ class TimeFrame(models.Model):
         return sale_order
 
     def compute_cart_amount(self, subscriber, lines):
-        amount = [line['price_unit'] * line['product_uom_qty'] * subscriber.nb_household  for line in lines][0]
+        amount = (line['price_unit'] * line['product_uom_qty'] *
+                  subscriber.nb_household for line in lines)
         return amount
 
     @api.model
@@ -136,13 +137,15 @@ class TimeFrame(models.Model):
             # we first get the customers with the corresponding subscription
             customers = (
                 self.env['res.partner']
-                    .search([('subscription_id', '=', frame.subscription_id.id)])
+                    .search([
+                        ('subscription_id', '=', frame.subscription_id.id)
+                        ])
             )
 
             # we then filter based on suspended date if suspended
             subscribers = customers.filtered(
                 lambda cust: not cust.suspend_cart or (
-                        cust.cart_suspended_from > frame.delivery_date 
+                        cust.cart_suspended_from > frame.delivery_date
                         or cust.cart_suspended_date < frame.delivery_date
                     )
                 )
@@ -176,7 +179,7 @@ class TimeFrameBlockedOrder(models.Model):
         string="Necessary amount")
     state = fields.Selection(
         [('insufficient', 'Insufficient credit'),
-        ('manual', 'Forced validation')],
+         ('manual', 'Forced validation')],
         string="State",
         default='insufficient')
     validated_by = fields.Many2one(
@@ -205,4 +208,5 @@ class TimeFrameBlockedOrder(models.Model):
             self.partner_id.write({'last_website_so_id': order.id})
             self.state = 'manual'
         else:
-            raise UserError(_("You cannot validate manually a blocked order if the time frame is not open anymore."))
+            raise UserError(_("You cannot validate manually a blocked order "
+                              "if the time frame is not open anymore."))
