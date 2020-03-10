@@ -33,8 +33,4 @@ class Partner(models.Model):
                 ('invoice_status', '!=', 'invoiced')
                 ])
 
-            amount_total = 0
-            for order in orders:
-                amount_total += order.amount_total
-
-            partner.amount_due = amount_total
+            partner.amount_due = sum(o.amount_total for o in orders)
