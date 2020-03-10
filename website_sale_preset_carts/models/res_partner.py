@@ -32,7 +32,7 @@ class ResPartner(models.Model):
 
         date = date if date else fields.Date.today()
         suspended = bool(
-            self.suspend_cart 
+            self.suspend_cart
             and date <= self.cart_suspended_date
             and date >= self.cart_suspended_from)
 
@@ -54,19 +54,10 @@ class ResPartner(models.Model):
         return res
 
     @api.multi
-    def write(self, vals):
+    @api.constrains('cart_suspended_from', 'cart_suspended_date')
+    def _check_suspended_dates(self):
         for partner in self:
-            if 'cart_suspended_from' in vals and 'cart_suspended_date' in vals:
-                suspended_from = vals['cart_suspended_from']
-                suspended_to = vals['cart_suspended_date']
-            elif 'cart_suspended_from' in vals:
-                suspended_from = vals['cart_suspended_from']
-                suspended_to = partner.cart_suspended_date
-            elif 'cart_suspended_date' in vals:
-                suspended_from = partner.cart_suspended_from
-                suspended_to = vals['cart_suspended_date']
-            else:
-                return super(ResPartner, partner).write(vals)
-            if suspended_from > suspended_to:
-                raise UserError(_("Cart Suspended from date can't be after Cart Suspended Until date."))
-            return super(ResPartner, partner).write(vals)
+            if partner.cart_suspended_from > partner.cart_suspended_date:
+                raise UserError(
+                    _("Cart Suspended from date can't be after Cart "
+                      "Suspended Until date."))
