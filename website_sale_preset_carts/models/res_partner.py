@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRLfs
 #     Robin Keunen <robin@coopiteasy.be>
+#     Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
-import datetime as dt
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
@@ -18,6 +18,10 @@ class ResPartner(models.Model):
         comodel_name='subscription',
         string='Subscription',
         required=False)
+    suspend_cart = fields.Boolean(
+        string='Suspend cart')
+    cart_suspended_from = fields.Date(
+        string='Cart Suspended from')
     cart_suspended_date = fields.Date(
         string='Cart Suspended Until',
     )
@@ -27,10 +31,10 @@ class ResPartner(models.Model):
         self.ensure_one()
 
         date = date if date else fields.Date.today()
-        if self.cart_suspended_date:
-            suspended = date <= self.cart_suspended_date
-        else:
-            suspended = False
+        suspended = bool(
+            self.suspend_cart
+            and date <= self.cart_suspended_date
+            and date >= self.cart_suspended_from)
 
         return self.subscription_id and not suspended
 
@@ -48,3 +52,12 @@ class ResPartner(models.Model):
         res['nb_household'] = partner.nb_household
         res['subscriptions'] = self.sudo().get_subscriptions()
         return res
+
+    @api.multi
+    @api.constrains('cart_suspended_from', 'cart_suspended_date')
+    def _check_suspended_dates(self):
+        for partner in self:
+            if partner.cart_suspended_from > partner.cart_suspended_date:
+                raise UserError(
+                    _("Cart Suspended from date can't be after Cart "
+                      "Suspended Until date."))

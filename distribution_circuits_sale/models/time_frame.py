@@ -1,3 +1,6 @@
+# Copyright 2019 Coop IT Easy SCRLfs
+#     Houssine Bakkali <houssine@coopiteasy.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from datetime import datetime
 
 from odoo import api, fields, models
@@ -43,6 +46,11 @@ class TimeFrame(models.Model):
         'time_frame_id',
         string="Purchase orders",
         readonly=True)
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string="Company",
+        readonly=True,
+        default=lambda self: self.env['res.company']._company_default_get('account.invoice'))
 
     @api.multi
     def action_validate(self):
