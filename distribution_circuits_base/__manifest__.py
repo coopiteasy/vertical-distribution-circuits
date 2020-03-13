@@ -34,9 +34,11 @@
     This module give the base features to enable the
     short distribution circuits.
     """,
+    "demo": [
+        'demo/demo.xml',
+    ],
     'data': [
         'security/easy_my_hub_security.xml',
-        'demo/demo.xml',
         'views/res_partner_view.xml',
         'views/menu_item.xml',
     ],
