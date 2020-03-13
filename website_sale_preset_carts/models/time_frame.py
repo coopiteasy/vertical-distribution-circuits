@@ -122,8 +122,8 @@ class TimeFrame(models.Model):
         return sale_order
 
     def compute_cart_amount(self, subscriber, lines):
-        amount = (line['price_unit'] * line['product_uom_qty'] *
-                  subscriber.nb_household for line in lines)
+        amount = [line['price_unit'] * line['product_uom_qty'] *
+                  subscriber.nb_household for line in lines][0]
         return amount
 
     @api.model
