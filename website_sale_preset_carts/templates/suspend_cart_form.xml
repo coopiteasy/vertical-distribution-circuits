@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Coop IT Easy SCRLfs <http://coopiteasy.be>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <template id="suspend_cart_form" name="Suspend Cart Form">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Suspend Cart</t>
+            <t t-set="no_breadcrumbs" t-value="True"/>
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+                    <h3 class="text-center mt-4">
+                        Suspend Cart
+                    </h3>
+                    <form class="oe_suspend_cart_form" role="form" method="post" t-if="not message">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <p class="alert alert-danger" role="alert" t-if="errors.get('__all__')">
+                            <t t-esc="errors.get('__all__')"/>
+                        </p>
+
+                        <div t-attf-class="form-group field-date_from">
+                            <label t-attf-for="date_from">Date From</label>
+                            <input t-attf-id="date_from"
+                                class="form-control form-control-sm"
+                                t-att-min="today"
+                                type="date"
+                                name="date_from"
+                                t-att-value="data.get('date_from', initial.get('date_from'))"
+                                required="required"
+                            />
+                        </div>
+                        <p class="alert alert-danger" t-if="'date_from' in errors" role="alert">
+                            <t t-esc="str(errors['date_from'])"/>
+                        </p>
+
+                        <div t-attf-class="form-group field-date_to">
+                            <label t-attf-for="date_to">Date To</label>
+                            <input t-attf-id="date_to"
+                                class="form-control form-control-sm"
+                                t-att-min="today"
+                                type="date"
+                                name="date_to"
+                                t-att-value="data.get('date_to', initial.get('date_to'))"
+                                required="required"
+                            />
+                        </div>
+                        <p class="alert alert-danger" t-if="'date_to' in errors" role="alert">
+                            <t t-esc="str(errors['date_to'])"/>
+                        </p>
+
+                        <p class="alert alert-danger" role="alert" t-if="errors.get('__all__')">
+                            <t t-esc="errors.get('__all__')"/>
+                        </p>
+
+                        <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        <div class="text-center oe_login_buttons pt-3">
+                            <button type="submit" class="btn btn-primary btn-block">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
