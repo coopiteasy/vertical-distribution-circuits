@@ -1,5 +1,6 @@
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
+#   Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
@@ -100,15 +101,15 @@ class Subscription(models.Model):
         end = _parse(self.next_delivery) - dt.timedelta(days=self.close_interval)
         frame = (
             self.env['time.frame']
-                .create({
+            .create({
                     'subscription_id': self.id,
                     'delivery_date': self.next_delivery,
                     'start': _format(start),
                     'end': _format(end),
-            })
+                    })
         )
         action = {
-            'name':_("New Frame"),
+            'name': _("New Frame"),
             'view_mode': 'form',
             'view_id': False,
             'view_type': 'form',
