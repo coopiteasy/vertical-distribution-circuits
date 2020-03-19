@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <data noupdate="1">
+        <record id="mass_mailing_execute_criteria_cron" model="ir.cron">
+            <field name="name">Mass mailing: execute all criteria and send emails</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_ps_mailing_criterium"/>
+            <field name="code">model.cron_send_mail()</field>
+        </record>
+    </data>
+</odoo>
