@@ -3,7 +3,7 @@
      Copyright 2019 Coop IT Easy
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
-<odoo noupdate="0">    <!-- fixme -->
+<odoo noupdate="1">
     
     <record id="ir_cron_open_timeframes_daily" model="ir.cron">
         <field name="name">Open time frame hourly</field>
