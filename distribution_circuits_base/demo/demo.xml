@@ -5,7 +5,7 @@
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <data noupdate="0"> <!-- fixme -->
+    <data noupdate="1"> <!-- fixme -->
 
         <record id="partner_raliment_point_1" model="res.partner">
             <field name="name">Point de r'Aliment</field>
@@ -71,7 +71,7 @@
             <field name="country_id" ref="base.be"/>
         </record>
 
-        <record id="partner_gac_1" model="res.partner">
+        <record id="distribution_circuits_base.partner_gac_1" model="res.partner">
             <field name="name">Kas'ap</field>
             <field name="customer" eval="True"/>
             <field name="is_gac" eval="True"/>
