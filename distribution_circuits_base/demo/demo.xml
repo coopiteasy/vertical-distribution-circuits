@@ -5,7 +5,7 @@
  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <data noupdate="0"> <!-- fixme -->
+    <data noupdate="1">
 
         <record id="partner_raliment_point_1" model="res.partner">
             <field name="name">Point de r'Aliment</field>

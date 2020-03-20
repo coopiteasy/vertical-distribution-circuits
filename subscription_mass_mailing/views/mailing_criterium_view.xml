@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2019 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="ps_mailing_criterium_view_form" model="ir.ui.view">
+        <field name="name">ps_mailing_criterium_view_form</field>
+        <field name="model">ps.mailing.criterium</field>
+        <field name="arch" type="xml">
+            <form string="ps_mailing_criterium_form">
+                <header>
+                    <button name="test_eval_py_expr_filter" type="object" string="Test Expression"/>
+                    <button name="send_email" type="object" string="Send Emails"/>
+                </header>
+                <sheet>
+                     <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "active"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="subscription"/>
+                        <field name="mail_template"/>
+                        <field name="py_expr_filter"/>
+                        <field name="nb_subscriptions"/>
+                    </group>
+                    <notebook>
+                        <page name="emails" string="Emails">
+                            <group>
+                                <field name="mail_ids" nolabel="1">
+                                    <tree string="Emails" decoration-muted="state in ('sent', 'cancel')" decoration-info="state=='outgoing'" decoration-danger="state=='exception'">
+                                        <field name="date"/>
+                                        <field name="subject"/>
+                                        <field name="author_id" string="User" invisible="1"/>
+                                        <field name="email_from"/>
+                                        <field name="email_to"/>
+                                        <field name="partner_id"/>
+                                        <field name="message_id" invisible="1"/>
+                                        <field name="recipient_ids" invisible="1"/>
+                                        <field name="model" invisible="1"/>
+                                        <field name="res_id" invisible="1"/>
+                                        <field name="state"/>
+                                        <field name="message_type" invisible="1"/>
+                                        <button name="send" string="Send Now" type="object" icon="gtk-media-play" states='outgoing'/>
+                                        <button name="mark_outgoing" string="Retry" type="object" icon="gtk-redo" states='exception,cancel'/>
+                                        <button name="cancel" string="Cancel Email" type="object" icon="terp-gtk-stop" states='outgoing'/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ps_mailing_criterium_view_tree" model="ir.ui.view">
+        <field name="name">ps_mailing_criterium_view_tree</field>
+        <field name="model">ps.mailing.criterium</field>
+        <field name="arch" type="xml">
+            <tree string="ps_mailing_criterium_tree">
+                <field name="name"/>
+                <field name="subscription"/>
+                <field name="mail_template"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ps_mailing_criterium_view_action" model="ir.actions.act_window">
+        <field name="name">Mailing Criteria</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ps.mailing.criterium</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="ps_mailing_criterium_menu"
+              name="Mailing Criteria"
+              parent="mass_mailing.mass_mailing_menu"
+              action="ps_mailing_criterium_view_action"
+              sequence="0"/>
+</odoo>
