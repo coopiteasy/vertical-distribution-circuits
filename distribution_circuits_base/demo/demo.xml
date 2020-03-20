@@ -71,7 +71,7 @@
             <field name="country_id" ref="base.be"/>
         </record>
 
-        <record id="distribution_circuits_base.partner_gac_1" model="res.partner">
+        <record id="partner_gac_1" model="res.partner">
             <field name="name">Kas'ap</field>
             <field name="customer" eval="True"/>
             <field name="is_gac" eval="True"/>
