@@ -9,9 +9,6 @@ from odoo import models, fields
 class Mail(models.Model):
     _inherit = "mail.mail"
 
-#     subscription_id = fields.Many2one(
-#         comodel_name="subscription", string="Subscription"
-#     )
     partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Subscriber"
