@@ -47,6 +47,7 @@ class MailingCriterium(models.Model):
     mail_template = fields.Many2one(
         comodel_name="mail.template",
         string="Email Template",
+        domain=[('model', '=', 'res.partner')],
         required=True,
     )
     py_expr_filter = fields.Char(
@@ -91,7 +92,7 @@ class MailingCriterium(models.Model):
             )
             for subscriber in subscribers:
                 criterium.mail_template.use_default_to = True
-                email_id = criterium.mail_template.send_mail(subscriber.id)
+                email_id = criterium.mail_template.sudo().send_mail(subscriber.id)
                 self.env["mail.mail"].browse(email_id).write(
                     {
                         "criterium_id": criterium.id,
