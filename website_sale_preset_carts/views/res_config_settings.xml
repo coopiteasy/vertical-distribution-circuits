@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Coop IT Easy SCRLfs
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="res_config_settings_view_form_website_sale_preset_carts" model="ir.ui.view">
+    <field name="name">
+      res.config.settings.view.form.website.sale.preset.carts
+    </field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="website_sale.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[@id='checkout_mail_setting']" position="before">
+            <div class="col-xs-12 col-md-6 o_setting_box" id="send_sale_order_on_timeframe_open">
+                <div class="o_setting_left_pane">
+                    <field name="send_sale_order_on_timeframe_open"/>
+                </div>
+                <div class="o_setting_right_pane">
+                    <label for="send_sale_order_on_timeframe_open"/>
+                    <div class="text-muted">
+                        Send Confirmation Email to Customer with Sale Order when the Timeframe is Opened
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 o_setting_box" id="send_sale_order_on_timeframe_close">
+                <div class="o_setting_left_pane">
+                    <field name="send_sale_order_on_timeframe_close"/>
+                </div>
+                <div class="o_setting_right_pane">
+                    <label for="send_sale_order_on_timeframe_close"/>
+                    <div class="text-muted">
+                        Send Confirmation Email to Customer with Sale Order when the Timeframe is Closed
+                    </div>
+                </div>
+            </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

@@ -69,7 +69,10 @@ class TimeFrame(models.Model):
         self.ensure_one()
         self.generate_sale_orders()
         for order in self.sale_orders.filtered(lambda so: so.state == 'draft'):
-            order.force_quotation_send()
+            if self.env['ir.config_parameter'].sudo().get_param(
+                    'website_sale_preset_carts.send_sale_order_on_timeframe_open'
+            ):
+                order.force_quotation_send()
             order.state = 'draft'
         return super(TimeFrame, self).action_open()
 
@@ -80,8 +83,13 @@ class TimeFrame(models.Model):
         for order in self.sale_orders:
             if order.state == 'draft':
                 if order.partner_id.is_subscribed(self.delivery_date):
-                    # should I prevent sending email?
-                    order.action_confirm()
+                    if self.env['ir.config_parameter'].sudo().get_param(
+                        'website_sale_preset_carts.'
+                        'send_sale_order_on_timeframe_close'
+                    ):
+                        order.with_context(send_email=True).action_confirm()
+                    else:
+                        order.with_context(send_email=False).action_confirm()
                     order.action_done()
 
         return super(TimeFrame, self).action_close()
