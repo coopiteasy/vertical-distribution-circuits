@@ -3,7 +3,7 @@
 #   Robin Keunen <robin@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons.distribution_circuits_website_sale.controllers.authsignup import AuthSignupHome
+from odoo.addons.dc_website_registration.controllers.authsignup import AuthSignupHome
 from odoo import http
 from odoo.http import request
 
