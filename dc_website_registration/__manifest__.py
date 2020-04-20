@@ -10,7 +10,7 @@
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
-                'distribution_circuits__website_sale',
+                'distribution_circuits_website_sale',
                 'portal',
                 'website_sale',
                 'auth_signup',
