@@ -1,16 +1,11 @@
-# -*- coding: utf-8 -*-
+# Copyright 2017 Coop IT Easy SCRLfs
+#     Houssine Bakkali <houssine@coopiteasy.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from ast import literal_eval
 from odoo.tools.misc import ustr
 
-from odoo import api, fields, models
+from odoo import api, models
 from odoo.addons.auth_signup.models.res_partner import SignupError
-
-
-class ResUsers(models.Model):
-
-    _inherit = "res.users"
-
-    need_validation = fields.Boolean(string="Need validation")
 
 
 class ResPartner(models.Model):
@@ -20,11 +15,13 @@ class ResPartner(models.Model):
     def signup_retrieve_info(self, token):
         res = super(ResPartner, self).signup_retrieve_info(token)
         partner = self.sudo().search([('email', '=', res.get('login'))])
+        rp = partner.raliment_point_id
+        dp = partner.delivery_point_id
 
         res['lastname'] = partner.lastname
         res['firstname'] = partner.firstname
-        res['raliment_point_id'] = partner.raliment_point_id.id if len(partner.raliment_point_id) > 0 else 0
-        res['delivery_point_id'] = partner.delivery_point_id.id if len(partner.delivery_point_id) > 0 else 0
+        res['raliment_point_id'] = rp.id if len(rp) > 0 else 0
+        res['delivery_point_id'] = dp.id if len(dp) > 0 else 0
         res['phone'] = partner.phone
         res['zip_code'] = partner.zip
         res['street'] = partner.street

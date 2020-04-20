@@ -4,7 +4,6 @@
 	<template id="assets_frontend" inherit_id="website.assets_frontend" name="Distribution circtuits Shop">
 	  <xpath expr="." position="inside">
 	      <script type="text/javascript" src="/distribution_circuits_website_sale/static/src/js/website_sale.js"></script>
-	  	  <script src="/distribution_circuits_website_sale/static/src/js/auth_signup.js" type="text/javascript"/>
 	  </xpath>
 	</template>
 	

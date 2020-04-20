@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
-# © 2017 Coop IT Easy (http://www.coopiteasy.be)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2017 Coop IT Easy SCRLfs
+#     Houssine Bakkali <houssine@coopiteasy.be>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     'name': 'Distribution Circuits in E-Commerce',
     'category': 'e-commerce',
     'author': "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
-    'website': 'www.coopiteasy.be',
-    'version': '11.0.1.0.0',
+    'website': 'https://coopiteasy.be',
+    'version': '11.0.2.0.0',
     'license': 'AGPL-3',
     'depends': ['distribution_circuits_base',
                 'distribution_circuits_sale',
                 'portal',
                 'website_sale',
                 'website_payment',
-                'auth_signup',
                 'mail',
                 ],
     "description": """
@@ -27,9 +26,7 @@
         "security/ir.model.access.csv",
         "views/website_sale_template.xml",
         "views/website_portal_sale_template.xml",
-        "views/auth_signup_template.xml",
         "views/res_config_settings_views.xml",
-        "views/res_users_view.xml",
     ],
     'installable': True,
 }
