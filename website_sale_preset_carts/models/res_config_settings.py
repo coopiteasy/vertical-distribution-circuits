@@ -1,8 +1,6 @@
 # Copyright 2018 Coop IT Easy SCRLfs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from ast import literal_eval
-
 from odoo import api, models, fields
 
 

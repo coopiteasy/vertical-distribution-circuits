@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+         <record id="res_config_settings_send_sale_order_on_timeframe_open" model="ir.config_parameter">
+            <field name="key">website_sale_preset_carts.send_sale_order_on_timeframe_open</field>
+            <field name="value">True</field>
+        </record>
+        <record id="res_config_settings_send_sale_order_on_timeframe_close" model="ir.config_parameter">
+            <field name="key">website_sale_preset_carts.send_sale_order_on_timeframe_close</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

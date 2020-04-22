@@ -24,6 +24,7 @@
     ],
     "data": [
         "data/cron.xml",
+        "data/res_config_settings.xml",
         "security/ir.model.access.csv",
         "views/auth_signup_template.xml",
         "views/preset_cart.xml",
