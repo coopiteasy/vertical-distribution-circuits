@@ -70,7 +70,8 @@ class WebsiteSale(WebsiteSale):
                     request.redirect('/shop')
                 else:
                     order.sudo().write({'time_frame_id': time_frame.id})
-                    return {time_frame.id: time_frame.name}
+            else:
+                request.session['selected_time_frame'] = time_frame.id
         else:
             request.session['selected_time_frame'] = None
         return {0: ""}

@@ -7,7 +7,7 @@
     'category': 'e-commerce',
     'author': "Coop IT Easy - Houssine BAKKALI <houssine@coopiteasy.be>",
     'website': 'https://coopiteasy.be',
-    'version': '11.0.2.0.0',
+    'version': '11.0.2.0.1',
     'license': 'AGPL-3',
     'depends': ['distribution_circuits_base',
                 'distribution_circuits_sale',
