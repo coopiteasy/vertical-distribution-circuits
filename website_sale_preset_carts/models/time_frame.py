@@ -126,7 +126,8 @@ class TimeFrame(models.Model):
         })
         for line in lines:
             line['order_id'] = sale_order.id
-            self.env['sale.order.line'].create(line)
+            so_line = self.env['sale.order.line'].create(line)
+            so_line.product_id_change()
         return sale_order
 
     def compute_cart_amount(self, subscriber, lines):
