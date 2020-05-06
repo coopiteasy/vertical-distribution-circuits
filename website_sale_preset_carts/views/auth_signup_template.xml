@@ -4,7 +4,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-    <template id="easy_my_hub_auth_signup_preset_carts" inherit_id="distribution_circuits_website_sale.easy_my_hub_auth_fields">
+    <template id="easy_my_hub_auth_signup_preset_carts" inherit_id="dc_website_registration.easy_my_hub_auth_fields">
         <xpath expr="//div[@name='delivery_point']" position="after">
 
             <div name="cart_subscription" class="form-group field-name">
