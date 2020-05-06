@@ -16,7 +16,7 @@ class WebsiteSale(Base):
         domain = super()._get_search_domain(search, category, attrib_values)
         if 'filter_supplier_id' in request.env.context:
             supplier = request.env.context['filter_supplier_id']
-            sellers = request.env['product.supplierinfo'].search([
+            sellers = request.env['product.supplierinfo'].sudo().search([
                 ('name', 'child_of', int(supplier)),
                 '|', ('date_start', '<=', datetime.today()),
                 ('date_start', '=', None),
@@ -57,7 +57,7 @@ class WebsiteSale(Base):
         # Add element to context
         response.qcontext['keep'] = keep
         response.qcontext['supplier'] = supplier
-        response.qcontext['suppliers'] = res_partner_mgr.search([
+        response.qcontext['suppliers'] = res_partner_mgr.sudo().search([
             ('supplier', '=', True)
         ])
 
