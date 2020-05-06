@@ -13,10 +13,10 @@
     "license": "AGPL-3",
     "depends": [
         "base",
+        "dc_website_registration",
         "distribution_circuits_base",
         "distribution_circuits_sale",
         "distribution_circuits_website_sale",
-        "dc_website_registration",
     ],
     "demo": [
         "demo/demo.xml",  # fixme

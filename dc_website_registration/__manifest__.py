@@ -10,10 +10,9 @@
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
-                'distribution_circuits_website_sale',
-                'portal',
-                'website_sale',
                 'auth_signup',
+                'web',
+                'distribution_circuits_base'
                 ],
     "description": """
     This module allows to choose your raliment point preference and give
