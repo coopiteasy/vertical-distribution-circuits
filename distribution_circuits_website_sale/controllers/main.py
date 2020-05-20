@@ -23,7 +23,7 @@ class WebsiteSale(WebsiteSale):
             time_frame = time_frame_obj.sudo().browse(tf_id)
             if time_frame.filter_on_products:
                 domain.append(
-                    ('id', 'in', time_frame.products.ids))
+                    ('id', 'in', time_frame.products.mapped('product_tmpl_id.id')))
         return domain
 
     @http.route([
