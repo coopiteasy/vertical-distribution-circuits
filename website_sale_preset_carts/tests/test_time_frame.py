@@ -103,8 +103,8 @@ class TestTimeFrame(TransactionCase):
         self.assertTrue(partner1.is_subscribed())
         self.assertTrue(partner1.is_subscribed(future_date))
 
-        self.assertTrue(partner2.is_subscribed())
-        self.assertFalse(partner2.is_subscribed(future_date))
+        self.assertFalse(partner2.is_subscribed())
+        self.assertTrue(partner2.is_subscribed(future_date))
 
         self.assertFalse(partner3.is_subscribed())
         self.assertFalse(partner3.is_subscribed(future_date))

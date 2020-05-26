@@ -40,6 +40,7 @@
 		                	<group>
 		                		<field name="filter_on_products"/>
 		                		<field name="resellers_only"/>
+		                		<field name="supervisor_id"/>
 		                	</group>
 		            	</group>
 		            	<notebook>
