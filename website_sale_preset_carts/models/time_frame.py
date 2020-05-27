@@ -71,8 +71,8 @@ class TimeFrame(models.Model):
                 frame.action_open()
             except:
                 if self.env['ir.config_parameter'].sudo().get_param(
-                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
-                    email_template_timeframe_error_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_error_state', False)
+                    'website_sale_preset_carts.send_mail_to_supervisor'):
+                    email_template_timeframe_error_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_error_state', False)
                     email_template_timeframe_error_state.send_mail(frame.id)
 
     @api.model
@@ -96,8 +96,8 @@ class TimeFrame(models.Model):
                 frame.action_close()
             except:
                 if self.env['ir.config_parameter'].sudo().get_param(
-                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
-                    email_template_timeframe_error_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_error_state', False)
+                    'website_sale_preset_carts.send_mail_to_supervisor'):
+                    email_template_timeframe_error_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_error_state', False)
                     email_template_timeframe_error_state.send_mail(frame.id)
 
     @api.multi
@@ -116,12 +116,16 @@ class TimeFrame(models.Model):
             ):
                 order.force_quotation_send()
             order.state = 'draft'
-        return super(TimeFrame, self).action_open()
+        res = super(TimeFrame, self).action_open()
+        if self.env['ir.config_parameter'].sudo().get_param(
+                    'website_sale_preset_carts.send_mail_to_supervisor'):
+            email_template_timeframe_success_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.send_mail(self.id)
+        return res
 
     @api.multi
     def action_close(self):
         self.ensure_one()
-
         for order in self.sale_orders:
             if order.state == 'draft':
                 if order.partner_id.is_subscribed(self.delivery_date):
@@ -133,8 +137,12 @@ class TimeFrame(models.Model):
                     else:
                         order.with_context(send_email=False).action_confirm()
                     order.action_done()
-
-        return super(TimeFrame, self).action_close()
+        res = super(TimeFrame, self).action_close()
+        if self.env['ir.config_parameter'].sudo().get_param(
+                    'website_sale_preset_carts.send_mail_to_supervisor'):
+            email_template_timeframe_success_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.send_mail(self.id)
+        return res
 
     def _prepare_order_lines(self):
         # fixme : seems that list price on customer won't be taken into account

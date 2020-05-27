@@ -13,6 +13,9 @@ class ResConfigSettings(models.TransientModel):
     send_sale_order_on_timeframe_close = fields.Boolean(
         string="Email when Timeframe is Closed",
     )
+    send_mail_to_supervisor = fields.Boolean(
+        string="Send notification emails to Time frame supervisor",
+    )
 
     @api.model
     def get_values(self):
@@ -20,10 +23,12 @@ class ResConfigSettings(models.TransientModel):
         select_type = self.env['ir.config_parameter'].sudo()
         send_sale_order_on_timeframe_open = select_type.get_param('website_sale_preset_carts.send_sale_order_on_timeframe_open')
         send_sale_order_on_timeframe_close = select_type.get_param('website_sale_preset_carts.send_sale_order_on_timeframe_close')
-        res.update(
-            {'send_sale_order_on_timeframe_open': send_sale_order_on_timeframe_open,
-             'send_sale_order_on_timeframe_close': send_sale_order_on_timeframe_close}
-        )
+        send_mail_to_supervisor = select_type.get_param('website_sale_preset_carts.send_mail_to_supervisor')
+        res.update({
+            'send_sale_order_on_timeframe_open': send_sale_order_on_timeframe_open,
+            'send_sale_order_on_timeframe_close': send_sale_order_on_timeframe_close,
+            'send_mail_to_supervisor': send_mail_to_supervisor
+        })
         return res
 
     @api.multi
@@ -32,3 +37,4 @@ class ResConfigSettings(models.TransientModel):
         select_type = self.env['ir.config_parameter'].sudo()
         select_type.set_param('website_sale_preset_carts.send_sale_order_on_timeframe_open', self.send_sale_order_on_timeframe_open)
         select_type.set_param('website_sale_preset_carts.send_sale_order_on_timeframe_close', self.send_sale_order_on_timeframe_close)
+        select_type.set_param('website_sale_preset_carts.send_mail_to_supervisor', self.send_mail_to_supervisor)

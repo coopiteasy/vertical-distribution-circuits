@@ -73,19 +73,11 @@ class TimeFrame(models.Model):
     def action_open(self):
         self.ensure_one()
         self.write({'state': 'open'})
-        if self.env['ir.config_parameter'].sudo().get_param(
-                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
-            email_template_timeframe_success_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
 
     @api.multi
     def action_close(self):
         self.ensure_one()
         self.write({'state': 'closed'})
-        if self.env['ir.config_parameter'].sudo().get_param(
-                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
-            email_template_timeframe_success_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
 
     @api.multi
     def action_enclose(self):
