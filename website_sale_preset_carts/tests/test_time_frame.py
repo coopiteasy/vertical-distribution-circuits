@@ -73,3 +73,10 @@ class TestTimeFrame(TransactionCase):
         self.assertEqual(frame.state, 'closed')
         self.assertTrue(frame.sale_orders)
         self.assertTrue(all((o.state == 'done' for o in frame.sale_orders)))
+
+    def test_timeframe_nosubscription(self):
+        frame = self.env.ref('website_sale_preset_carts.demo_timeframe_current_nosubscription')
+        frame.action_validate()
+        frame.action_open()
+        self.assertFalse(frame.sale_orders)
+

@@ -73,5 +73,13 @@
             <field name="subscription_id" ref="demo_subscription_tuesday"/>
             <field name="preset_cart_id" ref="demo_preset_cart_1"/>
         </record>
+
+        <record id="demo_timeframe_current_nosubscription" model="time.frame">
+            <field name="name" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-W%W')"/>
+            <field name="state">draft</field>
+            <field name="start" eval="(datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+            <field name="end" eval="(datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="delivery_date" eval="(datetime.now() + timedelta(days=4)).strftime('%Y-%m-%d')"/>
+        </record>
     </data>
 </odoo>
