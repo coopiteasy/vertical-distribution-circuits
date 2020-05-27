@@ -13,7 +13,7 @@
         <field name="arch" type="xml">
 
             <field name="filter_on_products" position="before">
-                <field name="preset_cart_id" context="{'form_view_ref':'website_sale_preset_carts.view_preset_cart_form_easy_create'}"/>
+                <field name="preset_cart_id" context="{'form_view_ref':'website_sale_preset_carts.view_preset_cart_form_easy_create'}" attrs="{'required':[('subscription_id', '!=', False)]}"/>
                 <field name="subscription_id"/>
                 <field name="block_insufficient_credit"/>
             </field>

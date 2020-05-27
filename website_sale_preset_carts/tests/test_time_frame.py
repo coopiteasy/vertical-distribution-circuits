@@ -36,8 +36,8 @@ class TestTimeFrame(TransactionCase):
 
             self.assertEqual(len(cart_lines), len(order_lines))
             self.assertItemsEqual(
-                [q * order.partner_id.nb_household for i, q in cart_lines],
-                [q for i, q in order_lines],
+                [round(q * order.partner_id.nb_household, 2) for i, q in cart_lines],
+                [round(q, 2) for i, q in order_lines],
             )
 
     def test_action_open_generates_sale_orders(self):

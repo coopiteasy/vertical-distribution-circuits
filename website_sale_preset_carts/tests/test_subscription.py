@@ -52,6 +52,6 @@ class TestSubscription(TransactionCase):
             'recurring_rule': 'weekly',
         })
         action = sub.create_next_time_frame()
-        from pprint import pprint
-        pprint(action)
+        # from pprint import pprint
+        # pprint(action)
         self.assertTrue(True)
