@@ -9,11 +9,9 @@ class ResConfigSettings(models.TransientModel):
 
     send_sale_order_on_timeframe_open = fields.Boolean(
         string="Email when Timeframe is Opened",
-        default=True
     )
     send_sale_order_on_timeframe_close = fields.Boolean(
         string="Email when Timeframe is Closed",
-        default=True
     )
 
     @api.model
