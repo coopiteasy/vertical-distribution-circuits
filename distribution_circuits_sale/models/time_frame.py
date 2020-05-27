@@ -73,21 +73,25 @@ class TimeFrame(models.Model):
     def action_open(self):
         self.ensure_one()
         self.write({'state': 'open'})
-        self.message_post(
-            'The Time frame %s has just beed opened' % self.name,
-            subject='The Time frame %s has just beed opened' % self.name,
-            subtype='mail.mt_comment'
-        )
+        if self.env['ir.config_parameter'].sudo().get_param(
+                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
+            self.message_post(
+                'The Time frame %s has just beed opened' % self.name,
+                subject='The Time frame %s has just beed opened' % self.name,
+                subtype='mail.mt_comment'
+            )
 
     @api.multi
     def action_close(self):
         self.ensure_one()
         self.write({'state': 'closed'})
-        self.message_post(
-            'The Time frame %s has just been closed' % self.name,
-            subject='The Time frame %s has just been closed' % self.name,
-            subtype='mail.mt_comment'
-        )
+        if self.env['ir.config_parameter'].sudo().get_param(
+                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
+            self.message_post(
+                'The Time frame %s has just been closed' % self.name,
+                subject='The Time frame %s has just been closed' % self.name,
+                subtype='mail.mt_comment'
+            )
 
     @api.multi
     def action_enclose(self):

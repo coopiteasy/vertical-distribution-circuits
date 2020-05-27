@@ -31,6 +31,7 @@
         'views/partner_view.xml',
         'views/purchase_view.xml',
         'views/sale_order_report_template.xml',
+        'views/res_config_settings.xml',
         'views/menu_item.xml',
     ],
     'installable': True,
