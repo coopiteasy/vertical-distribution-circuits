@@ -25,6 +25,7 @@
         'demo/demo.xml',
     ],
     'data': [
+        'data/mail_template.xml',
         'security/ir.model.access.csv',
         'views/time_frame_view.xml',
         'views/sale_view.xml',

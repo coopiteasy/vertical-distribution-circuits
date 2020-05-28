@@ -67,7 +67,13 @@ class TimeFrame(models.Model):
         _logger.info('opening frames %s' % frames)
         for frame in frames:
             _logger.info('opening frame %s' % frame.name)
-            frame.action_open()
+            try:
+                frame.action_open()
+            except:
+                if self.env['ir.config_parameter'].sudo().get_param(
+                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
+                    email_template_timeframe_error_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_error_state', False)
+                    email_template_timeframe_error_state.send_mail(frame.id)
 
     @api.model
     def close_timeframes(self):
@@ -86,7 +92,13 @@ class TimeFrame(models.Model):
         _logger.info('closing frames %s' % (frames))
         for frame in frames:
             _logger.info('closing frame %s' % frame.name)
-            frame.action_close()
+            try:
+                frame.action_close()
+            except:
+                if self.env['ir.config_parameter'].sudo().get_param(
+                    'distribution_circuits_website_sale.send_mail_to_supervisor'):
+                    email_template_timeframe_error_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_error_state', False)
+                    email_template_timeframe_error_state.send_mail(frame.id)
 
     @api.multi
     def action_draft(self):

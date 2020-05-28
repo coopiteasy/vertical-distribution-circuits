@@ -75,11 +75,8 @@ class TimeFrame(models.Model):
         self.write({'state': 'open'})
         if self.env['ir.config_parameter'].sudo().get_param(
                     'distribution_circuits_website_sale.send_mail_to_supervisor'):
-            self.message_post(
-                'The Time frame %s has just beed opened' % self.name,
-                subject='The Time frame %s has just beed opened' % self.name,
-                subtype='mail.mt_comment'
-            )
+            email_template_timeframe_success_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.send_mail(self.id)
 
     @api.multi
     def action_close(self):
@@ -87,11 +84,8 @@ class TimeFrame(models.Model):
         self.write({'state': 'closed'})
         if self.env['ir.config_parameter'].sudo().get_param(
                     'distribution_circuits_website_sale.send_mail_to_supervisor'):
-            self.message_post(
-                'The Time frame %s has just been closed' % self.name,
-                subject='The Time frame %s has just been closed' % self.name,
-                subtype='mail.mt_comment'
-            )
+            email_template_timeframe_success_state = self.env.ref('distribution_circuits_sale.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.send_mail(self.id)
 
     @api.multi
     def action_enclose(self):
@@ -102,20 +96,3 @@ class TimeFrame(models.Model):
     def action_draft(self):
         self.ensure_one()
         self.write({'state': 'draft'})
-
-    @api.multi
-    def write(self, vals):
-        if "supervisor_id" in vals:
-            new_partner = (
-                self.env["res.users"]
-                .browse(vals["supervisor_id"])
-                .partner_id.id
-            )
-            for rec in self:
-                rec.message_unsubscribe(
-                    partner_ids=rec.supervisor_id.partner_id.ids
-                )
-                rec.message_subscribe(
-                    partner_ids=[new_partner], subtype_ids=[]
-                )
-        return super(TimeFrame, self).write(vals)
