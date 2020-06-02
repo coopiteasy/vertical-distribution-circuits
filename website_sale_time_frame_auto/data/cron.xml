@@ -4,7 +4,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo noupdate="1">
-    
+
     <record id="ir_cron_open_timeframes_daily" model="ir.cron">
         <field name="name">Open time frame hourly</field>
         <field name="interval_number">1</field>
@@ -17,7 +17,7 @@
             model.open_timeframes()
         </field>
     </record>
-    
+
     <record id="ir_cron_close_timeframes_daily" model="ir.cron">
         <field name="name">Close time frame ending hourly</field>
         <field name="interval_number">1</field>

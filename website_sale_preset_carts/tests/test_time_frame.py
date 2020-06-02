@@ -51,35 +51,6 @@ class TestTimeFrame(TransactionCase):
             (s == 'draft' for s in frame.sale_orders.mapped('state'))
         ))
 
-    def test_starting_validated_frames_are_opened(self):
-        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.start = dt.datetime.now() - dt.timedelta(minutes=45)
-        frame.end = dt.datetime.now() - dt.timedelta(minutes=15)
-
-        frame.action_validate()
-        self.assertEqual(frame.state, 'validated')
-
-        self.env['time.frame'].open_timeframes()
-        self.assertEqual(frame.state, 'open')
-
-        self.assertTrue(frame.sale_orders)
-        self.assertEqual(len(frame.sale_orders), 1)
-        self.assertTrue(all((o.state == 'draft' for o in frame.sale_orders)))
-
-    def test_closing_opened_frames_are_closed(self):
-        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.start = dt.datetime.now() - dt.timedelta(minutes=45)
-        frame.end = dt.datetime.now() - dt.timedelta(minutes=15)
-
-        frame.action_validate()
-        frame.action_open()
-
-        self.assertEqual(frame.state, 'open')
-        self.env['time.frame'].close_timeframes()
-        self.assertEqual(frame.state, 'closed')
-        self.assertTrue(frame.sale_orders)
-        self.assertTrue(all((o.state == 'done' for o in frame.sale_orders)))
-
     def test_timeframe_nosubscription(self):
         frame = self.env.ref('website_sale_preset_carts.demo_timeframe_current_nosubscription')
         frame.action_validate()

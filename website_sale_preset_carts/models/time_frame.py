@@ -3,7 +3,6 @@
 #     Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models, _
-from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 # from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
 import pytz
@@ -50,56 +49,6 @@ class TimeFrame(models.Model):
         context_tz = pytz.timezone(tz_name)
         return d.astimezone(context_tz)
 
-    @api.model
-    def open_timeframes(self):
-        now = datetime.now()
-        last_hour = now - timedelta(hours=1)
-
-        now_str = fields.Datetime.to_string(now)
-        last_hour_str = fields.Datetime.to_string(last_hour)
-        _logger.info('opening frames from %s to %s' % (last_hour_str, now_str))
-
-        frames = self.search([
-            ('state', '=', 'validated'),
-            ('start', '>=', last_hour_str),
-            ('start', '<=', now_str),
-        ])
-        _logger.info('opening frames %s' % frames)
-        for frame in frames:
-            _logger.info('opening frame %s' % frame.name)
-            try:
-                frame.action_open()
-            except:
-                if self.env['ir.config_parameter'].sudo().get_param(
-                    'website_sale_preset_carts.send_mail_to_supervisor'):
-                    email_template_timeframe_error_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_error_state', False)
-                    email_template_timeframe_error_state.send_mail(frame.id)
-
-    @api.model
-    def close_timeframes(self):
-        now = datetime.now()
-        last_hour = now - timedelta(hours=1)
-
-        now_str = fields.Datetime.to_string(now)
-        last_hour_str = fields.Datetime.to_string(last_hour)
-        _logger.info('closing frames from %s to %s' % (last_hour_str, now_str))
-
-        frames = self.search([
-            ('state', '=', 'open'),
-            ('end', '>=', last_hour_str),
-            ('end', '<=', now_str),
-        ])
-        _logger.info('closing frames %s' % (frames))
-        for frame in frames:
-            _logger.info('closing frame %s' % frame.name)
-            try:
-                frame.action_close()
-            except:
-                if self.env['ir.config_parameter'].sudo().get_param(
-                    'website_sale_preset_carts.send_mail_to_supervisor'):
-                    email_template_timeframe_error_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_error_state', False)
-                    email_template_timeframe_error_state.send_mail(frame.id)
-
     @api.multi
     def action_draft(self):
         self.ensure_one()
@@ -116,12 +65,7 @@ class TimeFrame(models.Model):
             ):
                 order.force_quotation_send()
             order.state = 'draft'
-        res = super(TimeFrame, self).action_open()
-        if self.env['ir.config_parameter'].sudo().get_param(
-                    'website_sale_preset_carts.send_mail_to_supervisor'):
-            email_template_timeframe_success_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
-        return res
+        return super(TimeFrame, self).action_open()
 
     @api.multi
     def action_close(self):
@@ -137,12 +81,7 @@ class TimeFrame(models.Model):
                     else:
                         order.with_context(send_email=False).action_confirm()
                     order.action_done()
-        res = super(TimeFrame, self).action_close()
-        if self.env['ir.config_parameter'].sudo().get_param(
-                    'website_sale_preset_carts.send_mail_to_supervisor'):
-            email_template_timeframe_success_state = self.env.ref('website_sale_preset_carts.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
-        return res
+        return super(TimeFrame, self).action_close()
 
     def _prepare_order_lines(self):
         # fixme : seems that list price on customer won't be taken into account
