@@ -30,3 +30,18 @@ class TestTimeFrame(TransactionCase):
         self.assertEqual(frame.state, 'open')
         self.env['time.frame'].close_timeframes()
         self.assertEqual(frame.state, 'closed')
+
+    def test_mail_is_sent(self):
+        self.env['ir.config_parameter'].set_param(
+            'website_sale_time_frame_auto.send_mail_to_supervisor', True)
+        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
+        self.assertEqual(frame.state, 'draft')
+        frame.action_validate()
+        self.assertEqual(frame.state, 'validated')
+        frame.action_open()
+        self.assertEqual(frame.state, 'open')
+
+        mails = self.env["mail.mail"].search(
+            [("model", "=", "time.frame"), ("subject", "like", "%is now open.")]
+        )
+        self.assertTrue(len(mails) >= 1)

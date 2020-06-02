@@ -35,10 +35,10 @@ class TimeFrame(models.Model):
                 frame.action_open()
             except:
                 if self.env['ir.config_parameter'].sudo().get_param(
-                        'website_sale_auto_open_close.send_mail_to_supervisor'):
+                        'website_sale_time_frame_auto.send_mail_to_supervisor'):
                     email_template_timeframe_error_state = self.env.ref(
-                        'website_sale_auto_open_close.email_template_timeframe_error_state', False)
-                    email_template_timeframe_error_state.send_mail(frame.id)
+                        'website_sale_time_frame_auto.email_template_timeframe_error_state', False)
+                    email_template_timeframe_error_state.sudo().send_mail(frame.id)
 
     @api.model
     def close_timeframes(self):
@@ -61,27 +61,27 @@ class TimeFrame(models.Model):
                 frame.action_close()
             except:
                 if self.env['ir.config_parameter'].sudo().get_param(
-                        'website_sale_auto_open_close.send_mail_to_supervisor'):
+                        'website_sale_time_frame_auto.send_mail_to_supervisor'):
                     email_template_timeframe_error_state = self.env.ref(
-                        'website_sale_auto_open_close.email_template_timeframe_error_state', False)
-                    email_template_timeframe_error_state.send_mail(frame.id)
+                        'website_sale_time_frame_auto.email_template_timeframe_error_state', False)
+                    email_template_timeframe_error_state.sudo().send_mail(frame.id)
 
     @api.multi
     def action_open(self):
         self.ensure_one()
         res = super(TimeFrame, self).action_open()
-        if self.env['ir.config_parameter'].sudo().get_param('website_sale_auto_open_close.send_mail_to_supervisor'):
+        if self.env['ir.config_parameter'].sudo().get_param('website_sale_time_frame_auto.send_mail_to_supervisor'):
             email_template_timeframe_success_state = self.env.ref(
-                'website_sale_auto_open_close.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
+                'website_sale_time_frame_auto.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.sudo().send_mail(self.id)
         return res
 
     @api.multi
     def action_close(self):
         self.ensure_one()
         res = super(TimeFrame, self).action_close()
-        if self.env['ir.config_parameter'].sudo().get_param('website_sale_auto_open_close.send_mail_to_supervisor'):
+        if self.env['ir.config_parameter'].sudo().get_param('website_sale_time_frame_auto.send_mail_to_supervisor'):
             email_template_timeframe_success_state = self.env.ref(
-                'website_sale_auto_open_close.email_template_timeframe_success_state', False)
-            email_template_timeframe_success_state.send_mail(self.id)
+                'website_sale_time_frame_auto.email_template_timeframe_success_state', False)
+            email_template_timeframe_success_state.sudo().send_mail(self.id)
         return res
