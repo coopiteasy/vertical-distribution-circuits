@@ -12,7 +12,7 @@
     """,
     "version": "11.0.1.0.0",
     "category": "Sales",
-    "website": "https://coopiteasy.be",
+    "website": "https://www.coopiteasy.be",
     "author": "Coop IT Easy SCRL fs",
     "license": "AGPL-3",
     "depends": [
