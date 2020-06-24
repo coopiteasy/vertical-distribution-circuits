@@ -8,6 +8,7 @@
             report_type="qweb-pdf"
             name="distribution_circuits_logistic.theme_picking_consolidation"
             file="distribution_circuits_logistic.picking_consolidation_report.xml"
+            paperformat="distribution_circuits_logistic.paperformat_distribution_circuits_logistic_report_standard"
         />
         <report 
             id="action_supplier_picking_consolidation"
@@ -16,6 +17,7 @@
             report_type="qweb-pdf"
             name="distribution_circuits_logistic.theme_supplier_picking_consolidation"
             file="distribution_circuits_logistic.supplier_picking_consolidation_report.xml"
+            paperformat="distribution_circuits_logistic.paperformat_distribution_circuits_logistic_report_standard"
         />
         <report 
             id="action_customer_picking_consolidation"
@@ -24,6 +26,7 @@
             report_type="qweb-pdf"
             name="distribution_circuits_logistic.theme_customer_picking_consolidation"
             file="distribution_circuits_logistic.customer_picking_consolidation_report.xml"
+            paperformat="distribution_circuits_logistic.paperformat_distribution_circuits_logistic_report_standard"
         />
 	</data>
 </odoo>

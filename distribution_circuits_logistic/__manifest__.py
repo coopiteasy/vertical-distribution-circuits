@@ -20,6 +20,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/distribution_circuits_logistic_data.xml',
+        'data/paperformat.xml',
         'views/menu_item.xml',
         'views/stock_view.xml',
         'views/delivery_round_view.xml',
