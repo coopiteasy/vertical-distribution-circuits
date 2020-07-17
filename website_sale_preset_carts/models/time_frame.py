@@ -147,6 +147,7 @@ class TimeFrame(models.Model):
             customers = (
                 self.env['res.partner']
                     .search([
+                        ('subscription_id', '!=', False),
                         ('subscription_id', '=', frame.subscription_id.id)
                         ])
             )
