@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRLfs
 #     Robin Keunen <robin@coopiteasy.be>
 #     Houssine Bakkali <houssine@coopiteasy.be>
@@ -37,7 +38,7 @@ class ResPartner(models.Model):
         for partner in self:
             partner.ongoing_subscription = partner.is_subscribed()
 
-    @api.model
+    @api.multi
     def is_subscribed(self, date=None):
         self.ensure_one()
 

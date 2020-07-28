@@ -5,6 +5,7 @@
 
 from odoo.tests.common import TransactionCase
 import datetime as dt
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DTF
 
 
 class TestTimeFrame(TransactionCase):
@@ -50,33 +51,31 @@ class TestTimeFrame(TransactionCase):
             (s == 'draft' for s in frame.sale_orders.mapped('state'))
         ))
 
-    def test_starting_validated_frames_are_opened(self):
-        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.start = dt.datetime.now() - dt.timedelta(hours=1)
-        frame.action_validate()
-        self.assertEqual(frame.state, 'validated')
-        self.env['time.frame'].open_timeframes()
-        self.assertEqual(frame.state, 'open')
-        self.assertTrue(frame.sale_orders)
-        self.assertEqual(len(frame.sale_orders), 1)
-        self.assertTrue(all((o.state == 'draft' for o in frame.sale_orders)))
-
-    def test_closing_opened_frames_are_closed(self):
-        frame = self.env.ref('distribution_circuits_sale.demo_timeframe_future')
-        frame.start = dt.datetime.now() - dt.timedelta(hours=1)
-        frame.end = dt.datetime.now() - dt.timedelta(hours=1)
-        frame.action_validate()
-        frame.action_open()
-
-        self.assertEqual(frame.state, 'open')
-        self.env['time.frame'].close_timeframes()
-        self.assertEqual(frame.state, 'closed')
-        self.assertTrue(frame.sale_orders)
-        self.assertTrue(all((o.state == 'done' for o in frame.sale_orders)))
-
     def test_timeframe_nosubscription(self):
         frame = self.env.ref('website_sale_preset_carts.demo_timeframe_current_nosubscription')
         frame.action_validate()
         frame.action_open()
         self.assertFalse(frame.sale_orders)
 
+
+    def test_partner_is_subscribed(self):
+        partner1 = self.env.ref(
+            'distribution_circuits_base.partner_raliment_customer_1')
+        partner2 = self.env.ref(
+            'distribution_circuits_base.partner_raliment_customer_2')
+        partner3 = self.env.ref(
+            'distribution_circuits_base.partner_raliment_customer_3')
+        partner3.subscription_id = False
+
+        future_date = (
+                dt.date.today() + dt.timedelta(days=60)
+        ).strftime(DTF)
+
+        self.assertTrue(partner1.is_subscribed())
+        self.assertTrue(partner1.is_subscribed(future_date))
+
+        self.assertFalse(partner2.is_subscribed())
+        self.assertTrue(partner2.is_subscribed(future_date))
+
+        self.assertFalse(partner3.is_subscribed())
+        self.assertFalse(partner3.is_subscribed(future_date))
