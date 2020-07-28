@@ -3,9 +3,13 @@
 #     Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models, _
-from datetime import datetime, timedelta
 from odoo.exceptions import UserError
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
+# from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as _format
+import pytz
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class TimeFrame(models.Model):
@@ -34,29 +38,16 @@ class TimeFrame(models.Model):
         string="Blocked orders")
 
     @api.model
-    def open_timeframes(self):
-        now = datetime.now().replace(minute=0, second=0)
-        last_hour = now - timedelta(hours=1)
-        frames = self.search([
-            ('state', '=', 'validated'),
-            ('start', '>=', last_hour.strftime(_format)),
-            ('start', '<=', now.strftime(_format)),
-        ])
-        for frame in frames:
-            frame.action_open()
+    def localize(self, d):
+        tz_name = self.env['res.users'].browse(1).tz
+        tz_name = tz_name if tz_name else 'UTC'
 
-    @api.model
-    def close_timeframes(self):
-        now = datetime.now().replace(minute=0, second=0)
-        last_hour = now - timedelta(hours=1)
+        if not d.tzinfo:
+            utc_tz = pytz.timezone('UTC')
+            d = utc_tz.localize(d)
 
-        frames = self.search([
-            ('state', '=', 'open'),
-            ('end', '>=', last_hour.strftime(_format)),
-            ('end', '<=', now.strftime(_format)),
-        ])
-        for frame in frames:
-            frame.action_close()
+        context_tz = pytz.timezone(tz_name)
+        return d.astimezone(context_tz)
 
     @api.multi
     def action_draft(self):
@@ -79,7 +70,6 @@ class TimeFrame(models.Model):
     @api.multi
     def action_close(self):
         self.ensure_one()
-
         for order in self.sale_orders:
             if order.state == 'draft':
                 if order.partner_id.is_subscribed(self.delivery_date):
@@ -91,7 +81,6 @@ class TimeFrame(models.Model):
                     else:
                         order.with_context(send_email=False).action_confirm()
                     order.action_done()
-
         return super(TimeFrame, self).action_close()
 
     def _prepare_order_lines(self):

@@ -29,8 +29,8 @@ class TimeFrame(models.Model):
     state = fields.Selection([('draft', 'Draft'),
                               ('validated', 'Validated'),
                               ('open', 'Open'),
-                              ('cancel', 'Cancelled'),
                               ('closed', 'Closed'),
+                              ('cancel', 'Cancelled'),
                               ('enclosed', 'Enclosed')],
                              default="draft",
                              string="State",
@@ -51,6 +51,13 @@ class TimeFrame(models.Model):
         string="Company",
         readonly=True,
         default=lambda self: self.env['res.company']._company_default_get('account.invoice'))
+
+    supervisor_id = fields.Many2one(
+        comodel_name="res.users",
+        string="Responsible",
+        required=True,
+        default=lambda self: self.env.user,
+    )
 
     @api.multi
     def action_validate(self):
