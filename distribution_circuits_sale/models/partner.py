@@ -30,7 +30,7 @@ class Partner(models.Model):
             orders = order_obj.search([
                 ('partner_id', '=', partner.id),
                 ('state', 'in', ['sent', 'sale']),
-                ('invoice_status', '!=', 'invoiced')
+                ('invoice_status', 'not in', ['invoiced', 'no'])
                 ])
 
             partner.amount_due = sum(o.amount_total for o in orders)
