@@ -17,5 +17,6 @@
     "data": [
         "views/auth_signup_template.xml",
     ],
+    "installable": True,
     "auto_install": True
 }
