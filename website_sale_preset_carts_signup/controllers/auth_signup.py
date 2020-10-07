@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Coop IT Easy SCRL fs
 #   Robin Keunen <robin@coopiteasy.be>
+#   Houssine Bakkali <houssine@coopiteasy.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.addons.dc_website_registration.controllers.authsignup import AuthSignupHome
@@ -31,4 +32,3 @@ class AuthSignupHome(AuthSignupHome):
                    .get_subscriptions()
         )
         return res
-
