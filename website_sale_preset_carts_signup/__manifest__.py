@@ -15,8 +15,8 @@
         "website_sale_preset_carts",
     ],
     "data": [
-        "views/auth_signup_template.xml",
+        "templates/auth_signup_template.xml",
     ],
     "installable": True,
-    "auto_install": True
+    "auto_install": True,
 }
