@@ -143,11 +143,8 @@ class TimeFrame(models.Model):
 
             # we then filter based on suspended date if suspended
             subscribers = customers.filtered(
-                lambda cust: not cust.suspend_cart or (
-                        cust.cart_suspended_from > frame.delivery_date
-                        or cust.cart_suspended_date < frame.delivery_date
-                    )
-                )
+                lambda cust: cust.is_subscribed(frame.delivery_date)
+            )
 
             for subscriber in subscribers:
                 cart_amount = self.compute_cart_amount(subscriber, unit_lines)

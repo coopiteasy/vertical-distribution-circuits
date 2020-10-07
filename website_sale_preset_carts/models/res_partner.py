@@ -27,6 +27,17 @@ class ResPartner(models.Model):
         string='Cart Suspended Until',
     )
 
+    ongoing_subscription = fields.Boolean(
+        compute="_compute_ongoing_subscription",
+        string="Ongoing subscription ?",
+        help="The subscription state for today"
+    )
+
+    @api.multi
+    def _compute_ongoing_subscription(self):
+        for partner in self:
+            partner.ongoing_subscription = partner.is_subscribed()
+
     @api.multi
     def is_subscribed(self, date=None):
         self.ensure_one()

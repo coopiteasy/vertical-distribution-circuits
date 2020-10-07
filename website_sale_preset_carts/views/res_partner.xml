@@ -16,6 +16,7 @@
                 <group>
                     <field name="nb_household"/>
                     <field name="subscription_id"/>
+                    <field name="ongoing_subscription"/>
                     <field name="suspend_cart"/>
                     <field name="cart_suspended_from" attrs="{'required':[('suspend_cart','=',True)], 'invisible':[('suspend_cart','=',False)]}"/>
                     <field name="cart_suspended_date" attrs="{'required':[('suspend_cart','=',True)], 'invisible':[('suspend_cart','=',False)]}"/>
