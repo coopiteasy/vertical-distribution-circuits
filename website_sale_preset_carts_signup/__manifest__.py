@@ -5,7 +5,7 @@
 {
     "name": "Website Sale Preset Carts Signup",
     "summary": "Glue module to add fields to registration page",
-    "version": "11.0.1.0.1",
+    "version": "11.0.1.0.0",
     "category": "Sales",
     "website": "https://www.coopiteasy.be",
     "author": "Coop IT Easy SCRL fs",
