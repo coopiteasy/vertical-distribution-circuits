@@ -7,14 +7,13 @@
 {
     "name": "Website Sale Preset Carts",
     "summary": "Allows the sale manager to preset weekly carts",
-    "version": "11.0.2.0.2",
+    "version": "11.0.2.0.3",
     "category": "Sales",
     "website": "https://www.coopiteasy.be",
     "author": "Coop IT Easy SCRL fs",
     "license": "AGPL-3",
     "depends": [
         "base",
-        "dc_website_registration",
         "distribution_circuits_base",
         "distribution_circuits_sale",
         "distribution_circuits_website_sale",
@@ -24,7 +23,6 @@
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/auth_signup_template.xml",
         "views/preset_cart.xml",
         "views/res_config_settings.xml",
         "views/res_partner.xml",
