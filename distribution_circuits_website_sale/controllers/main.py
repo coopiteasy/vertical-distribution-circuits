@@ -126,6 +126,14 @@ class WebsiteSale(WebsiteSale):
         else:
             return partner.delivery_point_id.id
 
+    @http.route(['/shop/checkout'], type='http', auth="public", website=True, sitemap=False)
+    def checkout(self, **post):
+        order = request.website.sale_get_order()
+        if order.time_frame_id.state != "open":
+            return request.render(
+                "distribution_circuits_website_sale.timeframe_closed", post)
+        return super(WebsiteSale, self).checkout(**post)
+
     def checkout_values(self):
         values = super(WebsiteSale, self).checkout_values()
         values['shippings'] = self.get_delivery_points()

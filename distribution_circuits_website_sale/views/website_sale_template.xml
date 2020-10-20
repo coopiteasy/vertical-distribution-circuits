@@ -161,6 +161,35 @@
 	      </div>
 	    </t>
 	</template>
+
+	<template id="timeframe_closed" name="Timeframe Closed message">
+	    <t t-call="website.layout">
+	      <div id="wrap">
+	        <div class="oe_structure"/>
+	        <div class="container">
+	            <h1>Unable to proceed to checkout - Timeframe closed!</h1>
+	            <div class="row">
+	                <div class="col-md-8">
+	                    <p>
+							Unable to proceed to checkout, because the timeframe of your order has been closed.
+	                    </p>
+						<p>
+							After composing your orders, make sure to proceed to checkout before the corresponding timeframe closes.
+	                    </p>
+	                    <ul class="list-unstyled">
+	                        <li><i class="fa fa-phone"></i> : <span t-field="res_company.phone"/></li>
+	                        <li><i class="fa fa-envelope"></i> : <span t-field="res_company.email"/></li>
+	                    </ul>
+	                </div>
+	                <div class="col-md-4">
+	                    <t t-call="website.company_description"/>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="oe_structure"/>
+	      </div>
+	    </t>
+	</template>
 	
 	<template id="easy_my_hub_payment_tokens_list" inherit_id="payment.payment_tokens_list" name="EasyMyHub Payment Tokens list">
  		<xpath expr="//t[@t-foreach='form_acquirers']//input[@name='pm_id']" position="attributes">
