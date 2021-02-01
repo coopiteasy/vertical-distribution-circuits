@@ -12,6 +12,7 @@ class ResPartner(models.Model):
     raliment_point_id = fields.Many2one(
         'res.partner',
         string="Point de Raliment",
+        store=True,
         domain=[('is_raliment_point', '=', True)])
     raliment_point_manager = fields.Many2one(
         'res.users',

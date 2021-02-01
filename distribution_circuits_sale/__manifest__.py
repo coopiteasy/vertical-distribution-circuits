@@ -26,6 +26,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'report/sale_report_views.xml',
         'views/time_frame_view.xml',
         'views/sale_view.xml',
         'views/partner_view.xml',
