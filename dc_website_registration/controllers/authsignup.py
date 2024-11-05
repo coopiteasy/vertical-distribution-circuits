@@ -31,7 +31,7 @@ class AuthSignupHome(AuthSignupHome):
             raise SignupError(_('Authentication Failed.'))
         return uid
 
-    def do_signup(self, qcontext):
+    def do_custom_signup(self, qcontext):
         """ Shared helper that creates a res.partner out of a token """
         values = dict((key, qcontext.get(key)) for key in ('login',
                                                            'name',
@@ -88,7 +88,7 @@ class AuthSignupHome(AuthSignupHome):
 
         if 'error' not in qcontext and request.httprequest.method == 'POST':
             try:
-                self.do_signup(qcontext)
+                self.do_custom_signup(qcontext)
                 # Send an account creation confirmation email
                 if qcontext.get('token'):
                     user_sudo = request.env['res.users'].sudo().search([('login', '=', qcontext.get('login'))])
